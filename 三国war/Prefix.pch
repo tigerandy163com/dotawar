@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the '三国war' target in the '三国war' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+#endif
