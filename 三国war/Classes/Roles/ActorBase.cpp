@@ -33,10 +33,10 @@ bool ActorBase::initWithActorData(ActorData *data)
         }
 
         _action_attack = CCAnimate::create(
-                                           CCAnimation::createWithSpriteFrames(_attackFrames));
+                                           CCAnimation::createWithSpriteFrames(_attackFrames,0.3f));
         _action_attack->retain();
         _action_attack_flip = CCAnimate::create(
-                                                CCAnimation::createWithSpriteFrames(_attackFrames_flip));
+                                                CCAnimation::createWithSpriteFrames(_attackFrames_flip,0.3f));
         _action_attack_flip->retain();
         
         CCArray* _runFrames =  CCArray::createWithCapacity(10);
@@ -48,10 +48,10 @@ bool ActorBase::initWithActorData(ActorData *data)
             _runFrames_flip->addObject(cache->spriteFrameByName(strf));
         }
         _action_run = CCAnimate::create(
-                                        CCAnimation::createWithSpriteFrames(_runFrames));
+                                        CCAnimation::createWithSpriteFrames(_runFrames,0.3f));
         _action_run->retain();
         _action_run_flip = CCAnimate::create(
-                                             CCAnimation::createWithSpriteFrames(_runFrames_flip));
+                                             CCAnimation::createWithSpriteFrames(_runFrames_flip,0.3f));
         _action_run_flip->retain();
         
         CCArray* _standFrames =   CCArray::createWithCapacity(10);
@@ -63,10 +63,10 @@ bool ActorBase::initWithActorData(ActorData *data)
             _standFrames_flip->addObject(cache->spriteFrameByName(strf));
         }
         _action_stand = CCAnimate::create(
-                                          CCAnimation::createWithSpriteFrames(_standFrames));
+                                          CCAnimation::createWithSpriteFrames(_standFrames,0.3f));
         _action_stand->retain();
         _action_stand_flip = CCAnimate::create(
-                                               CCAnimation::createWithSpriteFrames(_standFrames_flip));
+                                               CCAnimation::createWithSpriteFrames(_standFrames_flip,0.3f));
         _action_stand_flip->retain();
         
         CCArray* _deadFrames =  CCArray::createWithCapacity(10);
@@ -78,22 +78,26 @@ bool ActorBase::initWithActorData(ActorData *data)
             _deadFrames_flip->addObject(cache->spriteFrameByName(strf));
         }
         _action_dead = CCAnimate::create(
-                                         CCAnimation::createWithSpriteFrames(_deadFrames));
+                                         CCAnimation::createWithSpriteFrames(_deadFrames,0.3f));
         _action_dead->retain();
         _action_dead_flip = CCAnimate::create(
-                                              CCAnimation::createWithSpriteFrames(_deadFrames_flip));
+                                              CCAnimation::createWithSpriteFrames(_deadFrames_flip,0.3f));
         _action_dead_flip->retain();
         
         if (mActorData->getGroupID().compare("1")) {
-              sprintf(str, "%s_%d.png", data->getActorID().c_str(), 6);
-        }else
+              sprintf(str, "%s_%d.png", data->getActorID().c_str(),6);
+            mActorDir = Left;
+        }else{
               sprintf(str, "%sf_%d.png", data->getActorID().c_str(), 6);
-      
+            mActorDir = Right;
+        }
        _sprite =  CCSprite::createWithSpriteFrameName(str);
         _sprite->retain();
         this->addChild(_sprite);
         setspeed(100.0f);
-        this->schedule(schedule_selector(ActorBase::actorLogic), 1.0f, kCCRepeatForever, 1.0f);
+        
+        this->schedule(schedule_selector(ActorBase::actorLogic), 1.0f, kCCRepeatForever, 2.0f);
+       // this->scheduleOnce(schedule_selector(ActorBase::StateToRun), 2.0f);
         bRet = true;
     } while (0);
     return bRet;
@@ -169,7 +173,7 @@ void ActorBase::currentAnimateActionStop()
 void ActorBase::RunAnimateAction_RepeatForever(CCAnimate* action)
 {
 	currentAnimateActionStop();
-	_currentAnimateAction = runAction(CCRepeatForever::create(action));
+	_currentAnimateAction = _sprite-> runAction(CCRepeatForever::create(action));
 }
 
 void ActorBase::actorLogic()
@@ -187,8 +191,15 @@ void ActorBase::actorLogic()
     index = arr->indexOfObject(this);
     
     settarget((ActorBase*)arr1->objectAtIndex(index));
+    StateToRun();
+    moveToTarget();
     
-    
+}
+void ActorBase::moveToTarget(){
+    float dis = ccpDistance(this->getPosition(), _target->getPosition());
+    float time = dis/_speed;
+    CCMoveTo *move = CCMoveTo::create(time, _target->getPosition());
+    this->runAction(move);
 }
 int ActorBase::less(const CCObject* in_pCcObj0, const CCObject* in_pCcObj1) {
     return ((ActorBase*)in_pCcObj0)->getPositionY() < ((ActorBase*)in_pCcObj1)->getPositionY();

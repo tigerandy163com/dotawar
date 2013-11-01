@@ -45,6 +45,7 @@ private :
     static int less(const CCObject* obj0, const CCObject* obj1);
 	void currentAnimateActionStop();
 	void RunAnimateAction_RepeatForever(CCAnimate* action);
+    void moveToTarget();
 };
 
 #endif

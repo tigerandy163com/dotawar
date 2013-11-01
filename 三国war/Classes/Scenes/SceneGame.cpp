@@ -65,7 +65,8 @@ bool SceneGame::init()
     }
     ActorBase::sortActors(arrL);
     ActorBase::sortActors(arrR);
-    
+    GameRoot::shareGameRoot()->setactorArrL(arrL);
+    GameRoot::shareGameRoot()->setactorArrR(arrR);
 	CCMenuItemSprite* btn_attack = CCMenuItemSprite::create(
 		CCSprite::createWithSpriteFrameName("btn_soldierattack1.png"), 
 		CCSprite::createWithSpriteFrameName("btn_soldierattack2.png"), 
