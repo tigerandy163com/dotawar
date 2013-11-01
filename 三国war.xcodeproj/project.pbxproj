@@ -301,6 +301,7 @@
 		C60A850018220A48001673B8 /* SceneSetting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F218220A48001673B8 /* SceneSetting.cpp */; };
 		C60A850118220A48001673B8 /* SceneStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F418220A48001673B8 /* SceneStart.cpp */; };
 		C60A850218220A48001673B8 /* LayerLevels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F718220A48001673B8 /* LayerLevels.cpp */; };
+		C6846C46182358EA00C664B7 /* tileMapHelp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6846C44182358EA00C664B7 /* tileMapHelp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -925,6 +926,8 @@
 		C60A84F518220A48001673B8 /* SceneStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneStart.h; sourceTree = "<group>"; };
 		C60A84F718220A48001673B8 /* LayerLevels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LayerLevels.cpp; sourceTree = "<group>"; };
 		C60A84F818220A48001673B8 /* LayerLevels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerLevels.h; sourceTree = "<group>"; };
+		C6846C44182358EA00C664B7 /* tileMapHelp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tileMapHelp.cpp; sourceTree = "<group>"; };
+		C6846C45182358EA00C664B7 /* tileMapHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tileMapHelp.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2196,6 +2199,8 @@
 				C60A84F318220A48001673B8 /* SceneSetting.h */,
 				C60A84F418220A48001673B8 /* SceneStart.cpp */,
 				C60A84F518220A48001673B8 /* SceneStart.h */,
+				C6846C44182358EA00C664B7 /* tileMapHelp.cpp */,
+				C6846C45182358EA00C664B7 /* tileMapHelp.h */,
 			);
 			name = Scenes;
 			path = Classes/Scenes;
@@ -2464,6 +2469,7 @@
 				C60A8332182208D3001673B8 /* CCTMXTiledMap.cpp in Sources */,
 				C60A850018220A48001673B8 /* SceneSetting.cpp in Sources */,
 				C60A83DD182208D5001673B8 /* CCInvocation.cpp in Sources */,
+				C6846C46182358EA00C664B7 /* tileMapHelp.cpp in Sources */,
 				C60A81ED182208D0001673B8 /* mat3.c in Sources */,
 				C60A83E9182208D5001673B8 /* CCEditBoxImplIOS.mm in Sources */,
 				C60A84FB18220A48001673B8 /* ActorBase.cpp in Sources */,
@@ -2697,6 +2703,7 @@
 				C60A84CB182208D6001673B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

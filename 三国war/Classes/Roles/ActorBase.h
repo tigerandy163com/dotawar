@@ -33,8 +33,16 @@ public :
 	void StateToAttack();
 	void StateToDead();
 	void StateToStand();
-
+    void actorLogic();
+    static void sortActors(CCArray* array);
 private :
+    CC_SYNTHESIZE(float, _speed, speed);
+    CC_SYNTHESIZE(int, _blood, blood);
+    CC_SYNTHESIZE(int, _damage, damage);
+    CC_SYNTHESIZE(int, _experience, experience);
+    
+    CC_SYNTHESIZE_RETAIN(ActorBase *, _target, target);
+    static int less(const CCObject* obj0, const CCObject* obj1);
 	void currentAnimateActionStop();
 	void RunAnimateAction_RepeatForever(CCAnimate* action);
 };

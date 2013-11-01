@@ -53,7 +53,7 @@ class CC_DLL CCTMXObjectGroup : public CCObject
 public:
     CCTMXObjectGroup();
     virtual ~CCTMXObjectGroup();
-
+    
     inline const char* getGroupName(){ return m_sGroupName.c_str(); }
     inline void setGroupName(const char *groupName){ m_sGroupName = groupName; }
 

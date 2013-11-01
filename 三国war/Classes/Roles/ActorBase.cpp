@@ -1,4 +1,5 @@
 #include "ActorBase.h"
+#include "GameRoot.h"
 bool ActorBase::initWithActorData(ActorData *data)
 {
     bool bRet = false;
@@ -20,19 +21,22 @@ bool ActorBase::initWithActorData(ActorData *data)
         char str[64] = {0};
         char strf[64] = {0};
         
-        CCArray* _attackFrames =  CCArray::createWithCapacity(10);
-        CCArray* _attackFrames_flip =  CCArray::createWithCapacity(10);
+        CCArray* _attackFrames =  CCArray::create();
+        CCArray* _attackFrames_flip =  CCArray::create();
+
         for (int i = 0; i < 4; i++) {
             sprintf(str, "%s_%d.png", data->getActorID().c_str(), i);
             sprintf(strf, "%sf_%d.png", data->getActorID().c_str(), i);
+   
             _attackFrames->addObject(cache->spriteFrameByName(str));
             _attackFrames_flip->addObject(cache->spriteFrameByName(strf));
         }
+
         _action_attack = CCAnimate::create(
-                                           CCAnimation::create(_attackFrames, 0.1f));
+                                           CCAnimation::createWithSpriteFrames(_attackFrames));
         _action_attack->retain();
         _action_attack_flip = CCAnimate::create(
-                                                CCAnimation::create(_attackFrames_flip, 0.1f));
+                                                CCAnimation::createWithSpriteFrames(_attackFrames_flip));
         _action_attack_flip->retain();
         
         CCArray* _runFrames =  CCArray::createWithCapacity(10);
@@ -44,10 +48,10 @@ bool ActorBase::initWithActorData(ActorData *data)
             _runFrames_flip->addObject(cache->spriteFrameByName(strf));
         }
         _action_run = CCAnimate::create(
-                                        CCAnimation::create(_runFrames, 0.1f));
+                                        CCAnimation::createWithSpriteFrames(_runFrames));
         _action_run->retain();
         _action_run_flip = CCAnimate::create(
-                                             CCAnimation::create(_runFrames_flip, 0.1f));
+                                             CCAnimation::createWithSpriteFrames(_runFrames_flip));
         _action_run_flip->retain();
         
         CCArray* _standFrames =   CCArray::createWithCapacity(10);
@@ -59,10 +63,10 @@ bool ActorBase::initWithActorData(ActorData *data)
             _standFrames_flip->addObject(cache->spriteFrameByName(strf));
         }
         _action_stand = CCAnimate::create(
-                                          CCAnimation::create(_standFrames, 0.1f));
+                                          CCAnimation::createWithSpriteFrames(_standFrames));
         _action_stand->retain();
         _action_stand_flip = CCAnimate::create(
-                                               CCAnimation::create(_standFrames_flip, 0.1f));
+                                               CCAnimation::createWithSpriteFrames(_standFrames_flip));
         _action_stand_flip->retain();
         
         CCArray* _deadFrames =  CCArray::createWithCapacity(10);
@@ -74,16 +78,22 @@ bool ActorBase::initWithActorData(ActorData *data)
             _deadFrames_flip->addObject(cache->spriteFrameByName(strf));
         }
         _action_dead = CCAnimate::create(
-                                         CCAnimation::create(_deadFrames, 0.1f));
+                                         CCAnimation::createWithSpriteFrames(_deadFrames));
         _action_dead->retain();
         _action_dead_flip = CCAnimate::create(
-                                              CCAnimation::create(_deadFrames_flip, 0.1f));
+                                              CCAnimation::createWithSpriteFrames(_deadFrames_flip));
         _action_dead_flip->retain();
         
-        sprintf(str, "%s_%d.png", data->getActorID().c_str(), 6);
-       _sprite =  CCSprite::create(str);
+        if (mActorData->getGroupID().compare("1")) {
+              sprintf(str, "%s_%d.png", data->getActorID().c_str(), 6);
+        }else
+              sprintf(str, "%sf_%d.png", data->getActorID().c_str(), 6);
+      
+       _sprite =  CCSprite::createWithSpriteFrameName(str);
         _sprite->retain();
         this->addChild(_sprite);
+        setspeed(100.0f);
+        this->schedule(schedule_selector(ActorBase::actorLogic), 1.0f, kCCRepeatForever, 1.0f);
         bRet = true;
     } while (0);
     return bRet;
@@ -160,4 +170,30 @@ void ActorBase::RunAnimateAction_RepeatForever(CCAnimate* action)
 {
 	currentAnimateActionStop();
 	_currentAnimateAction = runAction(CCRepeatForever::create(action));
+}
+
+void ActorBase::actorLogic()
+{
+    CCArray *arr;
+    CCArray *arr1;
+    if (getActorData()->getGroupID().compare("1")==0) {
+        arr = GameRoot::shareGameRoot()-> getactorArrL();
+        arr1 =   GameRoot::shareGameRoot()-> getactorArrR();
+    }else{
+           arr = GameRoot::shareGameRoot()-> getactorArrR();
+        arr1 = GameRoot::shareGameRoot()-> getactorArrL();
+    }
+    int index = -1;
+    index = arr->indexOfObject(this);
+    
+    settarget((ActorBase*)arr1->objectAtIndex(index));
+    
+    
+}
+int ActorBase::less(const CCObject* in_pCcObj0, const CCObject* in_pCcObj1) {
+    return ((ActorBase*)in_pCcObj0)->getPositionY() < ((ActorBase*)in_pCcObj1)->getPositionY();
+}
+
+void ActorBase::sortActors(CCArray* in_pCcArrDogs) {
+    std::sort(in_pCcArrDogs->data->arr, in_pCcArrDogs->data->arr + in_pCcArrDogs->data->num, ActorBase::less);
 }

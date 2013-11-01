@@ -20,7 +20,8 @@ public :
 	SceneSelect* getSceneSelect();
 	SceneGame* getSceneGame();
 	SceneOver* getSceneOver();
-
+    CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrL, actorArrL);
+    CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrR,actorArrR);
 };
 
 #endif

@@ -10,6 +10,8 @@ GameRoot::~GameRoot(){
     CC_SAFE_RELEASE_NULL(_SceneGame);
     CC_SAFE_RELEASE_NULL(_SceneOver);
     CC_SAFE_RELEASE_NULL(_SceneSelect);
+    CC_SAFE_RELEASE_NULL(_actorArrL);
+    CC_SAFE_RELEASE_NULL(_actorArrR);
 }
 GameRoot* GameRoot::shareGameRoot()
 {
@@ -24,6 +26,10 @@ bool GameRoot::init()
     bool bRet = false;
     do {
         InitializeResource();
+        _actorArrL = CCArray::create();
+        _actorArrL->retain();
+        _actorArrR = CCArray::create();
+        _actorArrR->retain();
         bRet = true;
     } while (0);
     return bRet;
