@@ -11,7 +11,7 @@
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "GameRoot.h"
-
+#include "CCLuaEngine.h"
 USING_NS_CC;
 using namespace CocosDenshion;
 
@@ -26,6 +26,13 @@ AppDelegate::~AppDelegate()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
+    // Create lua engine
+    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
+    assert(engine);
+    if (!engine)
+        return false;
+    engine->executeScriptFile("actor.lua");
+    CCScriptEngineManager::sharedManager()->setScriptEngine(engine);
     // initialize director
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());

@@ -69,7 +69,14 @@ SceneGame* GameRoot::getSceneGame()
     }
 	return _SceneGame;
 }
-
+bool GameRoot:: resetSceneGame()
+{
+    if (_SceneGame) {
+        CC_SAFE_RELEASE_NULL(_SceneGame);
+        return true;
+    }
+    return false;
+}
 SceneOver* GameRoot::getSceneOver()
 {
 	if (_SceneOver == NULL){

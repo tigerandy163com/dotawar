@@ -2,6 +2,7 @@
 #include "GameRoot.h"
 bool ActorBase::initWithActorData(ActorData *data)
 {
+ 
     bool bRet = false;
     do {
         setActorData(data);
@@ -33,10 +34,10 @@ bool ActorBase::initWithActorData(ActorData *data)
         }
 
         _action_attack = CCAnimate::create(
-                                           CCAnimation::createWithSpriteFrames(_attackFrames,0.3f));
+                                           CCAnimation::createWithSpriteFrames(_attackFrames,0.2f));
         _action_attack->retain();
         _action_attack_flip = CCAnimate::create(
-                                                CCAnimation::createWithSpriteFrames(_attackFrames_flip,0.3f));
+                                                CCAnimation::createWithSpriteFrames(_attackFrames_flip,0.2f));
         _action_attack_flip->retain();
         
         CCArray* _runFrames =  CCArray::createWithCapacity(10);
@@ -87,6 +88,7 @@ bool ActorBase::initWithActorData(ActorData *data)
         if (mActorData->getGroupID().compare("1")) {
               sprintf(str, "%s_%d.png", data->getActorID().c_str(),6);
             mActorDir = Left;
+            
         }else{
               sprintf(str, "%sf_%d.png", data->getActorID().c_str(), 6);
             mActorDir = Right;
@@ -94,10 +96,10 @@ bool ActorBase::initWithActorData(ActorData *data)
        _sprite =  CCSprite::createWithSpriteFrameName(str);
         _sprite->retain();
         this->addChild(_sprite);
-        setspeed(100.0f);
-        
-        this->schedule(schedule_selector(ActorBase::actorLogic), 1.0f, kCCRepeatForever, 2.0f);
-       // this->scheduleOnce(schedule_selector(ActorBase::StateToRun), 2.0f);
+
+       
+        this->scheduleOnce(schedule_selector(ActorBase::startRun), 2.0f);
+        schedule(schedule_selector(ActorBase::actorLogic), 0.5f);
         bRet = true;
     } while (0);
     return bRet;
@@ -140,20 +142,18 @@ void ActorBase::StateToRun()
 
 void ActorBase::StateToAttack()
 {
-	currentAnimateActionStop();
-	if (mActorDir == Left)
-		RunAnimateAction_RepeatForever(_action_attack);
-	else
-		RunAnimateAction_RepeatForever(_action_attack_flip);
+    
+//	currentAnimateActionStop();
+
 }
 
 void ActorBase::StateToDead()
 {
 	currentAnimateActionStop();
 	if (mActorDir == Left)
-		RunAnimateAction_RepeatForever(_action_dead);
+		RunAnimateAction_once(_action_dead,callfunc_selector(ActorBase::dealDead));
 	else
-		RunAnimateAction_RepeatForever(_action_dead_flip);
+		RunAnimateAction_once(_action_dead_flip,callfunc_selector(ActorBase::dealDead));
 }
 
 void ActorBase::StateToStand()
@@ -166,8 +166,10 @@ void ActorBase::StateToStand()
 
 void ActorBase::currentAnimateActionStop()
 {
+    
 	if (_currentAnimateAction != NULL)
-		this->stopAction(_currentAnimateAction);
+		_sprite->stopAction(_currentAnimateAction);
+    this->stopAllActions();
 }
 
 void ActorBase::RunAnimateAction_RepeatForever(CCAnimate* action)
@@ -175,8 +177,37 @@ void ActorBase::RunAnimateAction_RepeatForever(CCAnimate* action)
 	currentAnimateActionStop();
 	_currentAnimateAction = _sprite-> runAction(CCRepeatForever::create(action));
 }
+void ActorBase:: RunAnimateAction_once(CCAnimate* action,SEL_CallFunc selector)
+{
+    CCSequence *sequece = CCSequence::create(action,CCCallFunc::create(this, selector),NULL);
+    _onceAnimateAction =  _sprite->runAction(sequece);
+}
+ void ActorBase:: oneceAnimteActionStop()
+{
+   // this->scheduleOnce(schedule_selector(ActorBase::StateToAttack), 1.5f);
+}
+void ActorBase::actorLogic(){
+    if (_target) {
 
-void ActorBase::actorLogic()
+    if (_target->mActorData->getblood()<=0) {
+        _target->stopAllActions();
+       _target-> unschedule(schedule_selector(ActorBase::fire));
+       _target-> StateToDead();
+
+        unschedule(schedule_selector(ActorBase::fire));
+    }
+    }
+}
+void ActorBase::dealDead()
+{
+    removeFromParentAndCleanup(true);
+    if (mActorDir == Left) {
+        GameRoot::shareGameRoot()->getactorArrL()->removeObject(this);
+    }
+    else
+        GameRoot::shareGameRoot()->getactorArrR()->removeObject(this);
+}
+void ActorBase::startRun()
 {
     CCArray *arr;
     CCArray *arr1;
@@ -193,13 +224,71 @@ void ActorBase::actorLogic()
     settarget((ActorBase*)arr1->objectAtIndex(index));
     StateToRun();
     moveToTarget();
-    
+    this->scheduleUpdate();
 }
-void ActorBase::moveToTarget(){
+void ActorBase::moveToTarget()
+{
     float dis = ccpDistance(this->getPosition(), _target->getPosition());
-    float time = dis/_speed;
+    float time = dis/mActorData->getspeed();
     CCMoveTo *move = CCMoveTo::create(time, _target->getPosition());
     this->runAction(move);
+}
+void ActorBase::startAttack(){
+    int val = mActorData->getdamage();
+   _target ->attackedByEnemy(val, false);
+ }
+void ActorBase::fire(){
+    if (mActorDir == Left)
+    RunAnimateAction_once(_action_attack,callfunc_selector(ActorBase::startAttack));
+    else
+         RunAnimateAction_once(_action_attack_flip,callfunc_selector(ActorBase::startAttack));
+}
+
+void ActorBase::attackedByEnemy(int damageval,bool isBoom)
+{
+    int bloodval = mActorData->getblood();
+    bloodval -= damageval;
+    mActorData->setblood(bloodval);
+    
+    CCString *str = CCString::createWithFormat("-%d",damageval);
+    //  CCLog(str->getCString());
+    float font = 30;
+    if (isBoom) {
+        font = 60;
+    }
+    CCLabelTTF* demageLab = CCLabelTTF::create(str->getCString(),  "Marker Felt", font);
+    if (isBoom) {
+        demageLab->setColor(ccYELLOW);
+    }else
+        demageLab->setColor(ccRED);
+    float x = CCRANDOM_0_1()*40;
+    float y = CCRANDOM_0_1()*40;
+    demageLab->setPositionX(x);
+    demageLab->setPositionY(y);
+    this->addChild(demageLab);
+    CCActionInterval* scale=CCScaleTo::create(10, 0.5);
+    CCActionInterval *fade = CCFadeOut::create(0.5);
+    demageLab->runAction(CCSpawn::create(scale,fade,NULL));
+}
+void ActorBase:: update(float fDelta){
+
+    CCRect targetRect =
+    CCRectMake(
+                                   _target->getPosition().x - (_target->_sprite->getContentSize().width/2),
+                                   _target->getPosition().y - (_target->_sprite->getContentSize().height/2),
+                                   _target->_sprite->getContentSize().width+mActorData->getattackRange(),
+                                  _target->_sprite->getContentSize().height);
+
+    CCRect actorRect = CCRectMake(
+                                   this->getPosition().x - (_sprite->getContentSize().width/2),
+                                  this->getPosition().y - (_sprite->getContentSize().height/2),
+                                   _sprite->getContentSize().width+mActorData->getattackRange(),
+                                   _sprite->getContentSize().height);
+    if (actorRect.intersectsRect(targetRect)) {
+        this->unscheduleUpdate();
+        this->StateToStand();
+        schedule( schedule_selector(ActorBase::fire), 1.0f);
+    }
 }
 int ActorBase::less(const CCObject* in_pCcObj0, const CCObject* in_pCcObj1) {
     return ((ActorBase*)in_pCcObj0)->getPositionY() < ((ActorBase*)in_pCcObj1)->getPositionY();
