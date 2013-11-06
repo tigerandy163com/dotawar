@@ -38,14 +38,17 @@ public :
     void dealDead();
     virtual  void update(float fDelta);
     static void sortActors(CCArray* array);
+   
     void startAttack();
     void fire();
+    void findAnotherTarget();
     void attackedByEnemy(int damageval,bool isBoom);
 private :
 
-    
+    bool isDead;
     CC_SYNTHESIZE_RETAIN(ActorBase *, _target, target);
     static int less(const CCObject* obj0, const CCObject* obj1);
+
 	void currentAnimateActionStop();
 	void RunAnimateAction_RepeatForever(CCAnimate* action);
     void RunAnimateAction_once(CCAnimate* action,SEL_CallFunc selector);

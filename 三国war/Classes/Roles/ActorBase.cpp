@@ -187,25 +187,67 @@ void ActorBase:: RunAnimateAction_once(CCAnimate* action,SEL_CallFunc selector)
    // this->scheduleOnce(schedule_selector(ActorBase::StateToAttack), 1.5f);
 }
 void ActorBase::actorLogic(){
-    if (_target) {
-
-    if (_target->mActorData->getblood()<=0) {
-        _target->stopAllActions();
-       _target-> unschedule(schedule_selector(ActorBase::fire));
-       _target-> StateToDead();
-
-        unschedule(schedule_selector(ActorBase::fire));
+    if (mActorData->getblood()<=0) {
+        stopAllActions();
+        unscheduleAllSelectors();
+        isDead =true;
+        StateToDead();
     }
-    }
+        if (!isDead&& _target)
+        {
+            if (_target-> mActorData->getblood()<=0) {
+                StateToStand();
+                unschedule(schedule_selector(ActorBase::fire));
+                CC_SAFE_RELEASE_NULL(_target);
+                scheduleOnce(schedule_selector(ActorBase::findAnotherTarget), 2.0f) ;
+            }
+          }
+    
+    
 }
 void ActorBase::dealDead()
 {
     removeFromParentAndCleanup(true);
     if (mActorDir == Left) {
-        GameRoot::shareGameRoot()->getactorArrL()->removeObject(this);
-    }
-    else
         GameRoot::shareGameRoot()->getactorArrR()->removeObject(this);
+        CCLog("count:%d",GameRoot::shareGameRoot()->getactorArrR()->count());
+    }
+    else{
+        GameRoot::shareGameRoot()->getactorArrL()->removeObject(this);
+        CCLog("count:%d",GameRoot::shareGameRoot()->getactorArrL()->count());
+    }
+}
+void ActorBase::findAnotherTarget()
+{
+    CCArray *enmeys ;
+    if (mActorDir==Left) {
+        enmeys=GameRoot::shareGameRoot()->getactorArrL();
+       
+    }else
+        enmeys = GameRoot::shareGameRoot()->getactorArrR();
+     CCLog("count:%d",enmeys->count());
+    ActorBase* closestEnemy = NULL;
+	double maxDistant = 99999;
+
+	CCObject* temp;
+	CCARRAY_FOREACH(enmeys, temp){
+		ActorBase* enemy = (ActorBase*)temp;
+		if(enemy->getActorData()->getblood() <= 0){
+			continue;
+		}
+		double curDistance = ccpDistance(this->getPosition(), enemy->getPosition());
+		if(curDistance < maxDistant){
+			closestEnemy = enemy;
+			maxDistant = curDistance;
+		}
+	}
+    if (closestEnemy) {
+ 
+	settarget(closestEnemy);
+    StateToRun();
+    moveToTarget();
+    this->scheduleUpdate();
+    }
 }
 void ActorBase::startRun()
 {
@@ -228,13 +270,17 @@ void ActorBase::startRun()
 }
 void ActorBase::moveToTarget()
 {
+    if (_target) {
+
     float dis = ccpDistance(this->getPosition(), _target->getPosition());
     float time = dis/mActorData->getspeed();
     CCMoveTo *move = CCMoveTo::create(time, _target->getPosition());
     this->runAction(move);
+    }
 }
 void ActorBase::startAttack(){
     int val = mActorData->getdamage();
+    if (_target)
    _target ->attackedByEnemy(val, false);
  }
 void ActorBase::fire(){
@@ -271,7 +317,9 @@ void ActorBase::attackedByEnemy(int damageval,bool isBoom)
     demageLab->runAction(CCSpawn::create(scale,fade,NULL));
 }
 void ActorBase:: update(float fDelta){
-
+    if (!_target) {
+        return;
+    }
     CCRect targetRect =
     CCRectMake(
                                    _target->getPosition().x - (_target->_sprite->getContentSize().width/2),
@@ -294,6 +342,7 @@ int ActorBase::less(const CCObject* in_pCcObj0, const CCObject* in_pCcObj1) {
     return ((ActorBase*)in_pCcObj0)->getPositionY() < ((ActorBase*)in_pCcObj1)->getPositionY();
 }
 
-void ActorBase::sortActors(CCArray* in_pCcArrDogs) {
-    std::sort(in_pCcArrDogs->data->arr, in_pCcArrDogs->data->arr + in_pCcArrDogs->data->num, ActorBase::less);
+void ActorBase::sortActors(CCArray* array) {
+    std::sort(array->data->arr, array->data->arr + array->data->num, ActorBase::less);
 }
+
