@@ -322,17 +322,17 @@ void ActorBase:: update(float fDelta){
     }
     CCRect targetRect =
     CCRectMake(
-                                   _target->getPosition().x - (_target->_sprite->getContentSize().width/2),
-                                   _target->getPosition().y - (_target->_sprite->getContentSize().height/2),
-                                   _target->_sprite->getContentSize().width+mActorData->getattackRange(),
+                                   _target->getPosition().x,
+                                   _target->getPosition().y,
+                                   _target->_sprite->getContentSize().width,
                                   _target->_sprite->getContentSize().height);
 
     CCRect actorRect = CCRectMake(
-                                   this->getPosition().x - (_sprite->getContentSize().width/2),
-                                  this->getPosition().y - (_sprite->getContentSize().height/2),
+                                   this->getPosition().x ,
+                                  this->getPosition().y ,
                                    _sprite->getContentSize().width+mActorData->getattackRange(),
-                                   _sprite->getContentSize().height);
-    if (actorRect.intersectsRect(targetRect)) {
+                                   _sprite->getContentSize().height+mActorData->getattackRange());
+    if (actorRect.intersectsRect(targetRect)&&_target->getPositionY()==this->getPositionY()) {
         this->unscheduleUpdate();
         this->StateToStand();
         schedule( schedule_selector(ActorBase::fire), 1.0f);
