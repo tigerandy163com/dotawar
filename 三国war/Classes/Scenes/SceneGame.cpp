@@ -51,7 +51,7 @@ bool SceneGame::init()
         CCLOG("%f,,,%f",point.x,point.y);
      //   point = TileMapHelp::positionForTileCoord(_map, point);
       //    CCLOG("%f---%f",point.x,point.y);
-            ActorData *data = ActorData::getActorData(id->getCString(),groupid->getCString(), (ActorType)type, (ActorPro)pro);
+            ActorData *data = ActorData::getActorData(id->getCString(),groupid->getCString(), (ActorType)type, (ActorPro)pro,this);
             ActorBase *actor = ActorBase::create(data);
             actor->setPosition(point);
            this->addChild(actor);
@@ -76,7 +76,10 @@ bool SceneGame::init()
 	this->addChild(menu);
     return true;
 }
-
+void SceneGame::addChild(cocos2d::CCNode *child)
+{
+    CCLayer::addChild(child);
+}
 
 void SceneGame::click_attack(CCObject *pSender)
 {

@@ -9,7 +9,8 @@ using std::string;
 enum ActorType {Type_None = 0, Soldier, Hero};
 enum ActorPro {Pro_None = 0, Infantry, Pikeman, Cavalvy, Archer};
 enum ActorDir {Dir_None = 0, Right, Left};
-
+class ActorBase;
+class SceneGame;
 class ActorData:public CCObject
 {
 public :
@@ -17,7 +18,7 @@ public :
 	ActorData(ActorData* pActorData);
 
    bool actorData(int speed,int blood,int damage,int experience,int range);
-	static ActorData* getActorData(string id, string groupid, ActorType type, ActorPro pro);
+	static ActorData* getActorData(string id, string groupid, ActorType type, ActorPro pro,SceneGame* gameLayer);
     CC_SYNTHESIZE(std::string, mActorID, ActorID);
     CC_SYNTHESIZE(std::string, mGroupID, GroupID);
     CC_SYNTHESIZE(ActorType, mActorType, ActorType);

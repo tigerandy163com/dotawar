@@ -10,6 +10,7 @@ public :
     ~SceneGame();
     virtual bool init();
     static CCScene *Scene();
+    virtual void addChild(CCNode * child);
     CREATE_FUNC(SceneGame);
     CCTMXTiledMap* _map;
     cocos2d::CCTMXObjectGroup *_objects;

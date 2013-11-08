@@ -31,7 +31,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     assert(engine);
     if (!engine)
         return false;
-    engine->executeScriptFile("actor.lua");
+    engine->executeScriptFile("actorData.lua");
     CCScriptEngineManager::sharedManager()->setScriptEngine(engine);
     // initialize director
     CCDirector *pDirector = CCDirector::sharedDirector();

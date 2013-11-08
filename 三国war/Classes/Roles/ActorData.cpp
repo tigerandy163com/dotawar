@@ -1,6 +1,6 @@
 #include "ActorData.h"
-
-
+#include "ActorBase.h"
+#include "SceneGame.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -86,7 +86,7 @@ ActorData::ActorData(ActorData* pActorData)
 	}
 }
 
-ActorData* ActorData::getActorData(string id, string groupid, ActorType type, ActorPro pro)
+ActorData* ActorData::getActorData(string id, string groupid, ActorType type, ActorPro pro,SceneGame*gameLayer)
 {
 	ActorData* data = new ActorData(id);
     if (data) {
@@ -107,8 +107,9 @@ ActorData* ActorData::getActorData(string id, string groupid, ActorType type, Ac
     engine->getLuaStack()->pushCCObject(data, "ActorData");
      lua_pushstring(data->luaState, id.c_str());
  //    int rtn = engine->executeGlobalFunction("main");
-   executeGlobalFunction("main", 2);
-
+     executeGlobalFunction("main", 2);
+    
+     
 	return data;
 }
 bool  ActorData::actorData(int speed,int blood,int damage,int experience,int range)

@@ -38,6 +38,7 @@ extern "C" {
 #include "SimpleAudioEngine.h"
 #include "cocos-ext.h"
 #include "ActorData.h"
+#include "SceneGame.h"
 using namespace cocos2d;
 using namespace cocos2d::extension;
 using namespace CocosDenshion;
@@ -367,7 +368,8 @@ static int tolua_collect_CCControlSwitch (lua_State* tolua_S)
 /* function to register type */
 static void tolua_reg_types (lua_State* tolua_S)
 {
-    tolua_usertype(tolua_S,"ActorData");
+tolua_usertype(tolua_S,"ActorData");
+    tolua_usertype(tolua_S,"SceneGame");
  tolua_usertype(tolua_S,"kmMat4");
  tolua_usertype(tolua_S,"CCControlSaturationBrightnessPicker");
  tolua_usertype(tolua_S,"CCShaky3D");
@@ -64514,6 +64516,34 @@ static int tolua_Cocos2d_CCInteger_create00(lua_State* tolua_S)
 #endif
 }
 #endif //#ifndef TOLUA_DISABLE
+static int tolua_ss_SceneGame_addChild00(lua_State* tolua_S)
+{
+    tolua_Error tolua_err;
+    if (
+        // !tolua_isusertable(tolua_S,1,"ActorData",0,&tolua_err) ||
+        !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+
+        !tolua_isnoobj(tolua_S,3,&tolua_err)
+        )
+        goto tolua_lerror;
+    else
+    {
+        SceneGame* self = (SceneGame*)  tolua_tousertype(tolua_S,1,0);
+        CCNode* obj = ((CCNode*)  tolua_tousertype(tolua_S,2,0));
+
+        {
+           self
+            ->addChild(obj);
+            //            int nid = (tolua_ret) ? (int)tolua_ret->m_uID : -1;
+            //            int* pluaid = (tolua_ret) ? &tolua_ret->m_nLuaID : NULL;
+            //            toluafix_pushusertype_ccobject(tolua_S, nid, pluaid, (void*)tolua_ret,"HSprite");
+        }
+    }
+    return 1;
+tolua_lerror:
+    return 0;
+
+}
 static int tolua_ss_ActorData_actorData00(lua_State* tolua_S)
 {
     tolua_Error tolua_err;
@@ -67916,6 +67946,10 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
     tolua_function(tolua_S,"actorData",tolua_ss_ActorData_actorData00);
     tolua_endmodule(tolua_S);
     
+    tolua_cclass(tolua_S, "SceneGame", "SceneGame", "CCLayer", NULL);
+    tolua_beginmodule(tolua_S,"SceneGame");
+    tolua_function(tolua_S,"SceneGame",tolua_ss_SceneGame_addChild00);
+    tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;
 }

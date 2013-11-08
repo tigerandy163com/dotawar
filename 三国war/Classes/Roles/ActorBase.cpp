@@ -131,9 +131,19 @@ ActorBase::~ActorBase()
     CC_SAFE_RELEASE_NULL(_action_stand);
     CC_SAFE_RELEASE_NULL(_action_stand_flip);
 }
-
+ActorDir ActorBase::getActorDir(void){
+    if (_target) {
+        
+        if (_target->getPositionX()>this->getPositionX()) {
+            mActorDir = Right;
+        }else{
+            mActorDir = Left;
+        }
+    }
+}
 void ActorBase::StateToRun()
 {
+    getActorDir();
 	if (mActorDir == Left)
 		RunAnimateAction_RepeatForever(_action_run);
 	else
@@ -149,7 +159,9 @@ void ActorBase::StateToAttack()
 
 void ActorBase::StateToDead()
 {
+   
 	currentAnimateActionStop();
+     getActorDir();
 	if (mActorDir == Left)
 		RunAnimateAction_once(_action_dead,callfunc_selector(ActorBase::dealDead));
 	else
@@ -158,6 +170,7 @@ void ActorBase::StateToDead()
 
 void ActorBase::StateToStand()
 {
+    getActorDir();
 	if (mActorDir == Left)
 		RunAnimateAction_RepeatForever(_action_stand);
 	else
@@ -170,6 +183,7 @@ void ActorBase::currentAnimateActionStop()
 	if (_currentAnimateAction != NULL)
 		_sprite->stopAction(_currentAnimateAction);
     this->stopAllActions();
+    
 }
 
 void ActorBase::RunAnimateAction_RepeatForever(CCAnimate* action)
@@ -220,7 +234,7 @@ void ActorBase::dealDead()
 void ActorBase::findAnotherTarget()
 {
     CCArray *enmeys ;
-    if (mActorDir==Left) {
+    if (mActorData->getGroupID().compare("1")) {
         enmeys=GameRoot::shareGameRoot()->getactorArrL();
        
     }else
@@ -266,15 +280,21 @@ void ActorBase::startRun()
     settarget((ActorBase*)arr1->objectAtIndex(index));
     StateToRun();
     moveToTarget();
+    
     this->scheduleUpdate();
 }
 void ActorBase::moveToTarget()
 {
     if (_target) {
-
-    float dis = ccpDistance(this->getPosition(), _target->getPosition());
+        CCPoint pos;
+        if (_target->getActorDir()==Left) {
+            pos = ccp(_target->getPositionX()+20 ,_target->getPositionY());
+        }else
+             pos = ccp(_target->getPositionX()-20 ,_target->getPositionY());
+    float dis = ccpDistance(this->getPosition(), pos);
     float time = dis/mActorData->getspeed();
-    CCMoveTo *move = CCMoveTo::create(time, _target->getPosition());
+    CCMoveTo *move = CCMoveTo::create(time, pos);
+        _move = move;
     this->runAction(move);
     }
 }
@@ -284,6 +304,7 @@ void ActorBase::startAttack(){
    _target ->attackedByEnemy(val, false);
  }
 void ActorBase::fire(){
+    getActorDir();
     if (mActorDir == Left)
     RunAnimateAction_once(_action_attack,callfunc_selector(ActorBase::startAttack));
     else
@@ -332,6 +353,7 @@ void ActorBase:: update(float fDelta){
                                   this->getPosition().y ,
                                    _sprite->getContentSize().width+mActorData->getattackRange(),
                                    _sprite->getContentSize().height+mActorData->getattackRange());
+
     if (actorRect.intersectsRect(targetRect)&&_target->getPositionY()==this->getPositionY()) {
         this->unscheduleUpdate();
         this->StateToStand();

@@ -15,9 +15,10 @@ public :
     bool initWithActorData(ActorData* data);
     static ActorBase* create(ActorData* data);
     CC_SYNTHESIZE_RETAIN(ActorData*, mActorData, ActorData);
-    CC_SYNTHESIZE(ActorDir, mActorDir, ActorDir);
-
-
+   // CC_SYNTHESIZE(ActorDir, mActorDir, ActorDir);
+    ActorDir getActorDir(void);
+    ActorDir mActorDir;
+    CCAction *_move;
 	CCAnimate* _action_attack;
 	CCAnimate* _action_attack_flip;
 	CCAnimate* _action_run;
