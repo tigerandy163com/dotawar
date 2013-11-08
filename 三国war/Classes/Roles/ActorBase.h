@@ -15,7 +15,7 @@ public :
     bool initWithActorData(ActorData* data);
     static ActorBase* create(ActorData* data);
     CC_SYNTHESIZE_RETAIN(ActorData*, mActorData, ActorData);
-   // CC_SYNTHESIZE(ActorDir, mActorDir, ActorDir);
+    float totalBlood;
     ActorDir getActorDir(void);
     ActorDir mActorDir;
     CCAction *_move;
@@ -45,9 +45,9 @@ public :
     void findAnotherTarget();
     void attackedByEnemy(int damageval,bool isBoom);
 private :
-
+    cocos2d::CCProgressTimer* healthBar;
     bool isDead;
-    CC_SYNTHESIZE_RETAIN(ActorBase *, _target, target);
+    CC_SYNTHESIZE(ActorBase *, _target, target);
     static int less(const CCObject* obj0, const CCObject* obj1);
 
 	void currentAnimateActionStop();

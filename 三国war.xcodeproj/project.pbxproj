@@ -304,6 +304,8 @@
 		C6632E43182B93DA00482106 /* actor.lua in Resources */ = {isa = PBXBuildFile; fileRef = C6632E41182B93DA00482106 /* actor.lua */; };
 		C6632E44182B93DA00482106 /* actorData.lua in Resources */ = {isa = PBXBuildFile; fileRef = C6632E42182B93DA00482106 /* actorData.lua */; };
 		C6846C46182358EA00C664B7 /* tileMapHelp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6846C44182358EA00C664B7 /* tileMapHelp.cpp */; };
+		C6C214E2182CE02A008693B7 /* health_bar_green.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C214E0182CE02A008693B7 /* health_bar_green.png */; };
+		C6C214E3182CE02A008693B7 /* health_bar_red.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C214E1182CE02A008693B7 /* health_bar_red.png */; };
 		C6C86D36182750DB0006F14F /* GameDate.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6C86D35182750DB0006F14F /* GameDate.plist */; };
 		C6C8720D1827A3C10006F14F /* CCBProxy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C871E21827A3C10006F14F /* CCBProxy.cpp */; };
 		C6C8720E1827A3C10006F14F /* CCLuaBridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C871E41827A3C10006F14F /* CCLuaBridge.cpp */; };
@@ -952,6 +954,8 @@
 		C6632E42182B93DA00482106 /* actorData.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = actorData.lua; sourceTree = "<group>"; };
 		C6846C44182358EA00C664B7 /* tileMapHelp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tileMapHelp.cpp; sourceTree = "<group>"; };
 		C6846C45182358EA00C664B7 /* tileMapHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tileMapHelp.h; sourceTree = "<group>"; };
+		C6C214E0182CE02A008693B7 /* health_bar_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = health_bar_green.png; path = Resources/health_bar_green.png; sourceTree = "<group>"; };
+		C6C214E1182CE02A008693B7 /* health_bar_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = health_bar_red.png; path = Resources/health_bar_red.png; sourceTree = "<group>"; };
 		C6C86D35182750DB0006F14F /* GameDate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GameDate.plist; path = Resources/GameDate.plist; sourceTree = "<group>"; };
 		C6C871E21827A3C10006F14F /* CCBProxy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBProxy.cpp; sourceTree = "<group>"; };
 		C6C871E31827A3C10006F14F /* CCBProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBProxy.h; sourceTree = "<group>"; };
@@ -1061,6 +1065,8 @@
 		C60A8130182208CF001673B8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C6C214E0182CE02A008693B7 /* health_bar_green.png */,
+				C6C214E1182CE02A008693B7 /* health_bar_red.png */,
 				C6632E41182B93DA00482106 /* actor.lua */,
 				C6632E42182B93DA00482106 /* actorData.lua */,
 				C60A84CC182209F3001673B8 /* ActorsPack1.plist */,
@@ -2440,9 +2446,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6C214E3182CE02A008693B7 /* health_bar_red.png in Resources */,
 				C6C8721A1827A3C10006F14F /* CCBReaderLoad.lua in Resources */,
 				C60A8142182208CF001673B8 /* Icon.png in Resources */,
 				C60A84D7182209F3001673B8 /* ActorsPack1.plist in Resources */,
+				C6C214E2182CE02A008693B7 /* health_bar_green.png in Resources */,
 				C60A81E5182208D0001673B8 /* ChangeLog in Resources */,
 				C60A84DF182209F3001673B8 /* GameUI02.png in Resources */,
 				C60A8132182208CF001673B8 /* CloseNormal.png in Resources */,

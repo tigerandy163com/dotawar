@@ -6,6 +6,7 @@ bool ActorBase::initWithActorData(ActorData *data)
     bool bRet = false;
     do {
         setActorData(data);
+        totalBlood = data->getblood();
         _action_attack = NULL;
         _action_attack_flip = NULL;
         _action_run = NULL;
@@ -97,7 +98,19 @@ bool ActorBase::initWithActorData(ActorData *data)
         _sprite->retain();
         this->addChild(_sprite);
 
-       
+        healthBar = CCProgressTimer::create(CCSprite::create("health_bar_green.png"));
+        
+		healthBar->setType(kCCProgressTimerTypeBar);
+		healthBar->setMidpoint(ccp(0, 0));
+		healthBar->setBarChangeRate(ccp(1, 0));
+		healthBar->setPercentage(100);
+		healthBar->setScale(0.2f);
+		healthBar->setPosition(ccp(0,_sprite->getContentSize().height* 0.5f));
+		this->addChild(healthBar,2);
+        CCSprite *redBar = CCSprite::create("health_bar_red.png");
+        redBar->setPosition(healthBar->getPosition());
+        redBar->setScale(0.2);
+        this->addChild(redBar,1);
         this->scheduleOnce(schedule_selector(ActorBase::startRun), 2.0f);
         schedule(schedule_selector(ActorBase::actorLogic), 0.5f);
         bRet = true;
@@ -212,7 +225,8 @@ void ActorBase::actorLogic(){
             if (_target-> mActorData->getblood()<=0) {
                 StateToStand();
                 unschedule(schedule_selector(ActorBase::fire));
-                CC_SAFE_RELEASE_NULL(_target);
+                _target =NULL;
+                //CC_SAFE_RELEASE_NULL(_target);
                 scheduleOnce(schedule_selector(ActorBase::findAnotherTarget), 2.0f) ;
             }
           }
@@ -233,6 +247,9 @@ void ActorBase::dealDead()
 }
 void ActorBase::findAnotherTarget()
 {
+    if (isDead) {
+        return;
+    }
     CCArray *enmeys ;
     if (mActorData->getGroupID().compare("1")) {
         enmeys=GameRoot::shareGameRoot()->getactorArrL();
@@ -288,9 +305,9 @@ void ActorBase::moveToTarget()
     if (_target) {
         CCPoint pos;
         if (_target->getActorDir()==Left) {
-            pos = ccp(_target->getPositionX()+20 ,_target->getPositionY());
+            pos = ccp(_target->getPositionX()+40 ,_target->getPositionY());
         }else
-             pos = ccp(_target->getPositionX()-20 ,_target->getPositionY());
+             pos = ccp(_target->getPositionX()-40,_target->getPositionY());
     float dis = ccpDistance(this->getPosition(), pos);
     float time = dis/mActorData->getspeed();
     CCMoveTo *move = CCMoveTo::create(time, pos);
@@ -336,6 +353,9 @@ void ActorBase::attackedByEnemy(int damageval,bool isBoom)
     CCActionInterval* scale=CCScaleTo::create(10, 0.5);
     CCActionInterval *fade = CCFadeOut::create(0.5);
     demageLab->runAction(CCSpawn::create(scale,fade,NULL));
+    
+    float f = (float)mActorData->getblood()/totalBlood;
+    healthBar->setPercentage(f*100);
 }
 void ActorBase:: update(float fDelta){
     if (!_target) {
@@ -353,8 +373,8 @@ void ActorBase:: update(float fDelta){
                                   this->getPosition().y ,
                                    _sprite->getContentSize().width+mActorData->getattackRange(),
                                    _sprite->getContentSize().height+mActorData->getattackRange());
-
-    if (actorRect.intersectsRect(targetRect)&&_target->getPositionY()==this->getPositionY()) {
+    int YY=_target->getPositionY()-this->getPositionY();
+    if (actorRect.intersectsRect(targetRect)&& abs(YY)<5) {
         this->unscheduleUpdate();
         this->StateToStand();
         schedule( schedule_selector(ActorBase::fire), 1.0f);
