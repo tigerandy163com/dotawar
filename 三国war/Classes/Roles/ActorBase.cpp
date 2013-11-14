@@ -111,8 +111,9 @@ bool ActorBase::initWithActorData(ActorData *data)
         redBar->setPosition(healthBar->getPosition());
         redBar->setScale(0.2);
         this->addChild(redBar,1);
+        winsize = CCDirector::sharedDirector()->getWinSize();
         this->scheduleOnce(schedule_selector(ActorBase::startRun), 2.0f);
-        schedule(schedule_selector(ActorBase::actorLogic), 0.5f);
+        schedule(schedule_selector(ActorBase::actorLogic), 0.5f,kCCRepeatForever,2.1f);
         bRet = true;
     } while (0);
     return bRet;
@@ -227,22 +228,38 @@ void ActorBase::actorLogic(){
                 unschedule(schedule_selector(ActorBase::fire));
                 _target =NULL;
                 //CC_SAFE_RELEASE_NULL(_target);
-                scheduleOnce(schedule_selector(ActorBase::findAnotherTarget), 2.0f) ;
+         //       scheduleOnce(schedule_selector(ActorBase::findAnotherTarget), 2.0f) ;
             }
           }
     
+    if (!_target) {
+        scheduleOnce(schedule_selector(ActorBase::findAnotherTarget),0.0f) ;
+    }
     
 }
 void ActorBase::dealDead()
 {
     removeFromParentAndCleanup(true);
-    if (mActorDir == Left) {
-        GameRoot::shareGameRoot()->getactorArrR()->removeObject(this);
-        CCLog("count:%d",GameRoot::shareGameRoot()->getactorArrR()->count());
+    CCArray* arr;
+    if (mActorData->getGroupID().compare("1")==0) {
+     arr  =   GameRoot::shareGameRoot()->getactorArrL();
+    }else
+        arr = GameRoot::shareGameRoot()->getactorArrR();
+      int index =CC_INVALID_INDEX;
+    CCObject* obj;
+    CCARRAY_FOREACH(arr, obj)
+    {
+        ActorBase* actor = (ActorBase*)obj;
+        int tag = actor->getTag();
+        if (tag == this->getTag()) {
+            index = arr->indexOfObject(obj);
+            break;
+        }
     }
-    else{
-        GameRoot::shareGameRoot()->getactorArrL()->removeObject(this);
-        CCLog("count:%d",GameRoot::shareGameRoot()->getactorArrL()->count());
+    if (index!=CC_INVALID_INDEX) {
+        arr->removeObjectAtIndex(index);
+        CCLog("Rcount:%d", GameRoot::shareGameRoot()->getactorArrR()->count());
+         CCLog("Lcount:%d", GameRoot::shareGameRoot()->getactorArrL()->count());
     }
 }
 void ActorBase::findAnotherTarget()
@@ -256,7 +273,7 @@ void ActorBase::findAnotherTarget()
        
     }else
         enmeys = GameRoot::shareGameRoot()->getactorArrR();
-     CCLog("count:%d",enmeys->count());
+    // CCLog("count:%d",enmeys->count());
     ActorBase* closestEnemy = NULL;
 	double maxDistant = 99999;
 
@@ -266,6 +283,10 @@ void ActorBase::findAnotherTarget()
 		if(enemy->getActorData()->getblood() <= 0){
 			continue;
 		}
+        if (enemy->getPositionY()==this->getPositionY()) {
+            closestEnemy = enemy;
+            break;
+        }
 		double curDistance = ccpDistance(this->getPosition(), enemy->getPosition());
 		if(curDistance < maxDistant){
 			closestEnemy = enemy;
@@ -277,11 +298,13 @@ void ActorBase::findAnotherTarget()
 	settarget(closestEnemy);
     StateToRun();
     moveToTarget();
+        this->unscheduleUpdate();
     this->scheduleUpdate();
     }
 }
 void ActorBase::startRun()
 {
+    
     CCArray *arr;
     CCArray *arr1;
     if (getActorData()->getGroupID().compare("1")==0) {
@@ -291,28 +314,49 @@ void ActorBase::startRun()
            arr = GameRoot::shareGameRoot()-> getactorArrR();
         arr1 = GameRoot::shareGameRoot()-> getactorArrL();
     }
-    int index = -1;
-    index = arr->indexOfObject(this);
-    
-    settarget((ActorBase*)arr1->objectAtIndex(index));
+//    int index = -1;
+//    index = arr->indexOfObject(this);
+//    if (index!=CC_INVALID_INDEX) {
+//        if (index<arr1->count()) {
+//            settarget((ActorBase*)arr1->objectAtIndex(index));
+//        }
+//    }
+    CCLOG("arr count: %d ,arr1 count:%d",arr->count(),arr1->count());
+    if (arr1->count()==0) {
+        return;
+    }
     StateToRun();
-    moveToTarget();
+ //   moveToTarget();
+    CCSize winsize = CCDirector::sharedDirector()->getWinSize();
+    moveToPositon(ccp(winsize.width/2, this->getPositionY()));
+//    this->scheduleUpdate();
+}
+void ActorBase::moveToPositon(cocos2d::CCPoint pos)
+{
+    float dis = ccpDistance(this->getPosition(), pos);
+    float time = dis/mActorData->getspeed();
+    CCMoveTo *move = CCMoveTo::create(time, pos);
+    _move = move;
     
-    this->scheduleUpdate();
+    this->runAction(CCSequence::create(move,CCCallFunc::create(this, callfunc_selector(ActorBase::StateToStand)),NULL));
 }
 void ActorBase::moveToTarget()
 {
     if (_target) {
         CCPoint pos;
         if (_target->getActorDir()==Left) {
+
             pos = ccp(_target->getPositionX()+40 ,_target->getPositionY());
-        }else
+            if (pos.x>=winsize.width-20) {
+                pos.x = winsize.width-20;
+            }
+        }else{
              pos = ccp(_target->getPositionX()-40,_target->getPositionY());
-    float dis = ccpDistance(this->getPosition(), pos);
-    float time = dis/mActorData->getspeed();
-    CCMoveTo *move = CCMoveTo::create(time, pos);
-        _move = move;
-    this->runAction(move);
+            if (pos.x<=20) {
+                pos.x =20;
+            }
+        }
+        moveToPositon(pos);
     }
 }
 void ActorBase::startAttack(){

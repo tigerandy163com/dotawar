@@ -21,6 +21,8 @@ public :
 	SceneGame* getSceneGame();
 	SceneOver* getSceneOver();
     bool resetSceneGame();
+    void addSpriteTag();
+    CC_SYNTHESIZE(int, _spriteTag , spriteTag);
     CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrL, actorArrL);
     CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrR,actorArrR);
 };

@@ -301,6 +301,7 @@
 		C60A850018220A48001673B8 /* SceneSetting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F218220A48001673B8 /* SceneSetting.cpp */; };
 		C60A850118220A48001673B8 /* SceneStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F418220A48001673B8 /* SceneStart.cpp */; };
 		C60A850218220A48001673B8 /* LayerLevels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F718220A48001673B8 /* LayerLevels.cpp */; };
+		C635F17D18337E3B006741F4 /* GameHud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C635F17B18337E3B006741F4 /* GameHud.cpp */; };
 		C6632E43182B93DA00482106 /* actor.lua in Resources */ = {isa = PBXBuildFile; fileRef = C6632E41182B93DA00482106 /* actor.lua */; };
 		C6632E44182B93DA00482106 /* actorData.lua in Resources */ = {isa = PBXBuildFile; fileRef = C6632E42182B93DA00482106 /* actorData.lua */; };
 		C6846C46182358EA00C664B7 /* tileMapHelp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6846C44182358EA00C664B7 /* tileMapHelp.cpp */; };
@@ -950,6 +951,8 @@
 		C60A84F518220A48001673B8 /* SceneStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneStart.h; sourceTree = "<group>"; };
 		C60A84F718220A48001673B8 /* LayerLevels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LayerLevels.cpp; sourceTree = "<group>"; };
 		C60A84F818220A48001673B8 /* LayerLevels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerLevels.h; sourceTree = "<group>"; };
+		C635F17B18337E3B006741F4 /* GameHud.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameHud.cpp; sourceTree = "<group>"; };
+		C635F17C18337E3B006741F4 /* GameHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameHud.h; sourceTree = "<group>"; };
 		C6632E41182B93DA00482106 /* actor.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = actor.lua; sourceTree = "<group>"; };
 		C6632E42182B93DA00482106 /* actorData.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = actorData.lua; sourceTree = "<group>"; };
 		C6846C44182358EA00C664B7 /* tileMapHelp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tileMapHelp.cpp; sourceTree = "<group>"; };
@@ -2273,6 +2276,8 @@
 				C60A84F518220A48001673B8 /* SceneStart.h */,
 				C6846C44182358EA00C664B7 /* tileMapHelp.cpp */,
 				C6846C45182358EA00C664B7 /* tileMapHelp.h */,
+				C635F17B18337E3B006741F4 /* GameHud.cpp */,
+				C635F17C18337E3B006741F4 /* GameHud.h */,
 			);
 			name = Scenes;
 			path = Classes/Scenes;
@@ -2554,6 +2559,7 @@
 				C60A8267182208D1001673B8 /* CCDirectorCaller.mm in Sources */,
 				C60A8250182208D1001673B8 /* CCImageCommonWebp.cpp in Sources */,
 				C6C8720D1827A3C10006F14F /* CCBProxy.cpp in Sources */,
+				C635F17D18337E3B006741F4 /* GameHud.cpp in Sources */,
 				C60A84FC18220A48001673B8 /* ActorData.cpp in Sources */,
 				C60A81C2182208D0001673B8 /* CCGrabber.cpp in Sources */,
 				C60A8176182208CF001673B8 /* CCActionTiledGrid.cpp in Sources */,

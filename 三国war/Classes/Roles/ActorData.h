@@ -7,7 +7,7 @@ USING_NS_CC;
 using std::string;
 
 enum ActorType {Type_None = 0, Soldier, Hero};
-enum ActorPro {Pro_None = 0, Infantry, Pikeman, Cavalvy, Archer};
+enum ActorPro {Pro_None = 0, Infantry, Pikeman, Cavalvy, Archer};//步兵，矛兵，骑兵，弓兵
 enum ActorDir {Dir_None = 0, Right, Left};
 class ActorBase;
 class SceneGame;

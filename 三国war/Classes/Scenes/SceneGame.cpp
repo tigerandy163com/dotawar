@@ -1,10 +1,13 @@
 #include "SceneGame.h"
 #include "GameRoot.h"
 #include "tileMapHelp.h"
-#include "ActorBase.h"
+
+#include "GameHud.h"
+ CCPointArray* _startPosArr;
 SceneGame::~SceneGame()
 {
     CC_SAFE_RELEASE_NULL(_map);
+
 }
 CCScene* SceneGame::Scene()
 {
@@ -39,6 +42,10 @@ bool SceneGame::init()
     CCSize tileSize = map->getTileSize();
     CCArray *arrL = CCArray::create();
     CCArray *arrR = CCArray::create();
+    if(_startPosArr)
+        CC_SAFE_RELEASE_NULL(_startPosArr);
+   _startPosArr=CCPointArray::create(5) ;
+    _startPosArr->retain();
     CCARRAY_FOREACH(objects, obj){
         CCDictionary *dic = (CCDictionary *)obj;
         int  type = dic->valueForKey("type")->intValue() ;
@@ -54,26 +61,27 @@ bool SceneGame::init()
             ActorData *data = ActorData::getActorData(id->getCString(),groupid->getCString(), (ActorType)type, (ActorPro)pro,this);
             ActorBase *actor = ActorBase::create(data);
             actor->setPosition(point);
+        GameRoot::shareGameRoot()->addSpriteTag();
+        actor->setTag(GameRoot::shareGameRoot()->getspriteTag());
            this->addChild(actor);
-        
+  
         if (groupid->compare("1")==0) {
             arrL->addObject(actor);
+            if(type==Soldier)
+            _startPosArr->addControlPoint(point);
         }else
         {
             arrR->addObject(actor);
         }
     }
+    
     ActorBase::sortActors(arrL);
     ActorBase::sortActors(arrR);
-    GameRoot::shareGameRoot()->setactorArrL(arrL);
-    GameRoot::shareGameRoot()->setactorArrR(arrR);
-	CCMenuItemSprite* btn_attack = CCMenuItemSprite::create(
-		CCSprite::createWithSpriteFrameName("btn_soldierattack1.png"), 
-		CCSprite::createWithSpriteFrameName("btn_soldierattack2.png"), 
-		this, menu_selector(SceneGame::click_attack));
-	CCMenu* menu = CCMenu::createWithItem(btn_attack);
-	menu->setPosition(ccp(732, 36));
-	this->addChild(menu);
+    GameRoot::shareGameRoot()->getactorArrL()->addObjectsFromArray(arrL);
+    GameRoot::shareGameRoot()->getactorArrR()->addObjectsFromArray(arrR);
+	
+    
+    this->addChild(GameHud::shareGameHud());
     return true;
 }
 void SceneGame::addChild(cocos2d::CCNode *child)
@@ -81,7 +89,15 @@ void SceneGame::addChild(cocos2d::CCNode *child)
     CCLayer::addChild(child);
 }
 
-void SceneGame::click_attack(CCObject *pSender)
+void SceneGame::addSoldier(cocos2d::CCPoint pos, const char* soldierId,ActorPro pro)
 {
-	CCDirector::sharedDirector()->replaceScene((CCScene*)GameRoot::shareGameRoot()-> getSceneOver());
+    ActorData *data = ActorData::getActorData(soldierId,"1",Soldier, pro,this);
+    ActorBase *actor = ActorBase::create(data);
+    GameRoot::shareGameRoot()->addSpriteTag();
+    actor->setTag(GameRoot::shareGameRoot()->getspriteTag());
+    actor->setPosition(pos);
+    this->addChild(actor);
+    CCArray *larr = GameRoot::shareGameRoot()->getactorArrL();
+    larr->addObject(actor);
+
 }

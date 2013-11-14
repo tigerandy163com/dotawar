@@ -17,6 +17,7 @@ GameRoot* GameRoot::shareGameRoot()
 {
     if (_shareGameRoot==NULL) {
         _shareGameRoot = new GameRoot();
+       _shareGameRoot->init();
         _shareGameRoot->InitializeResource();
     }
     return _shareGameRoot;
@@ -30,6 +31,7 @@ bool GameRoot::init()
         _actorArrL->retain();
         _actorArrR = CCArray::create();
         _actorArrR->retain();
+        _spriteTag = 0;
         bRet = true;
     } while (0);
     return bRet;
@@ -42,7 +44,10 @@ void GameRoot::InitializeResource()
 	cache->addSpriteFramesWithFile("GameUI02.plist", "GameUI02.png");
 	cache->addSpriteFramesWithFile("ActorsPack1.plist", "ActorsPack1.png");
 }
-
+void  GameRoot::addSpriteTag()
+{
+    _spriteTag++;
+}
 SceneStart* GameRoot::getSceneStart()
 {
 	if (_SceneStart == NULL){

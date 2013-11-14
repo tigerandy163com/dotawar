@@ -54,8 +54,10 @@ private :
 	void RunAnimateAction_RepeatForever(CCAnimate* action);
     void RunAnimateAction_once(CCAnimate* action,SEL_CallFunc selector);
     void oneceAnimteActionStop();
-    
+    CCSize winsize;
+    bool isFiring;
     void moveToTarget();
+    void moveToPositon(CCPoint pos);
 };
 
 #endif

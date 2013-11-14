@@ -1,12 +1,12 @@
-actor_a1 = {blood = 1000,speed = 50,damage = 20,money = 10,range =5}
-actor_a2 = {blood = 2000,speed = 50 ,damage = 60 ,money = 20,range =100}
-actor_a3 = {blood = 2000,speed = 150 ,damage = 80 ,money = 20,range =5}
+actor_a1 = {blood = 100,speed = 50,damage = 20,money = 10,range =5}
+actor_a2 = {blood = 200,speed = 50 ,damage = 60 ,money = 20,range =100}
+actor_a3 = {blood = 200,speed = 150 ,damage = 80 ,money = 20,range =5}
 actor_a4 = {blood = 2000,speed = 50 ,damage = 40 ,money = 20,range =5}
 
-actor_b1 = {blood = 100,speed = 50,damage = 10,money = 10,range =5}
-actor_b2 = {blood = 200,speed = 50 ,damage = 30 ,money = 20,range =100}
-actor_b3 = {blood = 200,speed = 150 ,damage = 40 ,money = 20,range =5}
-actor_b4 = {blood = 200,speed = 50 ,damage = 20 ,money = 20,range =5}
+actor_b1 = {blood = 1000,speed = 50,damage = 10,money = 10,range =5}
+actor_b2 = {blood = 2000,speed = 50 ,damage = 30 ,money = 20,range =100}
+actor_b3 = {blood = 2000,speed = 150 ,damage = 40 ,money = 20,range =5}
+actor_b4 = {blood = 2000,speed = 50 ,damage = 20 ,money = 20,range =5}
 
 hero1 = {blood = 1000,speed = 80 ,damage = 50 ,money = 100,range =5}
 hero2 = {blood = 1000,speed = 150 ,damage = 100 ,money = 100,range =5}
