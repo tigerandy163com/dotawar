@@ -3,6 +3,7 @@
 #include "tileMapHelp.h"
 
 #include "GameHud.h"
+#include "MaskLayer.h"
  CCPointArray* _startPosArr;
 SceneGame::~SceneGame()
 {
@@ -61,6 +62,7 @@ bool SceneGame::init()
             ActorData *data = ActorData::getActorData(id->getCString(),groupid->getCString(), (ActorType)type, (ActorPro)pro,this);
             ActorBase *actor = ActorBase::create(data);
             actor->setPosition(point);
+        actor->setoriginalPos(point);
         GameRoot::shareGameRoot()->addSpriteTag();
         actor->setTag(GameRoot::shareGameRoot()->getspriteTag());
            this->addChild(actor);
@@ -79,14 +81,10 @@ bool SceneGame::init()
     ActorBase::sortActors(arrR);
     GameRoot::shareGameRoot()->getactorArrL()->addObjectsFromArray(arrL);
     GameRoot::shareGameRoot()->getactorArrR()->addObjectsFromArray(arrR);
-	
-    
+
     this->addChild(GameHud::shareGameHud());
+
     return true;
-}
-void SceneGame::addChild(cocos2d::CCNode *child)
-{
-    CCLayer::addChild(child);
 }
 
 void SceneGame::addSoldier(cocos2d::CCPoint pos, const char* soldierId,ActorPro pro)
@@ -96,8 +94,15 @@ void SceneGame::addSoldier(cocos2d::CCPoint pos, const char* soldierId,ActorPro 
     GameRoot::shareGameRoot()->addSpriteTag();
     actor->setTag(GameRoot::shareGameRoot()->getspriteTag());
     actor->setPosition(pos);
+    actor->setoriginalPos(pos);
     this->addChild(actor);
     CCArray *larr = GameRoot::shareGameRoot()->getactorArrL();
     larr->addObject(actor);
+    if(GameRoot::shareGameRoot()->gethasStart())
+    actor->start();
 
 }
+void SceneGame::removeMask()
+{
+    this->removeChildByTag(11);
+ }

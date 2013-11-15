@@ -305,6 +305,7 @@
 		C6632E43182B93DA00482106 /* actor.lua in Resources */ = {isa = PBXBuildFile; fileRef = C6632E41182B93DA00482106 /* actor.lua */; };
 		C6632E44182B93DA00482106 /* actorData.lua in Resources */ = {isa = PBXBuildFile; fileRef = C6632E42182B93DA00482106 /* actorData.lua */; };
 		C6846C46182358EA00C664B7 /* tileMapHelp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6846C44182358EA00C664B7 /* tileMapHelp.cpp */; };
+		C69810C01835C7AE00EB3663 /* MaskLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C69810BE1835C7AE00EB3663 /* MaskLayer.cpp */; };
 		C6C214E2182CE02A008693B7 /* health_bar_green.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C214E0182CE02A008693B7 /* health_bar_green.png */; };
 		C6C214E3182CE02A008693B7 /* health_bar_red.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C214E1182CE02A008693B7 /* health_bar_red.png */; };
 		C6C86D36182750DB0006F14F /* GameDate.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6C86D35182750DB0006F14F /* GameDate.plist */; };
@@ -327,6 +328,8 @@
 		C6C8721D1827A3C10006F14F /* tolua_map.c in Sources */ = {isa = PBXBuildFile; fileRef = C6C8720A1827A3C10006F14F /* tolua_map.c */; };
 		C6C8721E1827A3C10006F14F /* tolua_push.c in Sources */ = {isa = PBXBuildFile; fileRef = C6C8720B1827A3C10006F14F /* tolua_push.c */; };
 		C6C8721F1827A3C10006F14F /* tolua_to.c in Sources */ = {isa = PBXBuildFile; fileRef = C6C8720C1827A3C10006F14F /* tolua_to.c */; };
+		C6D9DEFE18361C99007AC1C2 /* aim.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D9DEFC18361C99007AC1C2 /* aim.png */; };
+		C6D9DEFF18361C99007AC1C2 /* hud.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D9DEFD18361C99007AC1C2 /* hud.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -957,6 +960,8 @@
 		C6632E42182B93DA00482106 /* actorData.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = actorData.lua; sourceTree = "<group>"; };
 		C6846C44182358EA00C664B7 /* tileMapHelp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tileMapHelp.cpp; sourceTree = "<group>"; };
 		C6846C45182358EA00C664B7 /* tileMapHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tileMapHelp.h; sourceTree = "<group>"; };
+		C69810BE1835C7AE00EB3663 /* MaskLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaskLayer.cpp; sourceTree = "<group>"; };
+		C69810BF1835C7AE00EB3663 /* MaskLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskLayer.h; sourceTree = "<group>"; };
 		C6C214E0182CE02A008693B7 /* health_bar_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = health_bar_green.png; path = Resources/health_bar_green.png; sourceTree = "<group>"; };
 		C6C214E1182CE02A008693B7 /* health_bar_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = health_bar_red.png; path = Resources/health_bar_red.png; sourceTree = "<group>"; };
 		C6C86D35182750DB0006F14F /* GameDate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GameDate.plist; path = Resources/GameDate.plist; sourceTree = "<group>"; };
@@ -996,6 +1001,8 @@
 		C6C8720A1827A3C10006F14F /* tolua_map.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tolua_map.c; sourceTree = "<group>"; };
 		C6C8720B1827A3C10006F14F /* tolua_push.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tolua_push.c; sourceTree = "<group>"; };
 		C6C8720C1827A3C10006F14F /* tolua_to.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tolua_to.c; sourceTree = "<group>"; };
+		C6D9DEFC18361C99007AC1C2 /* aim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aim.png; path = Resources/aim.png; sourceTree = "<group>"; };
+		C6D9DEFD18361C99007AC1C2 /* hud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hud.png; path = Resources/hud.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1068,6 +1075,8 @@
 		C60A8130182208CF001673B8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C6D9DEFC18361C99007AC1C2 /* aim.png */,
+				C6D9DEFD18361C99007AC1C2 /* hud.png */,
 				C6C214E0182CE02A008693B7 /* health_bar_green.png */,
 				C6C214E1182CE02A008693B7 /* health_bar_red.png */,
 				C6632E41182B93DA00482106 /* actor.lua */,
@@ -2264,6 +2273,8 @@
 		C60A84EB18220A48001673B8 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C69810BE1835C7AE00EB3663 /* MaskLayer.cpp */,
+				C69810BF1835C7AE00EB3663 /* MaskLayer.h */,
 				C60A84EC18220A48001673B8 /* SceneGame.cpp */,
 				C60A84ED18220A48001673B8 /* SceneGame.h */,
 				C60A84EE18220A48001673B8 /* SceneOver.cpp */,
@@ -2454,6 +2465,7 @@
 				C6C214E3182CE02A008693B7 /* health_bar_red.png in Resources */,
 				C6C8721A1827A3C10006F14F /* CCBReaderLoad.lua in Resources */,
 				C60A8142182208CF001673B8 /* Icon.png in Resources */,
+				C6D9DEFF18361C99007AC1C2 /* hud.png in Resources */,
 				C60A84D7182209F3001673B8 /* ActorsPack1.plist in Resources */,
 				C6C214E2182CE02A008693B7 /* health_bar_green.png in Resources */,
 				C60A81E5182208D0001673B8 /* ChangeLog in Resources */,
@@ -2468,6 +2480,7 @@
 				C60A84DC182209F3001673B8 /* GameUI01.plist in Resources */,
 				C60A84D8182209F3001673B8 /* ActorsPack1.png in Resources */,
 				C60A84DE182209F3001673B8 /* GameUI02.plist in Resources */,
+				C6D9DEFE18361C99007AC1C2 /* aim.png in Resources */,
 				C60A8140182208CF001673B8 /* Icon-Small@2x.png in Resources */,
 				C6C86D36182750DB0006F14F /* GameDate.plist in Resources */,
 				C60A84DD182209F3001673B8 /* GameUI01.png in Resources */,
@@ -2611,6 +2624,7 @@
 				C60A83FA182208D5001673B8 /* CCSorting.cpp in Sources */,
 				C60A8364182208D4001673B8 /* CCBFileLoader.cpp in Sources */,
 				C60A847B182208D6001673B8 /* chipmunk.c in Sources */,
+				C69810C01835C7AE00EB3663 /* MaskLayer.cpp in Sources */,
 				C60A8264182208D1001673B8 /* CCDevice.mm in Sources */,
 				C60A8491182208D6001673B8 /* cpSimpleMotor.c in Sources */,
 				C60A818C182208D0001673B8 /* ccFPSImages.c in Sources */,

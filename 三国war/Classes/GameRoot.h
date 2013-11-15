@@ -22,9 +22,11 @@ public :
 	SceneOver* getSceneOver();
     bool resetSceneGame();
     void addSpriteTag();
+    void startGame();
     CC_SYNTHESIZE(int, _spriteTag , spriteTag);
     CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrL, actorArrL);
     CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrR,actorArrR);
+    CC_SYNTHESIZE(bool, _hasStart, hasStart);
 };
 
 #endif

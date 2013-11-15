@@ -48,6 +48,20 @@ void  GameRoot::addSpriteTag()
 {
     _spriteTag++;
 }
+void GameRoot::startGame()
+{
+    CCObject* _obj;
+    CCARRAY_FOREACH( _actorArrL, _obj)
+    {
+        ActorBase* actor = (ActorBase*)_obj;
+        actor->start();
+    }
+    CCARRAY_FOREACH( _actorArrR, _obj)
+    {
+        ActorBase* actor = (ActorBase*)_obj;
+        actor->start();
+    }
+}
 SceneStart* GameRoot::getSceneStart()
 {
 	if (_SceneStart == NULL){

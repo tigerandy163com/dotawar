@@ -39,14 +39,26 @@ public :
     void dealDead();
     virtual  void update(float fDelta);
     static void sortActors(CCArray* array);
-   
+    void start();
     void startAttack();
     void fire();
     void findAnotherTarget();
     void attackedByEnemy(int damageval,bool isBoom);
+    void backToLine();
+    void setoriginalPos(CCPoint var);
+    CC_SYNTHESIZE(CCPoint, _destinationPos, destinationPos);
 private :
+    float to360Angle(float angle)
+	{
+		angle = (int)angle % 360;
+		if (angle < 0)
+			angle += 360;
+		return angle;
+	}
     cocos2d::CCProgressTimer* healthBar;
     bool isDead;
+    bool isBack;
+    CCPoint _originalPos;
     CC_SYNTHESIZE(ActorBase *, _target, target);
     static int less(const CCObject* obj0, const CCObject* obj1);
 

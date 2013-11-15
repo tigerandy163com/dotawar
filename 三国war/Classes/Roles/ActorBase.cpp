@@ -35,10 +35,10 @@ bool ActorBase::initWithActorData(ActorData *data)
         }
 
         _action_attack = CCAnimate::create(
-                                           CCAnimation::createWithSpriteFrames(_attackFrames,0.2f));
+                                           CCAnimation::createWithSpriteFrames(_attackFrames,0.3f));
         _action_attack->retain();
         _action_attack_flip = CCAnimate::create(
-                                                CCAnimation::createWithSpriteFrames(_attackFrames_flip,0.2f));
+                                                CCAnimation::createWithSpriteFrames(_attackFrames_flip,0.3f));
         _action_attack_flip->retain();
         
         CCArray* _runFrames =  CCArray::createWithCapacity(10);
@@ -104,16 +104,15 @@ bool ActorBase::initWithActorData(ActorData *data)
 		healthBar->setMidpoint(ccp(0, 0));
 		healthBar->setBarChangeRate(ccp(1, 0));
 		healthBar->setPercentage(100);
-		healthBar->setScale(0.2f);
+		healthBar->setScale(0.1f);
 		healthBar->setPosition(ccp(0,_sprite->getContentSize().height* 0.5f));
 		this->addChild(healthBar,2);
         CCSprite *redBar = CCSprite::create("health_bar_red.png");
         redBar->setPosition(healthBar->getPosition());
-        redBar->setScale(0.2);
+        redBar->setScale(0.1);
         this->addChild(redBar,1);
         winsize = CCDirector::sharedDirector()->getWinSize();
-        this->scheduleOnce(schedule_selector(ActorBase::startRun), 2.0f);
-        schedule(schedule_selector(ActorBase::actorLogic), 0.5f,kCCRepeatForever,2.1f);
+   
         bRet = true;
     } while (0);
     return bRet;
@@ -145,6 +144,19 @@ ActorBase::~ActorBase()
     CC_SAFE_RELEASE_NULL(_action_stand);
     CC_SAFE_RELEASE_NULL(_action_stand_flip);
 }
+void ActorBase::setoriginalPos(cocos2d::CCPoint var)
+{
+     if (mActorData->getGroupID().compare("1")==0)
+         var.x += winsize.width/5;
+    else
+        var.x -=  winsize.width/5;
+    _originalPos = var;
+}
+void ActorBase::start()
+{
+    this->scheduleOnce(schedule_selector(ActorBase::startRun), 0.5f);
+    schedule(schedule_selector(ActorBase::actorLogic), 0.1f,kCCRepeatForever,0.6f);
+}
 ActorDir ActorBase::getActorDir(void){
     if (_target) {
         
@@ -154,6 +166,29 @@ ActorDir ActorBase::getActorDir(void){
             mActorDir = Left;
         }
     }
+    if (_originalPos.equals(this->getPosition())) {
+          if (mActorData->getGroupID().compare("1")==0)
+              mActorDir = Right;
+        else
+            mActorDir = Left;
+    }
+}
+void ActorBase::backToLine()
+{
+    
+    if (isBack) {
+        return;
+    }
+    CCArray* arr;
+    if (mActorData->getGroupID().compare("1")==0) {
+        arr  =   GameRoot::shareGameRoot()->getactorArrL();
+    }else
+        arr = GameRoot::shareGameRoot()->getactorArrR();
+    
+  //  CCSize winsize = CCDirector::sharedDirector()->getWinSize();
+    
+    moveToPositon( _originalPos);
+    isBack = true;
 }
 void ActorBase::StateToRun()
 {
@@ -232,8 +267,12 @@ void ActorBase::actorLogic(){
             }
           }
     
-    if (!_target) {
-        scheduleOnce(schedule_selector(ActorBase::findAnotherTarget),0.0f) ;
+    if (!_target)
+    {
+        findAnotherTarget();
+    }else
+    {
+
     }
     
 }
@@ -274,6 +313,13 @@ void ActorBase::findAnotherTarget()
     }else
         enmeys = GameRoot::shareGameRoot()->getactorArrR();
     // CCLog("count:%d",enmeys->count());
+    if (enmeys->count()==0)
+    {
+        backToLine();//敌人此时都消灭了，回到防线内
+        return;
+    }else
+        isBack = false;
+    //查找最近距离的敌人
     ActorBase* closestEnemy = NULL;
 	double maxDistant = 99999;
 
@@ -297,10 +343,12 @@ void ActorBase::findAnotherTarget()
  
 	settarget(closestEnemy);
     StateToRun();
-    moveToTarget();
-        this->unscheduleUpdate();
+
+        //这里，操作同一“更新”时，先停止更新，在更新
+    this->unscheduleUpdate();
     this->scheduleUpdate();
     }
+    
 }
 void ActorBase::startRun()
 {
@@ -325,19 +373,30 @@ void ActorBase::startRun()
     if (arr1->count()==0) {
         return;
     }
-    StateToRun();
+   
  //   moveToTarget();
     CCSize winsize = CCDirector::sharedDirector()->getWinSize();
     moveToPositon(ccp(winsize.width/2, this->getPositionY()));
-//    this->scheduleUpdate();
+    this->scheduleUpdate();
 }
 void ActorBase::moveToPositon(cocos2d::CCPoint pos)
 {
+    if (this->getPosition().equals(pos)) {
+        return;
+    }
+    _destinationPos = pos;
+        if (pos.x>this->getPositionX()) {
+            mActorDir = Right;
+        }else{
+            mActorDir = Left;
+        }
+    
+
     float dis = ccpDistance(this->getPosition(), pos);
     float time = dis/mActorData->getspeed();
     CCMoveTo *move = CCMoveTo::create(time, pos);
     _move = move;
-    
+     StateToRun();
     this->runAction(CCSequence::create(move,CCCallFunc::create(this, callfunc_selector(ActorBase::StateToStand)),NULL));
 }
 void ActorBase::moveToTarget()
@@ -401,10 +460,11 @@ void ActorBase::attackedByEnemy(int damageval,bool isBoom)
     float f = (float)mActorData->getblood()/totalBlood;
     healthBar->setPercentage(f*100);
 }
-void ActorBase:: update(float fDelta){
+void ActorBase:: update(float dt){
     if (!_target) {
         return;
     }
+ //碰撞检测
     CCRect targetRect =
     CCRectMake(
                                    _target->getPosition().x,
@@ -421,7 +481,50 @@ void ActorBase:: update(float fDelta){
     if (actorRect.intersectsRect(targetRect)&& abs(YY)<5) {
         this->unscheduleUpdate();
         this->StateToStand();
+        //遭遇敌人，在攻击范围内，开始攻击
         schedule( schedule_selector(ActorBase::fire), 1.0f);
+    }else
+    {
+        // 跑向敌人，跟踪算法请参考： http://blog.csdn.net/looffer/article/details/8846159
+        CCPoint targetPos = _target->getPosition();
+        CCPoint myPos = this->getPosition();
+        double deltax = targetPos.x - myPos.x;
+        double deltay = targetPos.y - myPos.y;
+        if( deltax == 0 )
+        {
+            if( targetPos.y >= myPos.y )             // 子弹需要下移
+                deltax = 0.0000001;
+            else                                 // 子弹需要上移
+                deltax = -0.0000001;
+        }
+        
+        //   同理，对deltay作判断
+        
+        if( deltay == 0 )
+        {
+            if( targetPos.x >= myPos.x )             // 子弹需要右移
+                deltay = 0.0000001;
+            else                                 // 子弹需要左移
+                deltay = -0.0000001;
+        }
+        
+        //   现在对角度所处的项限作判断
+        float angle;
+        if( deltax>0 && deltay>0 )
+            angle = atan(fabs(deltay/deltax));           // 第一项限
+        
+        else if( deltax<0 && deltay>0 )
+            angle =  kmPI-atan(fabs(deltay/deltax))  ;        // 第二项限
+        
+        else if( deltax<0 && deltay<0 )
+            angle = kmPI+atan(fabs(deltay/deltax)) ;         // 第三项限
+        else
+            angle = 2*kmPI-atan(fabs(deltay/deltax));
+        
+        float x =cosf(angle) * mActorData->getspeed()* dt;
+        float y = sinf(angle) * mActorData->getspeed() * dt;
+        
+        this->setPosition(ccp(myPos.x + x, myPos.y + y));
     }
 }
 int ActorBase::less(const CCObject* in_pCcObj0, const CCObject* in_pCcObj1) {
