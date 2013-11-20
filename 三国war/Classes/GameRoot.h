@@ -8,7 +8,8 @@ using namespace cocos2d;
 #include "SceneSelect.h"
 #include "SceneGame.h"
 #include "SceneOver.h"
-
+extern float ScaleX;
+extern float ScaleY;
 class GameRoot:public CCObject
 {
 public :
@@ -27,6 +28,11 @@ public :
     CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrL, actorArrL);
     CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrR,actorArrR);
     CC_SYNTHESIZE(bool, _hasStart, hasStart);
+    CC_SYNTHESIZE_RETAIN( CCArray *, _TowerArrL, TowerArrL);
+    CC_SYNTHESIZE_RETAIN( CCArray *, _TowerArrR,TowerArrR);
+    int getLiveActors(int var);
+    int getLiveTowers(int var);
+
 };
 
 #endif

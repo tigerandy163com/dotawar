@@ -1,4 +1,5 @@
 #include "ActorBase.h"
+#include "Tower.h"
 #include "GameRoot.h"
 bool ActorBase::initWithActorData(ActorData *data)
 {
@@ -7,6 +8,7 @@ bool ActorBase::initWithActorData(ActorData *data)
     do {
         setActorData(data);
         totalBlood = data->getblood();
+        _towerTarget = NULL;
         _action_attack = NULL;
         _action_attack_flip = NULL;
         _action_run = NULL;
@@ -147,9 +149,9 @@ ActorBase::~ActorBase()
 void ActorBase::setoriginalPos(cocos2d::CCPoint var)
 {
      if (mActorData->getGroupID().compare("1")==0)
-         var.x += winsize.width/5;
+         var.x += (int)winsize.width/5;
     else
-        var.x -=  winsize.width/5;
+        var.x -=  (int)winsize.width/5;
     _originalPos = var;
 }
 void ActorBase::start()
@@ -165,13 +167,20 @@ ActorDir ActorBase::getActorDir(void){
         }else{
             mActorDir = Left;
         }
+        return mActorDir;
     }
-    if (_originalPos.equals(this->getPosition())) {
-          if (mActorData->getGroupID().compare("1")==0)
-              mActorDir = Right;
-        else
+    if (_towerTarget) {
+        
+        if (_towerTarget->getPositionX()>this->getPositionX()) {
+            mActorDir = Right;
+        }else{
             mActorDir = Left;
+        }
+          return mActorDir;
     }
+ 
+//    if (_originalPos.equals(this->getPosition()))
+
 }
 void ActorBase::backToLine()
 {
@@ -179,14 +188,9 @@ void ActorBase::backToLine()
     if (isBack) {
         return;
     }
-    CCArray* arr;
-    if (mActorData->getGroupID().compare("1")==0) {
-        arr  =   GameRoot::shareGameRoot()->getactorArrL();
-    }else
-        arr = GameRoot::shareGameRoot()->getactorArrR();
-    
-  //  CCSize winsize = CCDirector::sharedDirector()->getWinSize();
-    
+
+
+
     moveToPositon( _originalPos);
     isBack = true;
 }
@@ -256,7 +260,7 @@ void ActorBase::actorLogic(){
         isDead =true;
         StateToDead();
     }
-        if (!isDead&& _target)
+        if (!isDead&& _target&&!startTowerFight)
         {
             if (_target-> mActorData->getblood()<=0) {
                 StateToStand();
@@ -266,40 +270,43 @@ void ActorBase::actorLogic(){
          //       scheduleOnce(schedule_selector(ActorBase::findAnotherTarget), 2.0f) ;
             }
           }
-    
-    if (!_target)
+    if (!isDead&& _towerTarget&&startTowerFight)
     {
-        findAnotherTarget();
-    }else
-    {
+        if (_towerTarget-> getBlood()<=0) {
+            StateToStand();
+            unschedule(schedule_selector(ActorBase::fire));
 
+            _towerTarget =NULL;
+            
+         
+        }
     }
-    
+        findAnotherTarget();
 }
 void ActorBase::dealDead()
 {
     removeFromParentAndCleanup(true);
-    CCArray* arr;
-    if (mActorData->getGroupID().compare("1")==0) {
-     arr  =   GameRoot::shareGameRoot()->getactorArrL();
-    }else
-        arr = GameRoot::shareGameRoot()->getactorArrR();
-      int index =CC_INVALID_INDEX;
-    CCObject* obj;
-    CCARRAY_FOREACH(arr, obj)
-    {
-        ActorBase* actor = (ActorBase*)obj;
-        int tag = actor->getTag();
-        if (tag == this->getTag()) {
-            index = arr->indexOfObject(obj);
-            break;
-        }
-    }
-    if (index!=CC_INVALID_INDEX) {
-        arr->removeObjectAtIndex(index);
-        CCLog("Rcount:%d", GameRoot::shareGameRoot()->getactorArrR()->count());
-         CCLog("Lcount:%d", GameRoot::shareGameRoot()->getactorArrL()->count());
-    }
+//    CCArray* arr;
+//    if (mActorData->getGroupID().compare("1")==0) {
+//     arr  =   GameRoot::shareGameRoot()->getactorArrL();
+//    }else
+//        arr = GameRoot::shareGameRoot()->getactorArrR();
+//      int index =CC_INVALID_INDEX;
+//    CCObject* obj;
+//    CCARRAY_FOREACH(arr, obj)
+//    {
+//        ActorBase* actor = (ActorBase*)obj;
+//        int tag = actor->getTag();
+//        if (tag == this->getTag()) {
+//            index = arr->indexOfObject(obj);
+//            break;
+//        }
+//    }
+//    if (index!=CC_INVALID_INDEX) {
+//        arr->removeObjectAtIndex(index);
+////        CCLog("Rcount:%d", GameRoot::shareGameRoot()->getactorArrR()->count());
+////         CCLog("Lcount:%d", GameRoot::shareGameRoot()->getactorArrL()->count());
+//    }
 }
 void ActorBase::findAnotherTarget()
 {
@@ -307,18 +314,45 @@ void ActorBase::findAnotherTarget()
         return;
     }
     CCArray *enmeys ;
+    int liveActorsCount = 0;
+    int liveTowersCount = 0;
     if (mActorData->getGroupID().compare("1")) {
         enmeys=GameRoot::shareGameRoot()->getactorArrL();
-       
+        liveActorsCount = GameRoot::shareGameRoot()->getLiveActors(1);
     }else
-        enmeys = GameRoot::shareGameRoot()->getactorArrR();
-    // CCLog("count:%d",enmeys->count());
-    if (enmeys->count()==0)
     {
+        enmeys = GameRoot::shareGameRoot()->getactorArrR();
+         liveActorsCount = GameRoot::shareGameRoot()->getLiveActors(2);
+    }
+    // CCLog("count:%d",enmeys->count());
+    CCArray *towers;
+    if (mActorData->getGroupID().compare("1")) {
+        towers=GameRoot::shareGameRoot()->getTowerArrL();
+        liveTowersCount = GameRoot::shareGameRoot()->getLiveTowers(1);
+    }else
+    {
+        towers = GameRoot::shareGameRoot()->getTowerArrR();
+        liveTowersCount = GameRoot::shareGameRoot()->getLiveTowers(2);
+    }
+      //  CCLOG("enmeys count: %d ,towers count:%d",enmeys->count(),towers->count());
+    
+    if (liveTowersCount==0&&liveActorsCount==0)
+    {
+        _target = NULL;
+        _towerTarget = NULL;
         backToLine();//敌人此时都消灭了，回到防线内
+        
         return;
     }else
         isBack = false;
+   // startTowerFight =false;
+    if (liveActorsCount==0) {
+        startTowerFight = true;
+    }else
+        startTowerFight = false;
+    if(!_target&& !startTowerFight)
+    {
+        _towerTarget = NULL;
     //查找最近距离的敌人
     ActorBase* closestEnemy = NULL;
 	double maxDistant = 99999;
@@ -342,13 +376,53 @@ void ActorBase::findAnotherTarget()
     if (closestEnemy) {
  
 	settarget(closestEnemy);
+        stopAllActions();
     StateToRun();
 
         //这里，操作同一“更新”时，先停止更新，在更新
     this->unscheduleUpdate();
     this->scheduleUpdate();
     }
-    
+    }else if(!_towerTarget&&towers->count()!=0&& startTowerFight)
+    {
+        _target = NULL;
+        //查找最近距离的敌人
+        Tower* closestEnemy = NULL;
+        double maxDistant = 99999;
+        
+        CCObject* temp;
+        CCARRAY_FOREACH(towers, temp){
+            Tower* enemy = (Tower*)temp;
+            if (!enemy->getCanAttack()) {
+                if (liveTowersCount>1) {
+                    continue;
+                }
+            }
+            if(enemy->getBlood() <= 0){
+                continue;
+            }
+//            if (enemy->getPositionY()==this->getPositionY()) {
+//                closestEnemy = enemy;
+//                break;
+//            }
+            
+            double curDistance = ccpDistance(this->getPosition(), enemy->getPosition());
+            if(curDistance < maxDistant){
+                closestEnemy = enemy;
+                maxDistant = curDistance;
+            }
+        }
+        if (closestEnemy) {
+            
+            _towerTarget = closestEnemy;
+            stopAllActions();
+            StateToRun();
+            
+            //这里，操作同一“更新”时，先停止更新，在更新
+            this->unscheduleUpdate();
+            this->scheduleUpdate();
+        }
+    }
 }
 void ActorBase::startRun()
 {
@@ -369,7 +443,7 @@ void ActorBase::startRun()
 //            settarget((ActorBase*)arr1->objectAtIndex(index));
 //        }
 //    }
-    CCLOG("arr count: %d ,arr1 count:%d",arr->count(),arr1->count());
+
     if (arr1->count()==0) {
         return;
     }
@@ -395,9 +469,16 @@ void ActorBase::moveToPositon(cocos2d::CCPoint pos)
     float dis = ccpDistance(this->getPosition(), pos);
     float time = dis/mActorData->getspeed();
     CCMoveTo *move = CCMoveTo::create(time, pos);
-    _move = move;
      StateToRun();
-    this->runAction(CCSequence::create(move,CCCallFunc::create(this, callfunc_selector(ActorBase::StateToStand)),NULL));
+    this->runAction(CCSequence::create(move,CCCallFunc::create(this, callfunc_selector(ActorBase::comeInHome)),NULL));
+}
+void ActorBase::comeInHome()
+{
+    if (mActorData->getGroupID().compare("1")==0)
+        mActorDir = Right;
+    else
+        mActorDir = Left;
+    StateToStand();
 }
 void ActorBase::moveToTarget()
 {
@@ -420,8 +501,43 @@ void ActorBase::moveToTarget()
 }
 void ActorBase::startAttack(){
     int val = mActorData->getdamage();
+    //碰撞检测
+    CCRect targetRect =CCRectMake(0, 0, 0, 0);
+    if (_target) {
+        targetRect =
+        CCRectMake(
+                   _target->getPosition().x,
+                   _target->getPosition().y,
+                   _target->_sprite->getContentSize().width,
+                   _target->_sprite->getContentSize().height);
+    }else if (_towerTarget)
+    {
+        targetRect =   CCRectMake(
+                                  _towerTarget->getPosition().x,
+                                  _towerTarget->getPosition().y,
+                                  _towerTarget->_sprite->getContentSize().width,
+                                  _towerTarget->_sprite->getContentSize().height);
+    }
+    targetRect.origin.x = targetRect.origin.x - targetRect.size.width/2;
+    targetRect.origin.y = targetRect.origin.y - targetRect.size.height/2;
+    CCRect actorRect = CCRectMake(
+                                  this->getPosition().x ,
+                                  this->getPosition().y ,
+                                  _sprite->getContentSize().width+mActorData->getattackRange()*2,
+                                  _sprite->getContentSize().height+mActorData->getattackRange()*2);
+    actorRect.origin.x = actorRect.origin.x - actorRect.size.width/2;
+    actorRect.origin.y = actorRect.origin.y - actorRect.size.height/2;
+    int YY;
+    if (_target) {
+        YY=_target->getPositionY()-this->getPositionY();
+    }else if (_towerTarget)
+        YY=_towerTarget->getPositionY()-this->getPositionY();
+    if (actorRect.intersectsRect(targetRect) &&abs(YY)<=30){
     if (_target)
    _target ->attackedByEnemy(val, false);
+    if(_towerTarget)
+        _towerTarget->attackedByEnemy(val, false);
+    }
  }
 void ActorBase::fire(){
     getActorDir();
@@ -461,32 +577,56 @@ void ActorBase::attackedByEnemy(int damageval,bool isBoom)
     healthBar->setPercentage(f*100);
 }
 void ActorBase:: update(float dt){
-    if (!_target) {
+    if (!_target&&!_towerTarget) {
         return;
     }
  //碰撞检测
-    CCRect targetRect =
+    CCRect targetRect =CCRectMake(0, 0, 0, 0);
+    if (_target) {
+     targetRect =
     CCRectMake(
                                    _target->getPosition().x,
                                    _target->getPosition().y,
                                    _target->_sprite->getContentSize().width,
                                   _target->_sprite->getContentSize().height);
-
+    }else if (_towerTarget)
+    {
+     targetRect =   CCRectMake(
+                   _towerTarget->getPosition().x,
+                   _towerTarget->getPosition().y,
+                   _towerTarget->_sprite->getContentSize().width,
+                   _towerTarget->_sprite->getContentSize().height);
+    }
+    targetRect.origin.x = targetRect.origin.x - targetRect.size.width/2;
+    targetRect.origin.y = targetRect.origin.y - targetRect.size.height/2;
     CCRect actorRect = CCRectMake(
                                    this->getPosition().x ,
                                   this->getPosition().y ,
-                                   _sprite->getContentSize().width+mActorData->getattackRange(),
-                                   _sprite->getContentSize().height+mActorData->getattackRange());
-    int YY=_target->getPositionY()-this->getPositionY();
-    if (actorRect.intersectsRect(targetRect)&& abs(YY)<5) {
-        this->unscheduleUpdate();
-        this->StateToStand();
-        //遭遇敌人，在攻击范围内，开始攻击
-        schedule( schedule_selector(ActorBase::fire), 1.0f);
+                                   _sprite->getContentSize().width+mActorData->getattackRange()*2,
+                                   _sprite->getContentSize().height+mActorData->getattackRange()*2);
+    actorRect.origin.x = actorRect.origin.x - actorRect.size.width/2;
+    actorRect.origin.y = actorRect.origin.y - actorRect.size.height/2;
+    int YY;//不止是碰撞，应尽量与敌人在一条水平直线上（面向敌人），限非3D，如果3d就可以调整角色的面向方向到任意角度了
+    if (_target) {
+        YY=_target->getPositionY()-this->getPositionY();
+    }else if (_towerTarget)
+        YY=_towerTarget->getPositionY()-this->getPositionY();
+    if (actorRect.intersectsRect(targetRect) &&abs(YY)<=30) {
+        {
+                this->unscheduleUpdate();
+                this->StateToStand();
+                //遭遇敌人，在攻击范围内，开始攻击
+                schedule( schedule_selector(ActorBase::fire), 1.0f);
+        }
     }else
     {
         // 跑向敌人，跟踪算法请参考： http://blog.csdn.net/looffer/article/details/8846159
-        CCPoint targetPos = _target->getPosition();
+        CCPoint targetPos;
+        if (_target) {
+             targetPos = _target->getPosition();
+        }else if(_towerTarget)
+            targetPos = _towerTarget->getPosition();
+       
         CCPoint myPos = this->getPosition();
         double deltax = targetPos.x - myPos.x;
         double deltay = targetPos.y - myPos.y;

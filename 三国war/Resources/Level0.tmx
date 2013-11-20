@@ -27,29 +27,33 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="65" name="home" tilewidth="53" tileheight="53">
+  <tileoffset x="1" y="1"/>
+  <image source="home.png" width="53" height="53"/>
+ </tileset>
  <layer name="ground" width="13" height="8">
   <data encoding="base64" compression="zlib">
-   eJxd0NsKwkAMRdEB672KivggImpVBK2XVlv//8vcgRMIPiySyXQS0nVKKZcRtliF81C5xTE26KIO7ugpf2OPo3KrfdDHK3xT4qLcFBiEnoXe1Hq3Q4aTzuaBKyppQo8DZpj8zXaVYhPm2B4LTMOO3tvmn8M+fv/Uf8rDPr7jTTWfs0SLLzqKbahl4ndz/AA4bQ5u
+   eJxN0NkKwkAMheEBW5faihbxQkTcEVyqdanv/2T+gRPIxUeW6WRIlymlUgqssQj1SLnFMVbI8Qru6Ct/Y4uDcut9MMAzfHPDWbnZYxhmWl0pt3sbZDiqNg0uaKUKM3aYqhffdq3iV+e+R41J2NFn2/unsI+fP/SfyrCP73hVz9+Zo8MPPcUu9DLxsxn+HJEOSw==
   </data>
  </layer>
  <objectgroup name="objects" width="13" height="8">
-  <object name="hero1" x="64" y="192" width="64" height="64">
-      <properties>
-          <property name="group" value="1"/>
-          <property name="id" value="Hero11"/>
-          <property name="pro" value="-1"/>
-          <property name="type" value="2"/>
-      </properties>
-      </object>
-  <object name="hero2" x="704" y="192" width="64" height="64">
-      <properties>
-          <property name="group" value="2"/>
-          <property name="id" value="Hero02"/>
-          <property name="pro" value="-1"/>
-          <property name="type" value="2"/>
-      </properties>
-      </object>
-  <object name="soldier0" x="0" y="64" width="64" height="64">
+  <object name="hero1" x="192" y="192" width="64" height="64">
+   <properties>
+    <property name="group" value="1"/>
+    <property name="id" value="Hero11"/>
+    <property name="pro" value="-1"/>
+    <property name="type" value="2"/>
+   </properties>
+  </object>
+  <object name="hero2" x="576" y="192" width="64" height="64">
+   <properties>
+    <property name="group" value="2"/>
+    <property name="id" value="Hero02"/>
+    <property name="pro" value="-1"/>
+    <property name="type" value="2"/>
+   </properties>
+  </object>
+  <object name="soldier0" x="128" y="64" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
     <property name="id" value="A3"/>
@@ -57,76 +61,114 @@
     <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="soldier1" x="0" y="128" width="64" height="64">
+  <object name="soldier1" x="128" y="128" width="64" height="64">
    <properties>
-       <property name="group" value="1"/>
-       <property name="id" value="A1"/>
-       <property name="pro" value="2"/>
-       <property name="type" value="1"/>
+    <property name="group" value="1"/>
+    <property name="id" value="A1"/>
+    <property name="pro" value="2"/>
+    <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="soldier2" x="0" y="192" width="64" height="64">
+  <object name="soldier2" x="128" y="192" width="64" height="64">
    <properties>
-       <property name="group" value="1"/>
-       <property name="id" value="A2"/>
-       <property name="pro" value="3"/>
-       <property name="type" value="1"/>
+    <property name="group" value="1"/>
+    <property name="id" value="A2"/>
+    <property name="pro" value="3"/>
+    <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="soldier3" x="0" y="256" width="64" height="64">
+  <object name="soldier3" x="128" y="256" width="64" height="64">
    <properties>
-       <property name="group" value="1"/>
-       <property name="id" value="A3"/>
-       <property name="pro" value="1"/>
-       <property name="type" value="1"/>
+    <property name="group" value="1"/>
+    <property name="id" value="A3"/>
+    <property name="pro" value="1"/>
+    <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="soldier4" x="0" y="320" width="64" height="64">
+  <object name="soldier4" x="128" y="320" width="64" height="64">
    <properties>
-       <property name="group" value="1"/>
-       <property name="id" value="A1"/>
-       <property name="pro" value="1"/>
-       <property name="type" value="1"/>
+    <property name="group" value="1"/>
+    <property name="id" value="A1"/>
+    <property name="pro" value="1"/>
+    <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="_soldier0" x="768" y="64" width="64" height="64">
+  <object name="_soldier0" x="640" y="64" width="64" height="64">
    <properties>
-       <property name="group" value="2"/>
-       <property name="id" value="B1"/>
-       <property name="pro" value="1"/>
-       <property name="type" value="1"/>
+    <property name="group" value="2"/>
+    <property name="id" value="B1"/>
+    <property name="pro" value="1"/>
+    <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="_soldier1" x="768" y="128" width="64" height="64">
+  <object name="_soldier1" x="640" y="128" width="64" height="64">
    <properties>
-       <property name="group" value="2"/>
-       <property name="id" value="B3"/>
-       <property name="pro" value="2"/>
-       <property name="type" value="1"/>
+    <property name="group" value="2"/>
+    <property name="id" value="B3"/>
+    <property name="pro" value="2"/>
+    <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="_soldier2" x="768" y="192" width="64" height="64">
+  <object name="_soldier2" x="640" y="192" width="64" height="64">
    <properties>
-       <property name="group" value="2"/>
-       <property name="id" value="B2"/>
-       <property name="pro" value="3"/>
-       <property name="type" value="1"/>
+    <property name="group" value="2"/>
+    <property name="id" value="B2"/>
+    <property name="pro" value="3"/>
+    <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="_soldier3" x="768" y="256" width="64" height="64">
+  <object name="_soldier3" x="640" y="256" width="64" height="64">
    <properties>
-       <property name="group" value="2"/>
-       <property name="id" value="B1"/>
-       <property name="pro" value="1"/>
-       <property name="type" value="1"/>
+    <property name="group" value="2"/>
+    <property name="id" value="B1"/>
+    <property name="pro" value="1"/>
+    <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="_soldier4" x="768" y="320" width="64" height="64">
+  <object name="_soldier4" x="640" y="320" width="64" height="64">
    <properties>
-       <property name="group" value="2"/>
-       <property name="id" value="B3"/>
-       <property name="pro" value="1"/>
-       <property name="type" value="1"/>
+    <property name="group" value="2"/>
+    <property name="id" value="B3"/>
+    <property name="pro" value="1"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="towers" width="13" height="8">
+  <object x="0" y="192" width="64" height="64">
+   <properties>
+    <property name="group" value="1"/>
+    <property name="type" value="home"/>
+   </properties>
+  </object>
+  <object x="768" y="192" width="64" height="64">
+   <properties>
+    <property name="group" value="2"/>
+    <property name="type" value="home"/>
+   </properties>
+  </object>
+  <object x="64" y="128" width="64" height="64">
+   <properties>
+    <property name="group" value="1"/>
+    <property name="type" value="tower1"/>
+   </properties>
+  </object>
+  <object x="704" y="128" width="64" height="64">
+   <properties>
+    <property name="group" value="2"/>
+    <property name="type" value="tower2"/>
+   </properties>
+  </object>
+  <object x="704" y="256" width="64" height="64">
+   <properties>
+    <property name="group" value="2"/>
+    <property name="type" value="tower2"/>
+   </properties>
+  </object>
+  <object x="64" y="256" width="64" height="64">
+   <properties>
+    <property name="group" value="1"/>
+    <property name="type" value="tower1"/>
    </properties>
   </object>
  </objectgroup>

@@ -43,7 +43,7 @@ bool GameHud::init()
         menu->setPosition(ccp(100,30));
         menu->setTag(10);
         this->addChild(menu);
-        selectFlag = CCSprite::create("aim.png");
+        selectFlag = CCSprite::create("select.png");
         selectFlag->retain();
         selectFlag->setScale(0.5f);
         selectFlag->setPosition( ccpAdd(item1->getPosition(), menu->getPosition()));
@@ -71,7 +71,7 @@ bool GameHud::init()
         this->addChild(menu1);
         soldier1_Select(item1);
         
-        timerLab = CCLabelTTF::create("5", "Arial-BoldMT", 50);
+        timerLab = CCLabelTTF::create("3", "Arial-BoldMT", 50);
         timerLab->setPosition(ccp(winsize.width/2, winsize.height/2));
         this->addChild(timerLab);
         
@@ -109,7 +109,7 @@ void GameHud::soldier1_Select(CCNode *pSender){
     CCPoint pos = ccpAdd(menu->getPosition(), pSender->getPosition());
     selectFlag->setPosition(pos);
     CCLabelTTF* lab =(CCLabelTTF*) this->getChildByTag(101);
-    lab->setString("所需 100 战功");
+    lab->setString("所需 100 援兵");
     selectPro =  Infantry;
     selectID = "A1";
 }

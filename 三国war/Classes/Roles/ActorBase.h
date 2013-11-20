@@ -5,7 +5,7 @@
 using namespace cocos2d;
 
 #include "ActorData.h"
-
+class Tower;
 class ActorBase : public CCNode
 {
 public :
@@ -18,7 +18,7 @@ public :
     float totalBlood;
     ActorDir getActorDir(void);
     ActorDir mActorDir;
-    CCAction *_move;
+ 
 	CCAnimate* _action_attack;
 	CCAnimate* _action_attack_flip;
 	CCAnimate* _action_run;
@@ -37,6 +37,7 @@ public :
     void actorLogic();
     void startRun();
     void dealDead();
+    void comeInHome();
     virtual  void update(float fDelta);
     static void sortActors(CCArray* array);
     void start();
@@ -58,8 +59,10 @@ private :
     cocos2d::CCProgressTimer* healthBar;
     bool isDead;
     bool isBack;
+    bool startTowerFight;
     CCPoint _originalPos;
     CC_SYNTHESIZE(ActorBase *, _target, target);
+    Tower* _towerTarget;
     static int less(const CCObject* obj0, const CCObject* obj1);
 
 	void currentAnimateActionStop();

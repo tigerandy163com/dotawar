@@ -1,10 +1,12 @@
 #include "GameRoot.h"
+#include "Tower.h"
 static GameRoot* _shareGameRoot = NULL;
 static SceneStart* _SceneStart = NULL;
  static SceneSelect* _SceneSelect = NULL;
 static SceneGame* _SceneGame = NULL;
 static SceneOver* _SceneOver = NULL;
-
+float ScaleX =0;
+float ScaleY = 0;
 GameRoot::~GameRoot(){
     CC_SAFE_RELEASE_NULL(_SceneStart);
     CC_SAFE_RELEASE_NULL(_SceneGame);
@@ -12,6 +14,8 @@ GameRoot::~GameRoot(){
     CC_SAFE_RELEASE_NULL(_SceneSelect);
     CC_SAFE_RELEASE_NULL(_actorArrL);
     CC_SAFE_RELEASE_NULL(_actorArrR);
+    CC_SAFE_RELEASE_NULL(_TowerArrR);
+    CC_SAFE_RELEASE_NULL(_TowerArrL);
 }
 GameRoot* GameRoot::shareGameRoot()
 {
@@ -31,7 +35,11 @@ bool GameRoot::init()
         _actorArrL->retain();
         _actorArrR = CCArray::create();
         _actorArrR->retain();
-        _spriteTag = 0;
+        _TowerArrL = CCArray::create();
+        _TowerArrL->retain();
+        _TowerArrR = CCArray::create();
+        _TowerArrR->retain();
+        _spriteTag = 10;
         bRet = true;
     } while (0);
     return bRet;
@@ -61,6 +69,43 @@ void GameRoot::startGame()
         ActorBase* actor = (ActorBase*)_obj;
         actor->start();
     }
+}
+int GameRoot::getLiveActors(int var)
+{
+    CCArray* checkArr;
+    if (var==1) {
+        checkArr = _actorArrL;
+    }else
+        checkArr = _actorArrR;
+    CCObject* _obj;
+    int count = 0;
+    CCARRAY_FOREACH(checkArr, _obj)
+    {
+        ActorBase* actor = (ActorBase*)_obj;
+        if (actor->getActorData()->getblood()>0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int GameRoot::getLiveTowers(int var)
+{
+    CCArray* checkArr;
+    if (var==1) {
+        checkArr = _TowerArrL;
+    }else
+        checkArr = _TowerArrR;
+    CCObject* _obj;
+    int count = 0;
+    CCARRAY_FOREACH(checkArr, _obj)
+    {
+        Tower* tower = (Tower*)_obj;
+        if (tower->getBlood()>0) {
+            count++;
+        }
+    }
+    return count;
 }
 SceneStart* GameRoot::getSceneStart()
 {

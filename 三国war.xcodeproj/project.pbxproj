@@ -308,6 +308,14 @@
 		C69810C01835C7AE00EB3663 /* MaskLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C69810BE1835C7AE00EB3663 /* MaskLayer.cpp */; };
 		C6C214E2182CE02A008693B7 /* health_bar_green.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C214E0182CE02A008693B7 /* health_bar_green.png */; };
 		C6C214E3182CE02A008693B7 /* health_bar_red.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C214E1182CE02A008693B7 /* health_bar_red.png */; };
+		C6C2EB861839DF8600E7BB02 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2EB841839DF8600E7BB02 /* home.png */; };
+		C6C2EB871839DF8600E7BB02 /* select.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2EB851839DF8600E7BB02 /* select.png */; };
+		C6C2EB8A1839F5DB00E7BB02 /* Tower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C2EB881839F5DB00E7BB02 /* Tower.cpp */; };
+		C6C2EB8D183A070700E7BB02 /* tower1.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2EB8B183A070700E7BB02 /* tower1.png */; };
+		C6C2EB8E183A070700E7BB02 /* tower2.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2EB8C183A070700E7BB02 /* tower2.png */; };
+		C6C2EB91183A0B8A00E7BB02 /* bullet1.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2EB8F183A0B8A00E7BB02 /* bullet1.png */; };
+		C6C2EB92183A0B8A00E7BB02 /* bullet2.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2EB90183A0B8A00E7BB02 /* bullet2.png */; };
+		C6C2EB95183A0F9300E7BB02 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C2EB93183A0F9300E7BB02 /* Bullet.cpp */; };
 		C6C86D36182750DB0006F14F /* GameDate.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6C86D35182750DB0006F14F /* GameDate.plist */; };
 		C6C8720D1827A3C10006F14F /* CCBProxy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C871E21827A3C10006F14F /* CCBProxy.cpp */; };
 		C6C8720E1827A3C10006F14F /* CCLuaBridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6C871E41827A3C10006F14F /* CCLuaBridge.cpp */; };
@@ -964,6 +972,16 @@
 		C69810BF1835C7AE00EB3663 /* MaskLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskLayer.h; sourceTree = "<group>"; };
 		C6C214E0182CE02A008693B7 /* health_bar_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = health_bar_green.png; path = Resources/health_bar_green.png; sourceTree = "<group>"; };
 		C6C214E1182CE02A008693B7 /* health_bar_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = health_bar_red.png; path = Resources/health_bar_red.png; sourceTree = "<group>"; };
+		C6C2EB841839DF8600E7BB02 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = Resources/home.png; sourceTree = "<group>"; };
+		C6C2EB851839DF8600E7BB02 /* select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = select.png; path = Resources/select.png; sourceTree = "<group>"; };
+		C6C2EB881839F5DB00E7BB02 /* Tower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tower.cpp; sourceTree = "<group>"; };
+		C6C2EB891839F5DB00E7BB02 /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
+		C6C2EB8B183A070700E7BB02 /* tower1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tower1.png; path = Resources/tower1.png; sourceTree = "<group>"; };
+		C6C2EB8C183A070700E7BB02 /* tower2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tower2.png; path = Resources/tower2.png; sourceTree = "<group>"; };
+		C6C2EB8F183A0B8A00E7BB02 /* bullet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet1.png; path = Resources/bullet1.png; sourceTree = "<group>"; };
+		C6C2EB90183A0B8A00E7BB02 /* bullet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet2.png; path = Resources/bullet2.png; sourceTree = "<group>"; };
+		C6C2EB93183A0F9300E7BB02 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
+		C6C2EB94183A0F9300E7BB02 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		C6C86D35182750DB0006F14F /* GameDate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GameDate.plist; path = Resources/GameDate.plist; sourceTree = "<group>"; };
 		C6C871E21827A3C10006F14F /* CCBProxy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBProxy.cpp; sourceTree = "<group>"; };
 		C6C871E31827A3C10006F14F /* CCBProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBProxy.h; sourceTree = "<group>"; };
@@ -1075,6 +1093,12 @@
 		C60A8130182208CF001673B8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C6C2EB8F183A0B8A00E7BB02 /* bullet1.png */,
+				C6C2EB90183A0B8A00E7BB02 /* bullet2.png */,
+				C6C2EB8B183A070700E7BB02 /* tower1.png */,
+				C6C2EB8C183A070700E7BB02 /* tower2.png */,
+				C6C2EB841839DF8600E7BB02 /* home.png */,
+				C6C2EB851839DF8600E7BB02 /* select.png */,
 				C6D9DEFC18361C99007AC1C2 /* aim.png */,
 				C6D9DEFD18361C99007AC1C2 /* hud.png */,
 				C6C214E0182CE02A008693B7 /* health_bar_green.png */,
@@ -2265,6 +2289,10 @@
 				C60A84E818220A48001673B8 /* ActorBase.h */,
 				C60A84E918220A48001673B8 /* ActorData.cpp */,
 				C60A84EA18220A48001673B8 /* ActorData.h */,
+				C6C2EB881839F5DB00E7BB02 /* Tower.cpp */,
+				C6C2EB891839F5DB00E7BB02 /* Tower.h */,
+				C6C2EB93183A0F9300E7BB02 /* Bullet.cpp */,
+				C6C2EB94183A0F9300E7BB02 /* Bullet.h */,
 			);
 			name = Roles;
 			path = Classes/Roles;
@@ -2468,9 +2496,12 @@
 				C6D9DEFF18361C99007AC1C2 /* hud.png in Resources */,
 				C60A84D7182209F3001673B8 /* ActorsPack1.plist in Resources */,
 				C6C214E2182CE02A008693B7 /* health_bar_green.png in Resources */,
+				C6C2EB861839DF8600E7BB02 /* home.png in Resources */,
 				C60A81E5182208D0001673B8 /* ChangeLog in Resources */,
+				C6C2EB8E183A070700E7BB02 /* tower2.png in Resources */,
 				C60A84DF182209F3001673B8 /* GameUI02.png in Resources */,
 				C60A8132182208CF001673B8 /* CloseNormal.png in Resources */,
+				C6C2EB91183A0B8A00E7BB02 /* bullet1.png in Resources */,
 				C6632E44182B93DA00482106 /* actorData.lua in Resources */,
 				C60A813E182208CF001673B8 /* Icon-Small.png in Resources */,
 				C60A813A182208CF001673B8 /* Icon-72.png in Resources */,
@@ -2484,7 +2515,10 @@
 				C60A8140182208CF001673B8 /* Icon-Small@2x.png in Resources */,
 				C6C86D36182750DB0006F14F /* GameDate.plist in Resources */,
 				C60A84DD182209F3001673B8 /* GameUI01.png in Resources */,
+				C6C2EB8D183A070700E7BB02 /* tower1.png in Resources */,
 				C60A84D9182209F3001673B8 /* fps_images-hd.png in Resources */,
+				C6C2EB871839DF8600E7BB02 /* select.png in Resources */,
+				C6C2EB92183A0B8A00E7BB02 /* bullet2.png in Resources */,
 				C60A8136182208CF001673B8 /* Default.png in Resources */,
 				C60A84E1182209F3001673B8 /* Level0.tmx in Resources */,
 				C60A8134182208CF001673B8 /* CloseSelected.png in Resources */,
@@ -2565,6 +2599,7 @@
 				C60A816A182208CF001673B8 /* CCActionInterval.cpp in Sources */,
 				C60A82BF182208D3001673B8 /* CCAnimation.cpp in Sources */,
 				C60A8390182208D4001673B8 /* CCMenuItemImageLoader.cpp in Sources */,
+				C6C2EB8A1839F5DB00E7BB02 /* Tower.cpp in Sources */,
 				C60A8441182208D5001673B8 /* RegionAttachment.cpp in Sources */,
 				C60A8199182208D0001673B8 /* CCAutoreleasePool.cpp in Sources */,
 				C60A81EB182208D0001673B8 /* matrix.c in Sources */,
@@ -2779,6 +2814,7 @@
 				C60A820F182208D0001673B8 /* CCLabelTTF.cpp in Sources */,
 				C60A83EE182208D5001673B8 /* CCEditBoxImplNone.cpp in Sources */,
 				C60A8481182208D6001673B8 /* cpDampedRotarySpring.c in Sources */,
+				C6C2EB95183A0F9300E7BB02 /* Bullet.cpp in Sources */,
 				C60A84C3182208D6001673B8 /* AppDelegate.cpp in Sources */,
 				C60A832C182208D3001673B8 /* CCTMXLayer.cpp in Sources */,
 				C60A836B182208D4001673B8 /* CCBReader.cpp in Sources */,
