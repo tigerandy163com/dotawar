@@ -23,7 +23,7 @@ bool SceneGame::init()
 	if (!CCLayer::init()) {
         return false;
     }
-
+    GR = GameRoot::shareGameRoot();
 	CCSize size = CCDirector::sharedDirector()->getWinSize();
 
 	CCTMXTiledMap* map = CCTMXTiledMap::create("Level0.tmx");
@@ -34,6 +34,25 @@ bool SceneGame::init()
     float scaley =size.height/mapcontent.height;
     map->setScaleY(scaley);
     ScaleY = scaley;
+    _touchObj = map->objectGroupNamed("touch");
+    CCArray* arrT = _touchObj->getObjects();
+    
+    CCDictionary* dicT = (CCDictionary*)arrT->objectAtIndex(0);
+    CCString* objName = (CCString*)dicT->objectForKey("name");
+    
+    CCRect rec = TileMapHelp::objectBoundBox(map, _touchObj, objName->getCString());
+    CCPoint posT = rec.origin;
+        posT.x *= ScaleX;
+        posT.y *= ScaleY;
+    CCSize sizeT = rec.size;
+    sizeT.width *=ScaleX;
+    sizeT.height *=ScaleY;
+    rec = CCRectMake(posT.x, posT.y
+                     , sizeT.width, sizeT.height);
+    
+    GR->setLimitRect(rec);
+    
+ 
     _map = map;
     _map->retain();
     
@@ -43,6 +62,8 @@ bool SceneGame::init()
 	this->addChild(map);
     _objects = map->objectGroupNamed("objects");
     _bg1layer = map->layerNamed("ground");
+    
+    
     CCArray *objects = _objects->getObjects();
     CCObject *obj = NULL;
     CCSize tileSize = map->getTileSize();
@@ -54,25 +75,29 @@ bool SceneGame::init()
     _startPosArr->retain();
     CCARRAY_FOREACH(objects, obj){
         CCDictionary *dic = (CCDictionary *)obj;
+        CCString* objName = (CCString*)dic->objectForKey("name");
+        CCPoint point = TileMapHelp::objectPosition(_map, _objects, objName->getCString());
         int  type = dic->valueForKey("type")->intValue() ;
         CCString *id =(CCString*)dic->objectForKey("id");
         CCString *groupid = (CCString*)dic->objectForKey("group");
         int  pro = dic->valueForKey("pro")->intValue();
-         CCPoint point;
-        point.x = (dic->valueForKey("x")->intValue()+tileSize.width/2)*scalex;
-        point.y = (dic->valueForKey("y")->intValue()+tileSize.height/2)*scaley;
+        
+        point.x *=ScaleX;
+        point.y *=ScaleY;
       // point = TileMapHelp::positionForTileCoord(_map, point);
         {
             ActorData *data = ActorData::getActorData(id->getCString(),groupid->getCString(), (ActorType)type, (ActorPro)pro,this);
             ActorBase *actor = ActorBase::create(data);
    
-        GameRoot::shareGameRoot()->addSpriteTag();
-        actor->setTag(GameRoot::shareGameRoot()->getspriteTag());
+        GR->addSpriteTag();
+        actor->setTag(GR->getspriteTag());
   
         if (groupid->compare("1")==0) {
             arrL->addObject(actor);
             if(type==Soldier)
             _startPosArr->addControlPoint(point);
+            else if (type==Hero)
+                GR->setMyHero(actor);
         }else
         {
             arrR->addObject(actor);
@@ -86,8 +111,8 @@ bool SceneGame::init()
     }
     //    ActorBase::sortActors(arrL);
     //    ActorBase::sortActors(arrR);
-    GameRoot::shareGameRoot()->getactorArrL()->addObjectsFromArray(arrL);
-    GameRoot::shareGameRoot()->getactorArrR()->addObjectsFromArray(arrR);
+    GR->getactorArrL()->addObjectsFromArray(arrL);
+    GR->getactorArrR()->addObjectsFromArray(arrR);
     
     _objects = _map->objectGroupNamed("towers");
     objects = _objects->getObjects();
@@ -97,18 +122,21 @@ bool SceneGame::init()
         CCString *str =(CCString*) dic->objectForKey("type");
         CCString* str1 = CCString::createWithFormat("%s.png",str->getCString());
         CCString* groudid =(CCString*) dic->objectForKey("group");
-
+        CCString* objName = (CCString*)dic->objectForKey("name");
+        CCPoint point = TileMapHelp::objectPosition(_map, _objects, objName->getCString());
+        point.x *=ScaleX;
+        point.y *=ScaleY;
        {
             Tower* tower = Tower::create(str1->getCString());
-           GameRoot::shareGameRoot()->addSpriteTag();
-           tower->setTag(GameRoot::shareGameRoot()->getspriteTag());
+           GR->addSpriteTag();
+           tower->setTag(GR->getspriteTag());
            tower->setGroupID(groudid->intValue());
            if (groudid->intValue()==1) {
-               GameRoot::shareGameRoot()->getTowerArrL()->addObject(tower);
+               GR->getTowerArrL()->addObject(tower);
            }else
-               GameRoot::shareGameRoot()->getTowerArrR()->addObject(tower);
-            CCPoint point;
-            
+               GR->getTowerArrR()->addObject(tower);
+
+           
            if (str->compare("home")==0) {
                tower->setCanAttack(false);
            }else
@@ -116,30 +144,51 @@ bool SceneGame::init()
            tower->setRange(200);
            tower->setDamage(100);
            tower->setTotalBlood(500);
-            point.x = (dic->valueForKey("x")->intValue()+tileSize.width/2)*scalex;
-            point.y = (dic->valueForKey("y")->intValue()+tileSize.height/2)*scaley;
+
             tower->setPosition(point);
             this->addChild(tower);
            tower->startUpdate();
         }
     }
     this->addChild(GameHud::shareGameHud());
-
+    GameHud::shareGameHud()->addLeftHead("guanyu.png");
+    GameHud::shareGameHud()->addRightHead("jiangwei.png");
+    GameHud::shareGameHud()->addMask();
+        CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, GameNodePority, true);
     return true;
 }
 
+bool SceneGame:: ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
+{
+    GameHud::shareGameHud()->setHeroSel(true);
+    GameHud::shareGameHud()->unShowBottomMenu();
+    
+    CCPoint touchLocation = this->convertTouchToNodeSpace(pTouch);
+    if (GR->getLimitRect().containsPoint(touchLocation)) {
+
+        if (!GR->getMyHero()->getISDEAD()) {
+            GR->setMyTargetPos(touchLocation);
+            GR->flagNewTargetPos();
+            GR->getMyHero()->setAutoFight(false);
+            GR->getMyHero()->moveToPositon(touchLocation);
+        }
+       // unscheduleAllSelectors();
+     //   scheduleOnce(schedule_selector(GameRoot::hidenAimSprite), 1.0f);
+    }
+    return false;
+}
 void SceneGame::addSoldier(cocos2d::CCPoint pos, const char* soldierId,ActorPro pro)
 {
     ActorData *data = ActorData::getActorData(soldierId,"1",Soldier, pro,this);
     ActorBase *actor = ActorBase::create(data);
-    GameRoot::shareGameRoot()->addSpriteTag();
-    actor->setTag(GameRoot::shareGameRoot()->getspriteTag());
+    GR->addSpriteTag();
+    actor->setTag(GR->getspriteTag());
     actor->setPosition(pos);
     actor->setoriginalPos(pos);
     this->addChild(actor);
-    CCArray *larr = GameRoot::shareGameRoot()->getactorArrL();
+    CCArray *larr = GR->getactorArrL();
     larr->addObject(actor);
-    if(GameRoot::shareGameRoot()->gethasStart())
+    if(GR->gethasStart())
     actor->start();
 
 }
@@ -147,3 +196,4 @@ void SceneGame::removeMask()
 {
     this->removeChildByTag(11);
  }
+

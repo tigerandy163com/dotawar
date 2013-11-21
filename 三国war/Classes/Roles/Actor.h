@@ -1,8 +1,9 @@
 #ifndef _ACTOR_H_
 #define _ACTOR_H_
-
-class Actor
+#include "ActorBase.h"
+class Actor:public ActorBase
 {
+    
 };
 
 #endif

@@ -156,6 +156,7 @@ void ActorBase::setoriginalPos(cocos2d::CCPoint var)
 }
 void ActorBase::start()
 {
+    _autoFight = true;
     this->scheduleOnce(schedule_selector(ActorBase::startRun), 0.5f);
     schedule(schedule_selector(ActorBase::actorLogic), 0.1f,kCCRepeatForever,0.6f);
 }
@@ -254,6 +255,7 @@ void ActorBase:: RunAnimateAction_once(CCAnimate* action,SEL_CallFunc selector)
    // this->scheduleOnce(schedule_selector(ActorBase::StateToAttack), 1.5f);
 }
 void ActorBase::actorLogic(){
+
     if (mActorData->getblood()<=0) {
         stopAllActions();
         unscheduleAllSelectors();
@@ -311,6 +313,9 @@ void ActorBase::dealDead()
 void ActorBase::findAnotherTarget()
 {
     if (isDead) {
+        return;
+    }
+    if (!_autoFight) {
         return;
     }
     CCArray *enmeys ;
@@ -540,6 +545,7 @@ void ActorBase::startAttack(){
     }
  }
 void ActorBase::fire(){
+    setAutoFight(true);
     getActorDir();
     if (mActorDir == Left)
     RunAnimateAction_once(_action_attack,callfunc_selector(ActorBase::startAttack));
@@ -577,6 +583,9 @@ void ActorBase::attackedByEnemy(int damageval,bool isBoom)
     healthBar->setPercentage(f*100);
 }
 void ActorBase:: update(float dt){
+    if (!_autoFight) {
+        return;
+    }
     if (!_target&&!_towerTarget) {
         return;
     }

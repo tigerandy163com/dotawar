@@ -42,6 +42,20 @@ CCPoint TileMapHelp::tileCoordinateFromPosition(CCTMXTiledMap* map,CCTMXLayer* _
     
     return _bg1layer->tileGIDAt(cpt);
 }
+CCRect TileMapHelp::objectBoundBox(cocos2d::CCTMXTiledMap *map, cocos2d::CCTMXObjectGroup *group, const char *object)
+{
+    CCSize tileSize = map->getTileSize();
+     CCDictionary *dicT  = group->objectNamed(object);
+
+    CCString* objW = (CCString*)dicT->objectForKey("width");
+    CCString* objH =(CCString*)dicT->objectForKey("height");
+    CCPoint point ;
+    point.x = dicT->valueForKey("x")->intValue();
+    point.y =  dicT->valueForKey("y")->intValue();
+    CCRect rec = CCRect(point.x, point.y, objW->floatValue(), objH->floatValue());
+    return rec;
+
+}
 CCPoint TileMapHelp:: objectPosition(CCTMXTiledMap* map,cocos2d::CCTMXObjectGroup *group,const char *object)
 {
     CCPoint point;

@@ -9,6 +9,7 @@
 #include "Tower.h"
 #include "Bullet.h"
 #include "GameRoot.h"
+#include "GameHud.h"
 Tower* Tower::create(const char *name)
 {
     Tower* tower = new Tower();
@@ -30,6 +31,7 @@ bool Tower::initWithName(const char *name)
     do {
         CC_BREAK_IF(!CCNode::init());
         _sprite = CCSprite::create(name);
+        
         this->addChild(_sprite);
         
         healthBar = CCProgressTimer::create(CCSprite::create("health_bar_green.png"));
@@ -45,11 +47,25 @@ bool Tower::initWithName(const char *name)
         redBar->setPosition(healthBar->getPosition());
         redBar->setScale(0.25f);
         this->addChild(redBar,1);
-        
+        	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, TowerNodePority, true);
         bRet = true;
     } while (0);
     return bRet;
 }
+
+bool Tower::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
+        CCPoint touchLocation = this->convertTouchToNodeSpace(pTouch);
+        if(_sprite->boundingBox().containsPoint(touchLocation)){
+            if (_groupID==1&&!_canAttack) {
+                GameHud::shareGameHud()->setHeroSel(false);
+                GameHud::shareGameHud()->showBottomMenu();
+            }
+            return true;
+        }
+        return false;
+    }
+
+
 void Tower::startUpdate()
 {
      this->schedule(schedule_selector(Tower::towerLogic), 0.1f);
@@ -182,5 +198,6 @@ ActorBase*  Tower::getCloseEnemy()
         
         return  closestEnemy;
     }
+    
     return NULL;
 }

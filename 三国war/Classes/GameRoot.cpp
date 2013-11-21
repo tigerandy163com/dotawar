@@ -16,12 +16,14 @@ GameRoot::~GameRoot(){
     CC_SAFE_RELEASE_NULL(_actorArrR);
     CC_SAFE_RELEASE_NULL(_TowerArrR);
     CC_SAFE_RELEASE_NULL(_TowerArrL);
+    CC_SAFE_RELEASE_NULL(_aimSprite);
 }
 GameRoot* GameRoot::shareGameRoot()
 {
     if (_shareGameRoot==NULL) {
         _shareGameRoot = new GameRoot();
-       _shareGameRoot->init();
+       if(!_shareGameRoot->init())
+           return NULL;
         _shareGameRoot->InitializeResource();
     }
     return _shareGameRoot;
@@ -30,6 +32,7 @@ bool GameRoot::init()
 {
     bool bRet = false;
     do {
+  
         InitializeResource();
         _actorArrL = CCArray::create();
         _actorArrL->retain();
@@ -40,6 +43,9 @@ bool GameRoot::init()
         _TowerArrR = CCArray::create();
         _TowerArrR->retain();
         _spriteTag = 10;
+        _aimSprite = CCSprite::create("aim.png");
+        _aimSprite->setScale(0.5f);
+        _aimSprite->retain();
         bRet = true;
     } while (0);
     return bRet;
@@ -130,6 +136,9 @@ SceneGame* GameRoot::getSceneGame()
 	if (_SceneGame == NULL){
 		_SceneGame = (SceneGame*) SceneGame::Scene();
         _SceneGame->retain();
+        _SceneGame->addChild(_aimSprite);
+        _aimSprite->setVisible(false);
+      
     }
 	return _SceneGame;
 }
@@ -148,4 +157,15 @@ SceneOver* GameRoot::getSceneOver()
         _SceneOver->retain();
     }
 	return _SceneOver;
+}
+void GameRoot::hidenAimSprite()
+{
+     _aimSprite->setVisible(false);
+}
+void GameRoot::flagNewTargetPos()
+{
+    _aimSprite->setPosition(_myTargetPos);
+    _aimSprite->setVisible(true);
+    
+      
 }

@@ -32,7 +32,17 @@ public:
     ActorPro selectPro;
     CCLabelTTF* timerLab;
     CCSprite* selectFlag;
+    CCLayer* bottomLayer;
     int count;
-
+    void showBottomMenu();
+     void unShowBottomMenu();
+    void addLeftHead(const  char* name);
+    void addRightHead(const char* name );
+    void selMyHead();
+    void selEnemyHead();
+    void addMask();
+    CC_SYNTHESIZE(bool, _heroSel, HeroSel);
+private:
+    bool isShowing;
 };
 #endif /* defined(____war__GameHud__) */

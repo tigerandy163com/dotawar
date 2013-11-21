@@ -306,6 +306,11 @@
 		C6632E44182B93DA00482106 /* actorData.lua in Resources */ = {isa = PBXBuildFile; fileRef = C6632E42182B93DA00482106 /* actorData.lua */; };
 		C6846C46182358EA00C664B7 /* tileMapHelp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6846C44182358EA00C664B7 /* tileMapHelp.cpp */; };
 		C69810C01835C7AE00EB3663 /* MaskLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C69810BE1835C7AE00EB3663 /* MaskLayer.cpp */; };
+		C6B288DF183DC8E000C415F6 /* guanyu.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B288DD183DC8E000C415F6 /* guanyu.png */; };
+		C6B288E0183DC8E000C415F6 /* jiangwei.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B288DE183DC8E000C415F6 /* jiangwei.png */; };
+		C6B288E4183DDF7000C415F6 /* 关羽_dead.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B288E1183DDF7000C415F6 /* 关羽_dead.png */; };
+		C6B288E5183DDF7000C415F6 /* 关羽_melee.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B288E2183DDF7000C415F6 /* 关羽_melee.png */; };
+		C6B288E6183DDF7000C415F6 /* 关羽.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B288E3183DDF7000C415F6 /* 关羽.png */; };
 		C6C214E2182CE02A008693B7 /* health_bar_green.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C214E0182CE02A008693B7 /* health_bar_green.png */; };
 		C6C214E3182CE02A008693B7 /* health_bar_red.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C214E1182CE02A008693B7 /* health_bar_red.png */; };
 		C6C2EB861839DF8600E7BB02 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C6C2EB841839DF8600E7BB02 /* home.png */; };
@@ -970,6 +975,11 @@
 		C6846C45182358EA00C664B7 /* tileMapHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tileMapHelp.h; sourceTree = "<group>"; };
 		C69810BE1835C7AE00EB3663 /* MaskLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaskLayer.cpp; sourceTree = "<group>"; };
 		C69810BF1835C7AE00EB3663 /* MaskLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskLayer.h; sourceTree = "<group>"; };
+		C6B288DD183DC8E000C415F6 /* guanyu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guanyu.png; path = Resources/guanyu.png; sourceTree = "<group>"; };
+		C6B288DE183DC8E000C415F6 /* jiangwei.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jiangwei.png; path = Resources/jiangwei.png; sourceTree = "<group>"; };
+		C6B288E1183DDF7000C415F6 /* 关羽_dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "关羽_dead.png"; path = "Resources/行走图/关羽_dead.png"; sourceTree = "<group>"; };
+		C6B288E2183DDF7000C415F6 /* 关羽_melee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "关羽_melee.png"; path = "Resources/行走图/关羽_melee.png"; sourceTree = "<group>"; };
+		C6B288E3183DDF7000C415F6 /* 关羽.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "关羽.png"; path = "Resources/行走图/关羽.png"; sourceTree = "<group>"; };
 		C6C214E0182CE02A008693B7 /* health_bar_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = health_bar_green.png; path = Resources/health_bar_green.png; sourceTree = "<group>"; };
 		C6C214E1182CE02A008693B7 /* health_bar_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = health_bar_red.png; path = Resources/health_bar_red.png; sourceTree = "<group>"; };
 		C6C2EB841839DF8600E7BB02 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = Resources/home.png; sourceTree = "<group>"; };
@@ -1093,6 +1103,11 @@
 		C60A8130182208CF001673B8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C6B288E1183DDF7000C415F6 /* 关羽_dead.png */,
+				C6B288E2183DDF7000C415F6 /* 关羽_melee.png */,
+				C6B288E3183DDF7000C415F6 /* 关羽.png */,
+				C6B288DD183DC8E000C415F6 /* guanyu.png */,
+				C6B288DE183DC8E000C415F6 /* jiangwei.png */,
 				C6C2EB8F183A0B8A00E7BB02 /* bullet1.png */,
 				C6C2EB90183A0B8A00E7BB02 /* bullet2.png */,
 				C6C2EB8B183A070700E7BB02 /* tower1.png */,
@@ -2496,11 +2511,13 @@
 				C6D9DEFF18361C99007AC1C2 /* hud.png in Resources */,
 				C60A84D7182209F3001673B8 /* ActorsPack1.plist in Resources */,
 				C6C214E2182CE02A008693B7 /* health_bar_green.png in Resources */,
+				C6B288DF183DC8E000C415F6 /* guanyu.png in Resources */,
 				C6C2EB861839DF8600E7BB02 /* home.png in Resources */,
 				C60A81E5182208D0001673B8 /* ChangeLog in Resources */,
 				C6C2EB8E183A070700E7BB02 /* tower2.png in Resources */,
 				C60A84DF182209F3001673B8 /* GameUI02.png in Resources */,
 				C60A8132182208CF001673B8 /* CloseNormal.png in Resources */,
+				C6B288E5183DDF7000C415F6 /* 关羽_melee.png in Resources */,
 				C6C2EB91183A0B8A00E7BB02 /* bullet1.png in Resources */,
 				C6632E44182B93DA00482106 /* actorData.lua in Resources */,
 				C60A813E182208CF001673B8 /* Icon-Small.png in Resources */,
@@ -2509,6 +2526,7 @@
 				C60A813C182208CF001673B8 /* Icon-Small-50.png in Resources */,
 				C60A8146182208CF001673B8 /* iTunesArtwork in Resources */,
 				C60A84DC182209F3001673B8 /* GameUI01.plist in Resources */,
+				C6B288E6183DDF7000C415F6 /* 关羽.png in Resources */,
 				C60A84D8182209F3001673B8 /* ActorsPack1.png in Resources */,
 				C60A84DE182209F3001673B8 /* GameUI02.plist in Resources */,
 				C6D9DEFE18361C99007AC1C2 /* aim.png in Resources */,
@@ -2518,7 +2536,9 @@
 				C6C2EB8D183A070700E7BB02 /* tower1.png in Resources */,
 				C60A84D9182209F3001673B8 /* fps_images-hd.png in Resources */,
 				C6C2EB871839DF8600E7BB02 /* select.png in Resources */,
+				C6B288E0183DC8E000C415F6 /* jiangwei.png in Resources */,
 				C6C2EB92183A0B8A00E7BB02 /* bullet2.png in Resources */,
+				C6B288E4183DDF7000C415F6 /* 关羽_dead.png in Resources */,
 				C60A8136182208CF001673B8 /* Default.png in Resources */,
 				C60A84E1182209F3001673B8 /* Level0.tmx in Resources */,
 				C60A8134182208CF001673B8 /* CloseSelected.png in Resources */,

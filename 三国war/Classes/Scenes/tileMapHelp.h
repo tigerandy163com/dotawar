@@ -16,6 +16,7 @@ class TileMapHelp{
 public:
   static  CCPoint tileCoordinateFromPosition(CCTMXTiledMap* map,CCTMXLayer* _bg1layer,CCPoint pos);
    static int tileIDFromPosition(CCTMXTiledMap* map,CCTMXLayer* _bg1layer,cocos2d:: CCPoint pos);
+    static  cocos2d:: CCRect objectBoundBox(CCTMXTiledMap* map,cocos2d::CCTMXObjectGroup *group,const char *object);
   static  cocos2d:: CCPoint objectPosition(CCTMXTiledMap* map,cocos2d::CCTMXObjectGroup *group,const char *object);
    static cocos2d::CCPoint tileCoordForPosition(CCTMXTiledMap* map,cocos2d::CCPoint position);
 	static cocos2d::CCPoint positionForTileCoord(CCTMXTiledMap* map,cocos2d::CCPoint position);

@@ -37,26 +37,26 @@
   </data>
  </layer>
  <objectgroup name="objects" width="13" height="8">
-  <object name="hero1" x="192" y="192" width="64" height="64">
+  <object name="hero1" x="192" y="256" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
-    <property name="id" value="Hero11"/>
-    <property name="pro" value="-1"/>
-    <property name="type" value="2"/>
-   </properties>
-  </object>
-  <object name="hero2" x="576" y="192" width="64" height="64">
-   <properties>
-    <property name="group" value="2"/>
     <property name="id" value="Hero02"/>
     <property name="pro" value="-1"/>
     <property name="type" value="2"/>
    </properties>
   </object>
-  <object name="soldier0" x="128" y="64" width="64" height="64">
+  <object name="hero2" x="576" y="256" width="64" height="64">
+   <properties>
+    <property name="group" value="2"/>
+    <property name="id" value="Hero11"/>
+    <property name="pro" value="-1"/>
+    <property name="type" value="2"/>
+   </properties>
+  </object>
+  <object name="soldier0" x="128" y="384" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
-    <property name="id" value="A3"/>
+    <property name="id" value="B3"/>
     <property name="pro" value="1"/>
     <property name="type" value="1"/>
    </properties>
@@ -64,23 +64,23 @@
   <object name="soldier1" x="128" y="128" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
-    <property name="id" value="A1"/>
+    <property name="id" value="B1"/>
     <property name="pro" value="2"/>
     <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="soldier2" x="128" y="192" width="64" height="64">
+  <object name="soldier2" x="128" y="256" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
-    <property name="id" value="A2"/>
+    <property name="id" value="B2"/>
     <property name="pro" value="3"/>
     <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="soldier3" x="128" y="256" width="64" height="64">
+  <object name="soldier3" x="128" y="192" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
-    <property name="id" value="A3"/>
+    <property name="id" value="B3"/>
     <property name="pro" value="1"/>
     <property name="type" value="1"/>
    </properties>
@@ -88,15 +88,15 @@
   <object name="soldier4" x="128" y="320" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
-    <property name="id" value="A1"/>
+    <property name="id" value="B1"/>
     <property name="pro" value="1"/>
     <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="_soldier0" x="640" y="64" width="64" height="64">
+  <object name="_soldier0" x="640" y="384" width="64" height="64">
    <properties>
     <property name="group" value="2"/>
-    <property name="id" value="B1"/>
+    <property name="id" value="A1"/>
     <property name="pro" value="1"/>
     <property name="type" value="1"/>
    </properties>
@@ -104,23 +104,23 @@
   <object name="_soldier1" x="640" y="128" width="64" height="64">
    <properties>
     <property name="group" value="2"/>
-    <property name="id" value="B3"/>
+    <property name="id" value="A3"/>
     <property name="pro" value="2"/>
     <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="_soldier2" x="640" y="192" width="64" height="64">
+  <object name="_soldier2" x="640" y="256" width="64" height="64">
    <properties>
     <property name="group" value="2"/>
-    <property name="id" value="B2"/>
+    <property name="id" value="A2"/>
     <property name="pro" value="3"/>
     <property name="type" value="1"/>
    </properties>
   </object>
-  <object name="_soldier3" x="640" y="256" width="64" height="64">
+  <object name="_soldier3" x="640" y="192" width="64" height="64">
    <properties>
     <property name="group" value="2"/>
-    <property name="id" value="B1"/>
+    <property name="id" value="A1"/>
     <property name="pro" value="1"/>
     <property name="type" value="1"/>
    </properties>
@@ -128,48 +128,51 @@
   <object name="_soldier4" x="640" y="320" width="64" height="64">
    <properties>
     <property name="group" value="2"/>
-    <property name="id" value="B3"/>
+    <property name="id" value="A3"/>
     <property name="pro" value="1"/>
     <property name="type" value="1"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="towers" width="13" height="8">
-  <object x="0" y="192" width="64" height="64">
+  <object name="home1" x="0" y="256" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
     <property name="type" value="home"/>
    </properties>
   </object>
-  <object x="768" y="192" width="64" height="64">
+  <object name="home2" x="768" y="256" width="64" height="64">
    <properties>
     <property name="group" value="2"/>
     <property name="type" value="home"/>
    </properties>
   </object>
-  <object x="64" y="128" width="64" height="64">
+  <object name="tower11" x="64" y="192" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
     <property name="type" value="tower1"/>
    </properties>
   </object>
-  <object x="704" y="128" width="64" height="64">
+  <object name="tower12" x="704" y="192" width="64" height="64">
    <properties>
     <property name="group" value="2"/>
     <property name="type" value="tower2"/>
    </properties>
   </object>
-  <object x="704" y="256" width="64" height="64">
+  <object name="tower22" x="704" y="320" width="64" height="64">
    <properties>
     <property name="group" value="2"/>
     <property name="type" value="tower2"/>
    </properties>
   </object>
-  <object x="64" y="256" width="64" height="64">
+  <object name="tower21" x="64" y="320" width="64" height="64">
    <properties>
     <property name="group" value="1"/>
     <property name="type" value="tower1"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup name="touch" width="13" height="8">
+  <object name="limit" x="0" y="128" width="832" height="320"/>
  </objectgroup>
 </map>

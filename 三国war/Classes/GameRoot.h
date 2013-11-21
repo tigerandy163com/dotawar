@@ -8,6 +8,9 @@ using namespace cocos2d;
 #include "SceneSelect.h"
 #include "SceneGame.h"
 #include "SceneOver.h"
+#define GameNodePority 2
+#define TowerNodePority 1
+#define  ActorNodePority 1
 extern float ScaleX;
 extern float ScaleY;
 class GameRoot:public CCObject
@@ -24,6 +27,11 @@ public :
     bool resetSceneGame();
     void addSpriteTag();
     void startGame();
+    void hidenAimSprite();
+    CC_SYNTHESIZE(CCSprite*, _aimSprite, AimSprite);
+    CC_SYNTHESIZE(ActorBase*, _myHero, MyHero);
+    CC_SYNTHESIZE(CCPoint, _myTargetPos, MyTargetPos);
+    CC_SYNTHESIZE(CCRect, _limitRect, LimitRect);
     CC_SYNTHESIZE(int, _spriteTag , spriteTag);
     CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrL, actorArrL);
     CC_SYNTHESIZE_RETAIN( CCArray *, _actorArrR,actorArrR);
@@ -32,7 +40,8 @@ public :
     CC_SYNTHESIZE_RETAIN( CCArray *, _TowerArrR,TowerArrR);
     int getLiveActors(int var);
     int getLiveTowers(int var);
-
+    void flagNewTargetPos();
+    
 };
 
 #endif

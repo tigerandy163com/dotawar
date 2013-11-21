@@ -13,7 +13,7 @@
 #include "cocos2d.h"
 USING_NS_CC;
 class ActorBase;
-class Tower:public CCNode
+class Tower:public CCNode,public cocos2d::CCTouchDelegate
 {
 public:
     CCSprite* _sprite;
@@ -21,6 +21,7 @@ public:
     static Tower* create(const char* name);
     bool initWithName(const char* name);
     void towerData(int totalblood,int range,int damage,int group,bool canAttack,int fireSpeed,int bulletSpeed);
+    bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
     void attackedByEnemy(int damageval,bool isBoom);
     CC_SYNTHESIZE(float, _blood, Blood);
     void setTotalBlood(float var)
@@ -41,12 +42,18 @@ public:
     
     void startUpdate();
 protected:
+    
     ActorBase* _enemy;
     ActorBase* getCloseEnemy();
     void removeSelf();
     int _totalBlood;
     void towerLogic();
     void fire();
+    
+};
+
+class Home:public Tower
+{
     
 };
 #endif /* defined(____war__Tower__) */

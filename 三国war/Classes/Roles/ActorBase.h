@@ -28,6 +28,15 @@ public :
 	CCAnimate* _action_dead;
 	CCAnimate* _action_dead_flip;
 
+    CCAnimate* _action_attackUp;
+	CCAnimate* _action_attackDown;
+	CCAnimate* _action_runUp;
+	CCAnimate* _action_runDown;
+	CCAnimate* _action_standUp;
+	CCAnimate* _action_standDown;
+	CCAnimate* _action_deadUp;
+	CCAnimate* _action_deadDown;
+    
 	CCAction* _currentAnimateAction;
     CCAction* _onceAnimateAction;
 	void StateToRun();
@@ -48,6 +57,8 @@ public :
     void backToLine();
     void setoriginalPos(CCPoint var);
     CC_SYNTHESIZE(CCPoint, _destinationPos, destinationPos);
+    CC_SYNTHESIZE(bool, _autoFight, AutoFight);
+    CC_SYNTHESIZE(bool, isDead, ISDEAD);
 private :
     float to360Angle(float angle)
 	{
@@ -57,7 +68,7 @@ private :
 		return angle;
 	}
     cocos2d::CCProgressTimer* healthBar;
-    bool isDead;
+    
     bool isBack;
     bool startTowerFight;
     CCPoint _originalPos;
