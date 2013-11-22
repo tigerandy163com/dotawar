@@ -22,6 +22,9 @@ public :
     cocos2d::CCTMXLayer* _bg1layer;
     CCTMXObjectGroup* _touchObj;
     void removeMask();
+    void hidenAimSprite();
+     CCSprite* _aimSprite;
+    
 private :
 	void click_attack(CCObject* pSender);
     

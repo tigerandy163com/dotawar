@@ -6,7 +6,8 @@ using namespace cocos2d;
 
 #include "ActorData.h"
 class Tower;
-class ActorBase : public CCNode
+class GameRoot;
+class ActorBase : public CCNode,public cocos2d::CCTouchDelegate
 {
 public :
 //	ActorBase(ActorData* data);
@@ -14,11 +15,13 @@ public :
     CCSprite *_sprite;
     bool initWithActorData(ActorData* data);
     static ActorBase* create(ActorData* data);
-    CC_SYNTHESIZE_RETAIN(ActorData*, mActorData, ActorData);
+     bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
+    
+    GameRoot* GR;
     float totalBlood;
     ActorDir getActorDir(void);
     ActorDir mActorDir;
- 
+    CCSprite *_aimSprite;
 	CCAnimate* _action_attack;
 	CCAnimate* _action_attack_flip;
 	CCAnimate* _action_run;
@@ -59,6 +62,7 @@ public :
     CC_SYNTHESIZE(CCPoint, _destinationPos, destinationPos);
     CC_SYNTHESIZE(bool, _autoFight, AutoFight);
     CC_SYNTHESIZE(bool, isDead, ISDEAD);
+    CC_SYNTHESIZE_RETAIN(ActorData*, mActorData, ActorData);
 private :
     float to360Angle(float angle)
 	{

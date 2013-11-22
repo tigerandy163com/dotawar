@@ -9,7 +9,7 @@ actor_b3 = {blood = 200,speed = 150 ,damage = 40 ,money = 20,range =5}
 actor_b4 = {blood = 1000,speed = 50 ,damage = 20 ,money = 20,range =5}
 
 hero1 = {blood = 1000,speed = 80 ,damage = 150 ,money = 100,range =5}
-hero2 = {blood = 1000,speed = 150 ,damage = 100 ,money = 100,range =5}
+hero2 = {blood = 10000,speed = 150 ,damage = 100 ,money = 100,range =5}
 require "actor"
 actor = {}
 

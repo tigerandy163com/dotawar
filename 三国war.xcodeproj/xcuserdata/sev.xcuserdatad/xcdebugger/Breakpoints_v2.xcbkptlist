@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#19977;&#22269;war/Classes/GameRoot.cpp"
-            timestampString = "406725589.396029"
+            timestampString = "406780092.837756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "GameRoot::~GameRoot()"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "GameRoot::shareGameRoot()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

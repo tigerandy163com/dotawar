@@ -100,6 +100,10 @@ ActorData* ActorData::getActorData(string id, string groupid, ActorType type, Ac
 	data->setGroupID(groupid);
 	data->setActorType(type);
 	data->setActorPro(pro);
+    if ( id.compare("Hero02")==0) {
+        data->setITISME(true);
+    }else
+        data->setITISME(false);
     CCScriptEngineManager* manager = CCScriptEngineManager::sharedManager();
     CCLuaEngine* engine = (CCLuaEngine*)manager->getScriptEngine();
     

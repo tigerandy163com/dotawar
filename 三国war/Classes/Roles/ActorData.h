@@ -23,6 +23,7 @@ public :
     CC_SYNTHESIZE(std::string, mGroupID, GroupID);
     CC_SYNTHESIZE(ActorType, mActorType, ActorType);
     CC_SYNTHESIZE(ActorPro, mActorPro, ActorPro);
+    CC_SYNTHESIZE(bool, _itsMe, ITISME);
     CC_SYNTHESIZE(int, _speed, speed);
     CC_SYNTHESIZE(int, _blood, blood);
     CC_SYNTHESIZE(int, _damage, damage);

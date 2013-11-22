@@ -19,7 +19,7 @@ bool ActorBase::initWithActorData(ActorData *data)
         _action_dead_flip = NULL;
 
         _currentAnimateAction = NULL;
-        
+       
         CCSpriteFrameCache* cache =
         CCSpriteFrameCache::sharedSpriteFrameCache();
         char str[64] = {0};
@@ -114,7 +114,12 @@ bool ActorBase::initWithActorData(ActorData *data)
         redBar->setScale(0.1);
         this->addChild(redBar,1);
         winsize = CCDirector::sharedDirector()->getWinSize();
-   
+        _aimSprite = CCSprite::create("aim.png");
+        _aimSprite->retain();
+        _aimSprite->setScale(0.25f);
+        _aimSprite->setVisible(false);
+        this->addChild(_aimSprite);
+        CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, ActorNodePority, true);
         bRet = true;
     } while (0);
     return bRet;
@@ -153,6 +158,26 @@ void ActorBase::setoriginalPos(cocos2d::CCPoint var)
     else
         var.x -=  (int)winsize.width/5;
     _originalPos = var;
+}
+ bool ActorBase:: ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
+{
+    CCPoint touchLocation = this->convertTouchToNodeSpace(pTouch);
+    if (!GameRoot::shareGameRoot()->gethasStart()) {
+        return false;
+    }
+    if(_sprite->boundingBox().containsPoint(touchLocation)){
+        if (!mActorData->getITISME()) {
+            this->_aimSprite->setVisible(true);
+            GameRoot::shareGameRoot()->setMyTargetPos(this->getPosition());
+            GameRoot::shareGameRoot()->getMyHero()->settarget(this);
+               //     GameRoot::shareGameRoot()->flagNewTargetPos();
+            GameRoot::shareGameRoot()->getMyHero()->setAutoFight(true);
+            GameRoot::shareGameRoot()->getMyHero()->moveToPositon(this->getPosition());
+     //       GameRoot::shareGameRoot()->getMyHero()->fire();
+        return true;
+        }
+    }
+    return false;
 }
 void ActorBase::start()
 {
@@ -197,7 +222,7 @@ void ActorBase::backToLine()
 }
 void ActorBase::StateToRun()
 {
-    getActorDir();
+  //  getActorDir();
 	if (mActorDir == Left)
 		RunAnimateAction_RepeatForever(_action_run);
 	else
@@ -622,7 +647,7 @@ void ActorBase:: update(float dt){
         YY=_towerTarget->getPositionY()-this->getPositionY();
     if (actorRect.intersectsRect(targetRect) &&abs(YY)<=30) {
         {
-                this->unscheduleUpdate();
+            //    this->unscheduleUpdate();
                 this->StateToStand();
                 //遭遇敌人，在攻击范围内，开始攻击
                 schedule( schedule_selector(ActorBase::fire), 1.0f);

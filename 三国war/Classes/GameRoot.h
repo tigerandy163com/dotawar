@@ -27,7 +27,7 @@ public :
     bool resetSceneGame();
     void addSpriteTag();
     void startGame();
-    void hidenAimSprite();
+    
     CC_SYNTHESIZE(CCSprite*, _aimSprite, AimSprite);
     CC_SYNTHESIZE(ActorBase*, _myHero, MyHero);
     CC_SYNTHESIZE(CCPoint, _myTargetPos, MyTargetPos);
