@@ -11,6 +11,7 @@ using namespace cocos2d;
 #define GameNodePority 2
 #define TowerNodePority 1
 #define  ActorNodePority 1
+
 extern float ScaleX;
 extern float ScaleY;
 class GameRoot:public CCObject

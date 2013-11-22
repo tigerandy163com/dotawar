@@ -27,7 +27,10 @@ public:
     void soldier4_Select(CCNode *pSender);
     void click_attack(CCNode *pSender);
     void click_addSoldier(CCNode *pSender);
+    void giveMeALife();
     void countDown();
+    void hidenReLive();
+    void showReLive();
     string selectID;
     ActorPro selectPro;
     CCLabelTTF* timerLab;
@@ -41,8 +44,9 @@ public:
     void selMyHead();
     void selEnemyHead();
     void addMask();
-    CC_SYNTHESIZE(bool, _heroSel, HeroSel);
-private:
     bool isShowing;
+    CC_SYNTHESIZE(bool, _heroSel, HeroSel);
+
+
 };
 #endif /* defined(____war__GameHud__) */

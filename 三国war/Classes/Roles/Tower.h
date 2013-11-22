@@ -18,12 +18,15 @@ class Tower:public CCNode,public cocos2d::CCTouchDelegate
 public:
     CCSprite* _sprite;
     CCProgressTimer* healthBar;
+    ~Tower();
     static Tower* create(const char* name);
     bool initWithName(const char* name);
     void towerData(int totalblood,int range,int damage,int group,bool canAttack,int fireSpeed,int bulletSpeed);
     bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
+        void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) ;
     void attackedByEnemy(int damageval,bool isBoom);
     CC_SYNTHESIZE(float, _blood, Blood);
+    CCSprite*  _aimSprite;
     void setTotalBlood(float var)
     {
         _blood = var;

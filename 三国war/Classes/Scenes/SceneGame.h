@@ -15,7 +15,7 @@ public :
 //    void onExit();
     CREATE_FUNC(SceneGame);
     GameRoot* GR;
-    void addSoldier(CCPoint pos,const char* soldierId,ActorPro pro);
+    void addSoldier(CCPoint pos,const char* soldierId,ActorType type,ActorPro pro);
         bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
     CCTMXTiledMap* _map;
     cocos2d::CCTMXObjectGroup *_objects;

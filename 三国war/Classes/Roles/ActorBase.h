@@ -17,7 +17,7 @@ public :
     bool initWithActorData(ActorData* data);
     static ActorBase* create(ActorData* data);
      bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
-    
+    void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) ;
     GameRoot* GR;
     float totalBlood;
     ActorDir getActorDir(void);
@@ -65,6 +65,9 @@ public :
     CC_SYNTHESIZE(bool, _autoFight, AutoFight);
     CC_SYNTHESIZE(bool, isDead, ISDEAD);
     CC_SYNTHESIZE_RETAIN(ActorData*, mActorData, ActorData);
+    bool startTowerFight;
+    bool ForceAttackTower;
+    bool checkCollision();
 private :
     float to360Angle(float angle)
 	{
@@ -74,10 +77,9 @@ private :
 		return angle;
 	}
     cocos2d::CCProgressTimer* healthBar;
-    ActorDir lastDir;
+   
     bool isBack;
-    bool startTowerFight;
-    CCPoint _originalPos;
+        CCPoint _originalPos;
     
     CC_SYNTHESIZE(ActorBase *, _target, target);
     CC_SYNTHESIZE(Tower*, _towerTarget,TowerTarget);

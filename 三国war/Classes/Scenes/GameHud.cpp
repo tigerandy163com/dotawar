@@ -65,6 +65,17 @@ bool GameHud::init()
         CCMenu *menu0 = CCMenu::createWithItem(add);
         menu0->setPosition( winsize.width-200, 40);
         bottomLayer->addChild(menu0);
+        CCMenuItemFont *add1 = CCMenuItemFont::create("复活", this, menu_selector(GameHud::giveMeALife));
+        
+        add1->setPosition(CCPointZero);
+        add1->setFontSizeObj(35);
+        add1->setColor(ccRED);
+        CCMenu *menu01 = CCMenu::createWithItem(add1);
+        menu01->setPosition( 70, winsize.height - 150);
+        menu01->setTag(120);
+        menu01->setVisible(false);
+        this->addChild(menu01);
+        
         
         CCMenuItemSprite* btn_attack = CCMenuItemSprite::create(
                                                                 CCSprite::createWithSpriteFrameName("btn_soldierattack1.png"),
@@ -90,6 +101,16 @@ bool GameHud::init()
         ret = true;
     } while (0);
     return ret;
+}
+void GameHud::showReLive()
+{
+    CCMenu *node =(CCMenu*) this->getChildByTag(120);
+    node->setVisible(true);
+}
+void GameHud::hidenReLive()
+{
+    CCNode *node =this->getChildByTag(120);
+    node->setVisible(false);
 }
 void GameHud::addMask()
 {
@@ -165,7 +186,19 @@ void GameHud::click_addSoldier(CCNode *pSender)
     //    CCPoint pos = ccp(100,400);
     int index = CCRANDOM_0_1()*3;
     CCPoint pos = _startPosArr->getControlPointAtIndex(index);
-    scene->addSoldier(pos, selectID.c_str(), selectPro);
+    scene->addSoldier(pos, selectID.c_str(), Soldier,selectPro);
+}
+void GameHud::giveMeALife()
+{
+    if (!GameRoot::shareGameRoot()->getMyHero()->getISDEAD()) {
+        return;
+    }
+    SceneGame* scene =(SceneGame*)GameRoot::shareGameRoot()->getSceneGame();
+    
+    //    CCPoint pos = ccp(100,400);
+    int index = CCRANDOM_0_1()*3;
+    CCPoint pos = _startPosArr->getControlPointAtIndex(index);
+    scene->addSoldier(pos, "Hero02", Hero,selectPro);
 }
 void GameHud::showBottomMenu()
 {

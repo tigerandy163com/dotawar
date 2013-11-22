@@ -166,9 +166,13 @@ bool SceneGame::init()
 
 bool SceneGame:: ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
 {
-    GameHud::shareGameHud()->setHeroSel(true);
-    GameHud::shareGameHud()->unShowBottomMenu();
+
     if (!GameRoot::shareGameRoot()->gethasStart()) {
+        return false;
+    }
+    GameHud::shareGameHud()->setHeroSel(true);
+    if (GameHud::shareGameHud()->isShowing) {
+        GameHud::shareGameHud()->unShowBottomMenu();
         return false;
     }
     CCPoint touchLocation = this->convertTouchToNodeSpace(pTouch);
@@ -176,8 +180,10 @@ bool SceneGame:: ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent
         if (!GameRoot::shareGameRoot()->getMyHero()->getISDEAD()) {
             aimState = true;
             hidenAimSprite();
+            
             GameRoot::shareGameRoot()->setMyTargetPos(touchLocation);
             GameRoot::shareGameRoot()->flagNewTargetPos();
+            GameRoot::shareGameRoot()->getMyHero()->ForceAttackTower = false;
             GameRoot::shareGameRoot()->getMyHero()->settarget(NULL);
             GameRoot::shareGameRoot()->getMyHero()->setTowerTarget(NULL);
             GameRoot::shareGameRoot()->getMyHero()->setAutoFight(false);
@@ -194,9 +200,9 @@ void SceneGame::hidenAimSprite()
     _aimSprite->setVisible(false);
     aimState = false;
 }
-void SceneGame::addSoldier(cocos2d::CCPoint pos, const char* soldierId,ActorPro pro)
+void SceneGame::addSoldier(cocos2d::CCPoint pos, const char* soldierId,ActorType type,ActorPro pro)
 {
-    ActorData *data = ActorData::getActorData(soldierId,"1",Soldier, pro,this);
+    ActorData *data = ActorData::getActorData(soldierId,"1",type, pro,this);
     ActorBase *actor = ActorBase::create(data);
     GameRoot::shareGameRoot()->addSpriteTag();
     actor->setTag(GameRoot::shareGameRoot()->getspriteTag());
@@ -207,7 +213,10 @@ void SceneGame::addSoldier(cocos2d::CCPoint pos, const char* soldierId,ActorPro 
     larr->addObject(actor);
     if(GameRoot::shareGameRoot()->gethasStart())
     actor->start();
-
+    if (type == Hero) {
+        GameRoot::shareGameRoot()->setMyHero(actor);
+        GameHud::shareGameHud()->hidenReLive();
+    }
 }
 void SceneGame::removeMask()
 {

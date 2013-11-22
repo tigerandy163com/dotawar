@@ -10,6 +10,12 @@
 #include "Bullet.h"
 #include "GameRoot.h"
 #include "GameHud.h"
+Tower::~Tower()
+{
+    CC_SAFE_RELEASE_NULL(_sprite);
+    CC_SAFE_RELEASE_NULL(_aimSprite);
+    CC_SAFE_RELEASE_NULL(healthBar);
+}
 Tower* Tower::create(const char *name)
 {
     Tower* tower = new Tower();
@@ -31,7 +37,7 @@ bool Tower::initWithName(const char *name)
     do {
         CC_BREAK_IF(!CCNode::init());
         _sprite = CCSprite::create(name);
-        
+        _sprite->retain();
         this->addChild(_sprite);
         
         healthBar = CCProgressTimer::create(CCSprite::create("health_bar_green.png"));
@@ -42,23 +48,45 @@ bool Tower::initWithName(const char *name)
 		healthBar->setPercentage(100);
 		healthBar->setScale(0.25f);
 		healthBar->setPosition(ccp(0,_sprite->getContentSize().height* 0.5f));
+        healthBar->retain();
 		this->addChild(healthBar,2);
         CCSprite *redBar = CCSprite::create("health_bar_red.png");
         redBar->setPosition(healthBar->getPosition());
         redBar->setScale(0.25f);
         this->addChild(redBar,1);
+        
+        _aimSprite = CCSprite::create("aim.png");
+        _aimSprite->retain();
+        _aimSprite->setScale(0.5f);
+        _aimSprite->setVisible(false);
+        this->addChild(_aimSprite);
         	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, TowerNodePority, true);
         bRet = true;
     } while (0);
     return bRet;
 }
-
+    void Tower:: ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
+{
+     this->_aimSprite->setVisible(false);
+}
 bool Tower::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent){
         CCPoint touchLocation = this->convertTouchToNodeSpace(pTouch);
         if(_sprite->boundingBox().containsPoint(touchLocation)){
             if (_groupID==1&&!_canAttack) {
                 GameHud::shareGameHud()->setHeroSel(false);
                 GameHud::shareGameHud()->showBottomMenu();
+            }else if (_groupID==2)
+            {
+                 this->_aimSprite->setVisible(true);
+                GameRoot::shareGameRoot()->setMyTargetPos(this->getPosition());
+                GameRoot::shareGameRoot()->getMyHero()->settarget(NULL);
+                GameRoot::shareGameRoot()->getMyHero()->startTowerFight = true;
+                GameRoot::shareGameRoot()->getMyHero()->ForceAttackTower = true;
+                GameRoot::shareGameRoot()->getMyHero()->setTowerTarget(this);
+                GameRoot::shareGameRoot()->getMyHero()->setAutoFight(true);
+            //    GameRoot::shareGameRoot()->getMyHero()->moveToPositon(this->getPosition());
+                GameRoot::shareGameRoot()->getMyHero()->unscheduleUpdate();
+                GameRoot::shareGameRoot()->getMyHero()->scheduleUpdate();
             }
             return true;
         }
