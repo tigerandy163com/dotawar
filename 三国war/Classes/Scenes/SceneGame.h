@@ -24,7 +24,7 @@ public :
     void removeMask();
     void hidenAimSprite();
      CCSprite* _aimSprite;
-    
+    bool aimState;
 private :
 	void click_attack(CCObject* pSender);
     

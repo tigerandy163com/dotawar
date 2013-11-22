@@ -173,22 +173,26 @@ bool SceneGame:: ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent
     }
     CCPoint touchLocation = this->convertTouchToNodeSpace(pTouch);
     if (GameRoot::shareGameRoot()->getLimitRect().containsPoint(touchLocation)) {
- 
         if (!GameRoot::shareGameRoot()->getMyHero()->getISDEAD()) {
+            aimState = true;
+            hidenAimSprite();
             GameRoot::shareGameRoot()->setMyTargetPos(touchLocation);
             GameRoot::shareGameRoot()->flagNewTargetPos();
+            GameRoot::shareGameRoot()->getMyHero()->settarget(NULL);
+            GameRoot::shareGameRoot()->getMyHero()->setTowerTarget(NULL);
             GameRoot::shareGameRoot()->getMyHero()->setAutoFight(false);
             GameRoot::shareGameRoot()->getMyHero()->moveToPositon(touchLocation);
             unscheduleAllSelectors();
+             scheduleOnce(schedule_selector(SceneGame::hidenAimSprite), 0.3f);
         }
-        unscheduleAllSelectors();
-        scheduleOnce(schedule_selector(SceneGame::hidenAimSprite), 0.3f);
+
     }
     return false;
 }
 void SceneGame::hidenAimSprite()
 {
     _aimSprite->setVisible(false);
+    aimState = false;
 }
 void SceneGame::addSoldier(cocos2d::CCPoint pos, const char* soldierId,ActorPro pro)
 {

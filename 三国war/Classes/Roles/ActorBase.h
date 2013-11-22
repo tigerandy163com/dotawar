@@ -5,6 +5,7 @@
 using namespace cocos2d;
 
 #include "ActorData.h"
+enum ActorState {Stand = 0, Run, Attack};
 class Tower;
 class GameRoot;
 class ActorBase : public CCNode,public cocos2d::CCTouchDelegate
@@ -22,6 +23,7 @@ public :
     ActorDir getActorDir(void);
     ActorDir mActorDir;
     CCSprite *_aimSprite;
+    ActorState mState;
 	CCAnimate* _action_attack;
 	CCAnimate* _action_attack_flip;
 	CCAnimate* _action_run;
@@ -72,12 +74,13 @@ private :
 		return angle;
 	}
     cocos2d::CCProgressTimer* healthBar;
-    
+    ActorDir lastDir;
     bool isBack;
     bool startTowerFight;
     CCPoint _originalPos;
+    
     CC_SYNTHESIZE(ActorBase *, _target, target);
-    Tower* _towerTarget;
+    CC_SYNTHESIZE(Tower*, _towerTarget,TowerTarget);
     static int less(const CCObject* obj0, const CCObject* obj1);
 
 	void currentAnimateActionStop();

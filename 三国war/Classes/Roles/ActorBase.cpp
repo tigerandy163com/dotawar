@@ -173,7 +173,8 @@ void ActorBase::setoriginalPos(cocos2d::CCPoint var)
                //     GameRoot::shareGameRoot()->flagNewTargetPos();
             GameRoot::shareGameRoot()->getMyHero()->setAutoFight(true);
             GameRoot::shareGameRoot()->getMyHero()->moveToPositon(this->getPosition());
-     //       GameRoot::shareGameRoot()->getMyHero()->fire();
+            GameRoot::shareGameRoot()->getMyHero()->unscheduleUpdate();
+            GameRoot::shareGameRoot()->getMyHero()->scheduleUpdate();
         return true;
         }
     }
@@ -222,11 +223,15 @@ void ActorBase::backToLine()
 }
 void ActorBase::StateToRun()
 {
-  //  getActorDir();
+    if (mState==Run) {
+        return;
+    }
+    getActorDir();
 	if (mActorDir == Left)
 		RunAnimateAction_RepeatForever(_action_run);
 	else
 		RunAnimateAction_RepeatForever(_action_run_flip);
+    mState = Run;
 }
 
 void ActorBase::StateToAttack()
@@ -249,24 +254,27 @@ void ActorBase::StateToDead()
 
 void ActorBase::StateToStand()
 {
+    if (mState ==Stand) {
+        return;
+    }
     getActorDir();
 	if (mActorDir == Left)
 		RunAnimateAction_RepeatForever(_action_stand);
 	else
 		RunAnimateAction_RepeatForever(_action_stand_flip);
+    mState = Stand;
 }
 
 void ActorBase::currentAnimateActionStop()
 {
-    
 	if (_currentAnimateAction != NULL)
 		_sprite->stopAction(_currentAnimateAction);
     this->stopAllActions();
-    
 }
 
 void ActorBase::RunAnimateAction_RepeatForever(CCAnimate* action)
 {
+
 	currentAnimateActionStop();
 	_currentAnimateAction = _sprite-> runAction(CCRepeatForever::create(action));
 }
@@ -499,8 +507,11 @@ void ActorBase::moveToPositon(cocos2d::CCPoint pos)
     float dis = ccpDistance(this->getPosition(), pos);
     float time = dis/mActorData->getspeed();
     CCMoveTo *move = CCMoveTo::create(time, pos);
+    unschedule(schedule_selector(ActorBase::fire));
+    StateToStand();
      StateToRun();
-    this->runAction(CCSequence::create(move,CCCallFunc::create(this, callfunc_selector(ActorBase::comeInHome)),NULL));
+    
+    this->runAction(CCSequence::create(move,CCCallFunc::create(this, callfunc_selector(ActorBase::StateToStand)),NULL));
 }
 void ActorBase::comeInHome()
 {
@@ -530,6 +541,7 @@ void ActorBase::moveToTarget()
     }
 }
 void ActorBase::startAttack(){
+    mState = Stand;
     int val = mActorData->getdamage();
     //碰撞检测
     CCRect targetRect =CCRectMake(0, 0, 0, 0);
@@ -567,15 +579,23 @@ void ActorBase::startAttack(){
    _target ->attackedByEnemy(val, false);
     if(_towerTarget)
         _towerTarget->attackedByEnemy(val, false);
+    }else{
+        unschedule(schedule_selector(ActorBase::fire));
+        unscheduleUpdate();
+        scheduleUpdate();
     }
  }
 void ActorBase::fire(){
     setAutoFight(true);
     getActorDir();
+    if (mState==Attack) {
+        return;
+    }
+    mState = Attack;
     if (mActorDir == Left)
     RunAnimateAction_once(_action_attack,callfunc_selector(ActorBase::startAttack));
     else
-         RunAnimateAction_once(_action_attack_flip,callfunc_selector(ActorBase::startAttack));
+    RunAnimateAction_once(_action_attack_flip,callfunc_selector(ActorBase::startAttack));
 }
 
 void ActorBase::attackedByEnemy(int damageval,bool isBoom)
@@ -647,13 +667,14 @@ void ActorBase:: update(float dt){
         YY=_towerTarget->getPositionY()-this->getPositionY();
     if (actorRect.intersectsRect(targetRect) &&abs(YY)<=30) {
         {
-            //    this->unscheduleUpdate();
+                this->unscheduleUpdate();
                 this->StateToStand();
                 //遭遇敌人，在攻击范围内，开始攻击
-                schedule( schedule_selector(ActorBase::fire), 1.0f);
+                schedule( schedule_selector(ActorBase::fire), 2.0f);
         }
     }else
     {
+        StateToRun();
         // 跑向敌人，跟踪算法请参考： http://blog.csdn.net/looffer/article/details/8846159
         CCPoint targetPos;
         if (_target) {
