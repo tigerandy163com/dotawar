@@ -27,16 +27,25 @@ public:
     void soldier4_Select(CCNode *pSender);
     void click_attack(CCNode *pSender);
     void click_addSoldier(CCNode *pSender);
+    
     void giveMeALife();
     void countDown();
     void hidenReLive();
     void showReLive();
+    
+    void click_BackpackBtn(CCNode *pSender);
+     void click_FriendBtn(CCNode *pSender);
+     void click_ChallengeBtn(CCNode *pSender);
+     void click_MarketBtn(CCNode *pSender);
     string selectID;
     ActorPro selectPro;
     CCLabelTTF* timerLab;
     CCSprite* selectFlag;
     CCLayer* bottomLayer;
+    CCLayer* heroBottomLayer;
     int count;
+    void initBottomLayer();
+    void initHeroBottomLayer();
     void showBottomMenu();
      void unShowBottomMenu();
     void addLeftHead(const  char* name);

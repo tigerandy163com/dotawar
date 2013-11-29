@@ -170,11 +170,10 @@ bool SceneGame:: ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent
     if (!GameRoot::shareGameRoot()->gethasStart()) {
         return false;
     }
-    GameHud::shareGameHud()->setHeroSel(true);
-    if (GameHud::shareGameHud()->isShowing) {
-        GameHud::shareGameHud()->unShowBottomMenu();
-        return false;
-    }
+
+    GameHud::shareGameHud()->unShowBottomMenu();
+       
+    
     CCPoint touchLocation = this->convertTouchToNodeSpace(pTouch);
     if (GameRoot::shareGameRoot()->getLimitRect().containsPoint(touchLocation)) {
         if (!GameRoot::shareGameRoot()->getMyHero()->getISDEAD()) {

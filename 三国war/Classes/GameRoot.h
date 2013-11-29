@@ -8,6 +8,8 @@ using namespace cocos2d;
 #include "SceneSelect.h"
 #include "SceneGame.h"
 #include "SceneOver.h"
+#include "LoadingLayer.h"
+
 #define GameNodePority 2
 #define TowerNodePority 1
 #define  ActorNodePority 1
@@ -20,11 +22,13 @@ public :
     ~GameRoot();
     virtual bool init();
     static GameRoot* shareGameRoot();
-	void InitializeResource();
+
+    LoadingLayer* getSceneLoading();
 	SceneStart* getSceneStart();
 	SceneSelect* getSceneSelect();
 	SceneGame* getSceneGame();
 	SceneOver* getSceneOver();
+  
     bool resetSceneGame();
     void addSpriteTag();
     void startGame();

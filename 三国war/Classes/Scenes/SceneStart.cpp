@@ -75,7 +75,9 @@ bool SceneStart::init()
 }
 void SceneStart::click_start(CCObject* pSender)
 {
-	CCScene* tmpScene = CCTransitionFade::create(0.5f, (CCScene*)GameRoot::shareGameRoot()-> getSceneSelect());
+    CCScene* pScene = CCScene::create();
+    pScene->addChild(GameRoot::shareGameRoot()-> getSceneSelect());
+	CCScene* tmpScene = CCTransitionFade::create(0.5f, pScene);
 	CCDirector::sharedDirector()->pushScene(tmpScene);
 }
 

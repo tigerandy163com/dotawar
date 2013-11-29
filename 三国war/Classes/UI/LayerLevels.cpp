@@ -32,7 +32,9 @@ LayerLevels::LayerLevels()
 void LayerLevels::click_level(CCObject *pSender)
 {
     GameRoot::shareGameRoot()->resetSceneGame();
-	CCDirector::sharedDirector()->pushScene((CCScene*)GameRoot::shareGameRoot()-> getSceneGame());
+    CCScene* pScene = CCScene::create();
+    pScene->addChild(GameRoot::shareGameRoot()-> getSceneGame());
+	CCDirector::sharedDirector()->pushScene(pScene);
 }
 
 void LayerLevels::Show()

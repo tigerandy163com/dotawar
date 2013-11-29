@@ -19,6 +19,7 @@ The reason to implement with private inheritance is to hide some interface detai
 class  AppDelegate : private cocos2d::CCApplication
 {
 public:
+     
     AppDelegate();
     virtual ~AppDelegate();
 

@@ -5,9 +5,11 @@ static SceneStart* _SceneStart = NULL;
  static SceneSelect* _SceneSelect = NULL;
 static SceneGame* _SceneGame = NULL;
 static SceneOver* _SceneOver = NULL;
+static LoadingLayer* _SceneLoading = NULL;
 float ScaleX =0;
 float ScaleY = 0;
 GameRoot::~GameRoot(){
+    CC_SAFE_RELEASE_NULL(_SceneLoading);
     CC_SAFE_RELEASE_NULL(_SceneStart);
     CC_SAFE_RELEASE_NULL(_SceneGame);
     CC_SAFE_RELEASE_NULL(_SceneOver);
@@ -29,7 +31,7 @@ GameRoot* GameRoot::shareGameRoot()
                return NULL;
        }
         _shareGameRoot->retain();
-        _shareGameRoot->InitializeResource();
+        
     }
     return _shareGameRoot;
 }
@@ -37,8 +39,6 @@ bool GameRoot::init()
 {
     bool bRet = false;
     do {
-  
-        InitializeResource();
         _actorArrL = CCArray::create();
         _actorArrL->retain();
         _actorArrR = CCArray::create();
@@ -53,14 +53,7 @@ bool GameRoot::init()
     } while (0);
     return bRet;
 }
-void GameRoot::InitializeResource()
-{
-	CCSpriteFrameCache* cache = 
-			CCSpriteFrameCache::sharedSpriteFrameCache();
-	cache->addSpriteFramesWithFile("GameUI01.plist", "GameUI01.png");
-	cache->addSpriteFramesWithFile("GameUI02.plist", "GameUI02.png");
-	cache->addSpriteFramesWithFile("ActorsPack1.plist", "ActorsPack1.png");
-}
+
 void  GameRoot::addSpriteTag()
 {
     _spriteTag++;
@@ -116,10 +109,18 @@ int GameRoot::getLiveTowers(int var)
     }
     return count;
 }
+LoadingLayer* GameRoot::getSceneLoading()
+{
+    if (_SceneLoading==NULL) {
+        _SceneLoading = LoadingLayer::create();
+        _SceneLoading->retain();
+    }
+    return _SceneLoading;
+}
 SceneStart* GameRoot::getSceneStart()
 {
 	if (_SceneStart == NULL){
-		_SceneStart =(SceneStart*)SceneStart::Scene();
+		_SceneStart =SceneStart::create();
         _SceneStart->retain();
     }
 	return _SceneStart;
@@ -128,7 +129,7 @@ SceneStart* GameRoot::getSceneStart()
 SceneSelect* GameRoot::getSceneSelect()
 {
 	if (_SceneSelect == NULL){
-		_SceneSelect = (SceneSelect*)SceneSelect::Scene();
+		_SceneSelect = SceneSelect::create();
         _SceneSelect->retain();
     }
 	return _SceneSelect;
@@ -137,7 +138,7 @@ SceneSelect* GameRoot::getSceneSelect()
 SceneGame* GameRoot::getSceneGame()
 {
 	if (_SceneGame == NULL){
-		_SceneGame = (SceneGame*) SceneGame::Scene();
+		_SceneGame = SceneGame::create();
         _SceneGame->retain();
        
 
@@ -155,7 +156,7 @@ bool GameRoot:: resetSceneGame()
 SceneOver* GameRoot::getSceneOver()
 {
 	if (_SceneOver == NULL){
-		_SceneOver = (SceneOver*) SceneOver::Scene();
+		_SceneOver = SceneOver::create();
         _SceneOver->retain();
     }
 	return _SceneOver;
