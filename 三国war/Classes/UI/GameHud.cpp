@@ -314,11 +314,11 @@ void GameHud::click_BackpackBtn(CCNode *pSender)
 {
     CCMenu* menu = (CCMenu*)heroBottomLayer->getChildByTag(10);
     SelectMenuItem(menu, (CCMenuItem*)pSender);
-    BagLayer* baglayer = BagLayer::create();
-    baglayer->setAnchorPoint(CCPointZero);
-    baglayer->setPosition(ccp(100,100));
-
-    GameRoot::shareGameRoot()->getSceneGame()->addChild(baglayer);
+//    BagLayer* baglayer = BagLayer::create();
+//    baglayer->setAnchorPoint(CCPointZero);
+//    baglayer->setPosition(ccp(100,100));
+//
+//    GameRoot::shareGameRoot()->getSceneGame()->addChild(baglayer);
 }
 void GameHud::click_FriendBtn(CCNode *pSender)
 {
