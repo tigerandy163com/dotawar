@@ -12,7 +12,7 @@ public :
 	void Hide();
 
 private :
-	void click_level(CCObject* pSender);	
+	void click_level(CCNode* pSender);	
 	void HideAniCompleted();
 };
 

@@ -55,7 +55,7 @@ public:
     void addMask();
     bool isShowing;
     CC_SYNTHESIZE(bool, _heroSel, HeroSel);
-
+    void SelectMenuItem(CCMenu* menu,CCMenuItem* item);
 
 };
 #endif /* defined(____war__GameHud__) */

@@ -138,7 +138,7 @@ void GameHud::initHeroBottomLayer()
     item4->setScale(scalex);
     CCMenu* menu = CCMenu::create(item1,item2,item3,item4,NULL);
     menu->setPosition(ccp(180,60));
-    menu->setTag(11);
+    menu->setTag(10);
     
     heroBottomLayer->addChild(menu);
 
@@ -178,6 +178,8 @@ void GameHud::countDown()
 }
 void GameHud::soldier1_Select(CCNode *pSender){
     CCMenu* menu =(CCMenu*) bottomLayer->getChildByTag(10);
+    SelectMenuItem(menu, (CCMenuItem*)pSender);
+    
     CCPoint pos = ccpAdd(menu->getPosition(), pSender->getPosition());
     selectFlag->setPosition(pos);
     CCLabelTTF* lab =(CCLabelTTF*) bottomLayer->getChildByTag(101);
@@ -187,6 +189,7 @@ void GameHud::soldier1_Select(CCNode *pSender){
 }
 void GameHud::soldier2_Select(CCNode *pSender){
     CCMenu* menu =(CCMenu*) bottomLayer->getChildByTag(10);
+     SelectMenuItem(menu, (CCMenuItem*)pSender);
     CCPoint pos = ccpAdd(menu->getPosition(), pSender->getPosition());
     selectFlag->setPosition(pos);
     CCLabelTTF* lab =(CCLabelTTF*) bottomLayer->getChildByTag(101);
@@ -196,6 +199,7 @@ void GameHud::soldier2_Select(CCNode *pSender){
 }
 void GameHud::soldier3_Select(CCNode *pSender){
     CCMenu* menu =(CCMenu*) bottomLayer->getChildByTag(10);
+     SelectMenuItem(menu, (CCMenuItem*)pSender);
     CCPoint pos = ccpAdd(menu->getPosition(), pSender->getPosition());
     selectFlag->setPosition(pos);
     CCLabelTTF* lab =(CCLabelTTF*) bottomLayer->getChildByTag(101);
@@ -205,6 +209,7 @@ void GameHud::soldier3_Select(CCNode *pSender){
 }
 void GameHud::soldier4_Select(CCNode *pSender){
     CCMenu* menu =(CCMenu*) bottomLayer->getChildByTag(10);
+     SelectMenuItem(menu, (CCMenuItem*)pSender);
     CCPoint pos = ccpAdd(menu->getPosition(), pSender->getPosition());
     selectFlag->setPosition(pos);
     CCLabelTTF* lab =(CCLabelTTF*) bottomLayer->getChildByTag(101);
@@ -307,21 +312,38 @@ void GameHud::selEnemyHead()
 }
 void GameHud::click_BackpackBtn(CCNode *pSender)
 {
-//    BagLayer* baglayer = BagLayer::create();
-//    baglayer->setAnchorPoint(CCPointZero);
-//    baglayer->setPosition(ccp(100,100));
-//
-//    GameRoot::shareGameRoot()->getSceneGame()->addChild(baglayer);
+    CCMenu* menu = (CCMenu*)heroBottomLayer->getChildByTag(10);
+    SelectMenuItem(menu, (CCMenuItem*)pSender);
+    BagLayer* baglayer = BagLayer::create();
+    baglayer->setAnchorPoint(CCPointZero);
+    baglayer->setPosition(ccp(100,100));
+
+    GameRoot::shareGameRoot()->getSceneGame()->addChild(baglayer);
 }
 void GameHud::click_FriendBtn(CCNode *pSender)
 {
-    
+    CCMenu* menu = (CCMenu*)heroBottomLayer->getChildByTag(10);
+    SelectMenuItem(menu, (CCMenuItem*)pSender);
 }
 void GameHud::click_ChallengeBtn(CCNode *pSender)
 {
-    
+    CCMenu* menu = (CCMenu*)heroBottomLayer->getChildByTag(10);
+    SelectMenuItem(menu, (CCMenuItem*)pSender);
 }
 void GameHud::click_MarketBtn(CCNode *pSender)
 {
-    
+    CCMenu* menu = (CCMenu*)heroBottomLayer->getChildByTag(10);
+    SelectMenuItem(menu, (CCMenuItem*)pSender);
+}
+void GameHud::SelectMenuItem(cocos2d::CCMenu *menu, cocos2d::CCMenuItem *pSender)
+{
+    CCObject *item;
+	CCARRAY_FOREACH(menu->getChildren(), item)
+	{
+		CCMenuItem *menuitem = dynamic_cast<CCMenuItem *>(item);
+		menuitem->setEnabled(true);
+	}
+	CCMenuItem *sender = dynamic_cast<CCMenuItem *>(pSender);
+	sender->setEnabled(false);
+
 }

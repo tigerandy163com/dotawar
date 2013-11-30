@@ -10,6 +10,8 @@ LayerLevels::LayerLevels()
 				CCSprite::createWithSpriteFrameName("btn_level1.png"), 
 				CCSprite::createWithSpriteFrameName("btn_level2.png"), 
 				this, menu_selector(LayerLevels::click_level));
+            int tag = (j * 4 + i + 1);
+            level->setTag(tag);
 			CCMenu* menu = CCMenu::createWithItem(level);
 			menu->setPosition(CCDirector::sharedDirector()->convertToUI(
 				ccp(offset->x + 200* i, offset->y + 85 * j)));
@@ -17,7 +19,7 @@ LayerLevels::LayerLevels()
 
 
 			char str[64] = {0};
-			sprintf(str, "%d", (j * 4 + i + 1));
+			sprintf(str, "%d", tag);
 			CCMenuItem* menuitem = new CCMenuItem();
 			CCLabelTTF* text = CCLabelTTF::create(
 				str, "Arial", 22);
@@ -29,8 +31,9 @@ LayerLevels::LayerLevels()
 	}
 }
 
-void LayerLevels::click_level(CCObject *pSender)
+void LayerLevels::click_level(CCNode *pSender)
 {
+    CCLOG("%d",pSender->getTag());
     GameRoot::shareGameRoot()->resetSceneGame();
     CCScene* pScene = CCScene::create();
     pScene->addChild(GameRoot::shareGameRoot()-> getSceneGame());
