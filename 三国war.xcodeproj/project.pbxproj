@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		268ECC151849E1C20045122E /* HTabGroupLayerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 268ECC131849E1C20045122E /* HTabGroupLayerBase.cpp */; };
 		C60A8120182208CF001673B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60A811F182208CF001673B8 /* QuartzCore.framework */; };
 		C60A8122182208CF001673B8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60A8121182208CF001673B8 /* OpenGLES.framework */; };
 		C60A8124182208CF001673B8 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60A8123182208CF001673B8 /* OpenAL.framework */; };
@@ -358,6 +359,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		268ECC131849E1C20045122E /* HTabGroupLayerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HTabGroupLayerBase.cpp; path = "三国war/Classes/Roles/HTabGroupLayerBase.cpp"; sourceTree = SOURCE_ROOT; };
+		268ECC141849E1C20045122E /* HTabGroupLayerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTabGroupLayerBase.h; path = "三国war/Classes/Roles/HTabGroupLayerBase.h"; sourceTree = SOURCE_ROOT; };
 		C60A811C182208CF001673B8 /* 三国war.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "三国war.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C60A811F182208CF001673B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C60A8121182208CF001673B8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2385,6 +2388,8 @@
 				C6C86A161845F6E900F8C7B4 /* MaskLayer.h */,
 				C60A84F718220A48001673B8 /* LayerLevels.cpp */,
 				C60A84F818220A48001673B8 /* LayerLevels.h */,
+				268ECC131849E1C20045122E /* HTabGroupLayerBase.cpp */,
+				268ECC141849E1C20045122E /* HTabGroupLayerBase.h */,
 			);
 			name = UI;
 			path = Classes/UI;
@@ -2873,6 +2878,7 @@
 				C6C872101827A3C10006F14F /* CCLuaStack.cpp in Sources */,
 				C60A848B182208D6001673B8 /* cpPivotJoint.c in Sources */,
 				C60A84C6182208D6001673B8 /* HelloWorldScene.cpp in Sources */,
+				268ECC151849E1C20045122E /* HTabGroupLayerBase.cpp in Sources */,
 				C60A82C2182208D3001673B8 /* CCAnimationCache.cpp in Sources */,
 				C6C8721E1827A3C10006F14F /* tolua_push.c in Sources */,
 				C60A847F182208D6001673B8 /* cpConstraint.c in Sources */,
@@ -2986,9 +2992,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/sev/Desktop/三国war/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
-					"/Users/sev/Desktop/三国war/三国war/libs/libwebsockets/ios/lib",
-					"/Users/sev/Desktop/dotawar/三国war/libs/lua/luajit/ios",
+					"/Users/sven/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
+					"/Users/sven/Desktop/dotawar/三国war/libs/libwebsockets/ios/lib",
+					"/Users/sven/Desktop/dotawar/三国war/libs/lua/luajit/ios",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -3015,9 +3021,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/sev/Desktop/三国war/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
-					"/Users/sev/Desktop/三国war/三国war/libs/libwebsockets/ios/lib",
-					"/Users/sev/Desktop/dotawar/三国war/libs/lua/luajit/ios",
+					"/Users/sven/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
+					"/Users/sven/Desktop/dotawar/三国war/libs/libwebsockets/ios/lib",
+					"/Users/sven/Desktop/dotawar/三国war/libs/lua/luajit/ios",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
