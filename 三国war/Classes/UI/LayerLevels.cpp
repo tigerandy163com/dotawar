@@ -20,13 +20,14 @@ LayerLevels::LayerLevels()
 
 			char str[64] = {0};
 			sprintf(str, "%d", tag);
-			CCMenuItem* menuitem = new CCMenuItem();
+			CCMenuItem* menuitem = CCMenuItem::create();
 			CCLabelTTF* text = CCLabelTTF::create(
 				str, "Arial", 22);
 			
 			text->setColor(ccBLACK);
 			menuitem->addChild(text);
 			menu->addChild(menuitem);
+            
 		}
 	}
 }

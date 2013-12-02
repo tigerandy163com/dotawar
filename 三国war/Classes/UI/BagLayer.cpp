@@ -44,7 +44,7 @@ bool BagLayer::init()
        // m_ScrollView->setViewSize(CCDirector::sharedDirector()->getVisibleSize());
         this->setContentSize(CCSizeMake(ww,hh));
         this->addChild(m_ScrollView);
-        registerWithTouchDispatcher();
+   //     registerWithTouchDispatcher();
         ret = true;
     } while (0 );
     return ret;
@@ -79,6 +79,7 @@ bool BagLayer::scrollViewInitPage(cocos2d::CCNode *pScroll, cocos2d::CCNode *pPa
             {
             item = Item::Create(500169, tag, 2);
             }
+            item->retain();
             item->setAnchorPoint(ccp(0, 0));
             item->setPosition(ccp(posX, posY));
             pPage->addChild(item,2,tag);
@@ -148,11 +149,13 @@ void BagLayer::registerWithTouchDispatcher()
 {
     //使用-128和CCMenu优先级相同,并且吞掉事件true//
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, -128, true);
-    CCLayer::registerWithTouchDispatcher();
+ //   CCLayer::registerWithTouchDispatcher();
 }
 void BagLayer::nodeDidClick(CCNode* pNode,const CCPoint& clickPos)
 {
-
+    if (!this->isVisible()) {
+        return;
+    }
     CCObject* pObj = NULL;
     CCArray* pChildren = pNode->getChildren();
     

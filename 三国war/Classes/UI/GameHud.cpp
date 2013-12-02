@@ -9,9 +9,19 @@
 #include "GameHud.h"
 #include  "GameRoot.h"
 #include "MaskLayer.h"
-#include "BagLayer.h"
+
+#include "ActorBoardLayer.h"
 static GameHud* _shareHud;
 extern CCPointArray* _startPosArr;
+GameHud::GameHud()
+{
+    
+}
+GameHud::~GameHud()
+{
+    CC_SAFE_RELEASE_NULL(bottomLayer);
+    CC_SAFE_RELEASE_NULL(heroBottomLayer);
+}
 GameHud* GameHud::shareGameHud()
 {
     if (_shareHud==NULL) {
@@ -56,6 +66,7 @@ void GameHud::initBottomLayer()
 {
     CCSize winsize = CCDirector::sharedDirector()->getWinSize();
     bottomLayer = CCLayer::create();
+    bottomLayer->retain();
     bottomLayer->setPosition(0, 0);
     this->addChild(bottomLayer);
     
@@ -114,6 +125,7 @@ void GameHud::initHeroBottomLayer()
 {
     CCSize winsize = CCDirector::sharedDirector()->getWinSize();
     heroBottomLayer = CCLayer::create();
+    heroBottomLayer->retain();
     heroBottomLayer->setPosition(0, 0);
     this->addChild(heroBottomLayer);
     
@@ -314,11 +326,12 @@ void GameHud::click_BackpackBtn(CCNode *pSender)
 {
     CCMenu* menu = (CCMenu*)heroBottomLayer->getChildByTag(10);
     SelectMenuItem(menu, (CCMenuItem*)pSender);
-//    BagLayer* baglayer = BagLayer::create();
-//    baglayer->setAnchorPoint(CCPointZero);
-//    baglayer->setPosition(ccp(100,100));
-//
-//    GameRoot::shareGameRoot()->getSceneGame()->addChild(baglayer);
+    
+//    ActorBoardLayer* layer = ActorBoardLayer::create();
+//    layer->setAnchorPoint(CCPointZero);
+//    layer->setPosition(ccp(0,0));
+//    GameRoot::shareGameRoot()->getSceneGame()->addChild(layer);
+
 }
 void GameHud::click_FriendBtn(CCNode *pSender)
 {
@@ -346,4 +359,15 @@ void GameHud::SelectMenuItem(cocos2d::CCMenu *menu, cocos2d::CCMenuItem *pSender
 	CCMenuItem *sender = dynamic_cast<CCMenuItem *>(pSender);
 	sender->setEnabled(false);
 
+}
+void GameHud::enableAllHeroMenu()
+{
+    CCObject *item;
+    CCMenu* menu = (CCMenu*)heroBottomLayer->getChildByTag(10);
+	CCARRAY_FOREACH(menu->getChildren(), item)
+	{
+		CCMenuItem *menuitem = dynamic_cast<CCMenuItem *>(item);
+
+		menuitem->setEnabled(true);
+	}
 }

@@ -18,7 +18,8 @@ class GameHud:public CCLayer
 {
 public:
     virtual bool init();
-   
+    GameHud();
+    ~GameHud();
    static  GameHud* shareGameHud();
     CREATE_FUNC(GameHud);
     void soldier1_Select(CCNode *pSender);
@@ -56,6 +57,6 @@ public:
     bool isShowing;
     CC_SYNTHESIZE(bool, _heroSel, HeroSel);
     void SelectMenuItem(CCMenu* menu,CCMenuItem* item);
-
+    void enableAllHeroMenu();
 };
 #endif /* defined(____war__GameHud__) */

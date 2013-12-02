@@ -20,6 +20,7 @@ bool CCCGameScrollView::init()
 {
 	if (!CCScrollView::init())
 	{
+  //      registerWithTouchDispatcher();
 		return false;
 	}
     

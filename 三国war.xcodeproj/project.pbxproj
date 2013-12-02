@@ -354,6 +354,7 @@
 		C6CE5C6C1846F31500AC5121 /* tileMapHelp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6CE5C691846F31500AC5121 /* tileMapHelp.cpp */; };
 		C6CE5C6F184757E900AC5121 /* CCGameScrollView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6CE5C6D184757E900AC5121 /* CCGameScrollView.cpp */; };
 		C6CE5C7218475B1500AC5121 /* BagLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6CE5C7018475B1500AC5121 /* BagLayer.cpp */; };
+		C6CFE72D184C5605000E9261 /* ActorBoardLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6CFE72B184C5605000E9261 /* ActorBoardLayer.cpp */; };
 		C6D9DEFE18361C99007AC1C2 /* aim.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D9DEFC18361C99007AC1C2 /* aim.png */; };
 		C6D9DEFF18361C99007AC1C2 /* hud.png in Resources */ = {isa = PBXBuildFile; fileRef = C6D9DEFD18361C99007AC1C2 /* hud.png */; };
 /* End PBXBuildFile section */
@@ -1061,6 +1062,8 @@
 		C6CE5C6E184757E900AC5121 /* CCGameScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGameScrollView.h; sourceTree = "<group>"; };
 		C6CE5C7018475B1500AC5121 /* BagLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BagLayer.cpp; sourceTree = "<group>"; };
 		C6CE5C7118475B1500AC5121 /* BagLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BagLayer.h; sourceTree = "<group>"; };
+		C6CFE72B184C5605000E9261 /* ActorBoardLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActorBoardLayer.cpp; sourceTree = "<group>"; };
+		C6CFE72C184C5605000E9261 /* ActorBoardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActorBoardLayer.h; sourceTree = "<group>"; };
 		C6D9DEFC18361C99007AC1C2 /* aim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aim.png; path = Resources/aim.png; sourceTree = "<group>"; };
 		C6D9DEFD18361C99007AC1C2 /* hud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hud.png; path = Resources/hud.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2390,6 +2393,8 @@
 				C60A84F818220A48001673B8 /* LayerLevels.h */,
 				268ECC131849E1C20045122E /* HTabGroupLayerBase.cpp */,
 				268ECC141849E1C20045122E /* HTabGroupLayerBase.h */,
+				C6CFE72B184C5605000E9261 /* ActorBoardLayer.cpp */,
+				C6CFE72C184C5605000E9261 /* ActorBoardLayer.h */,
 			);
 			name = UI;
 			path = Classes/UI;
@@ -2870,6 +2875,7 @@
 				C60A849D182208D6001673B8 /* cpBody.c in Sources */,
 				C60A82CE182208D3001673B8 /* CCSpriteFrameCache.cpp in Sources */,
 				C60A8158182208CF001673B8 /* CCActionCamera.cpp in Sources */,
+				C6CFE72D184C5605000E9261 /* ActorBoardLayer.cpp in Sources */,
 				C60A8349182208D4001673B8 /* CDAudioManager.m in Sources */,
 				C60A83EC182208D5001673B8 /* CCEditBoxImplMac.mm in Sources */,
 				C60A821F182208D0001673B8 /* CCTransitionProgress.cpp in Sources */,
@@ -2992,9 +2998,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/sven/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
-					"/Users/sven/Desktop/dotawar/三国war/libs/libwebsockets/ios/lib",
-					"/Users/sven/Desktop/dotawar/三国war/libs/lua/luajit/ios",
+					"/Users/sev/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
+					"/Users/sev/Desktop/dotawar/三国war/libs/libwebsockets/ios/lib",
+					"/Users/sev/Desktop/dotawar/三国war/libs/lua/luajit/ios",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -3021,9 +3027,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/sven/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
-					"/Users/sven/Desktop/dotawar/三国war/libs/libwebsockets/ios/lib",
-					"/Users/sven/Desktop/dotawar/三国war/libs/lua/luajit/ios",
+					"/Users/sev/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
+					"/Users/sev/Desktop/dotawar/三国war/libs/libwebsockets/ios/lib",
+					"/Users/sev/Desktop/dotawar/三国war/libs/lua/luajit/ios",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
