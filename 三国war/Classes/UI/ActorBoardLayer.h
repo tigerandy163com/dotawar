@@ -25,9 +25,9 @@ public:
     bool init();
     
     CREATE_FUNC(ActorBoardLayer);
-    CCNode* viewTabIndex(CCNode* pTabLayer,int index);
-    bool tabViewInitPage( CCNode* pTabLayer,cocos2d::CCNode *pPage, int nPage);
-    void tabItemClick(CCNode* pTabLayer,CCNode* object);
+   virtual CCNode* viewTabIndex(CCNode* pTabLayer,int index);
+   virtual bool tabViewInitPage( CCNode* pTabLayer,cocos2d::CCNode *pPage, int nPage);
+  virtual  void tabItemClick(CCNode* pTabLayer,CCNode* object);
     void closeMe();
 private:
     HTabGroupLayerBase* m_Htab;

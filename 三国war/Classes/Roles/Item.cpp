@@ -7,7 +7,45 @@
 //
 
 #include "Item.h"
+//    获取当前时间 精确到毫秒数
 
+static inline long millisecondNow()
+
+{
+    
+    struct cc_timeval now;
+    
+    CCTime::gettimeofdayCocos2d(&now, NULL);
+    
+    return (now.tv_sec * 1000 + now.tv_usec / 1000);
+    
+}
+
+// 判断是不是 双击
+
+static inline bool isDoubleTouch(){
+    
+    static long lastTouchTime=0;
+    
+    long thisTouchTime=millisecondNow();
+    
+    if(abs(thisTouchTime-lastTouchTime)<250){
+        
+        lastTouchTime=0;
+        
+        return true;
+        
+    }
+    
+    else{
+        
+        lastTouchTime=millisecondNow();
+        
+        return false;
+        
+    }
+    
+}
 Item::Item()
 {
     
@@ -134,4 +172,128 @@ void Item::selectItem(bool var)
         
     }
 }
+bool Item::isInSprite(cocos2d::CCTouch *theTouch)
+{
+    //    返回当前触摸位置在OpenGL坐标
+    
+    CCPoint touchPoint=theTouch->getLocation();
+    
+    //    将世界坐标转换为当前父View的本地坐标系
+    
+    CCPoint reallyPoint=this->getParent()->convertToNodeSpace(touchPoint);
+    
+    //    获取当前基于父view的坐标系
+    
+    CCRect rect=this->boundingBox();
+    
+    //    CCnode->convertToNodeSpace 或者  convertToWorldSpace 是基于当前Node的  与当前Node相关
+    
+    if(rect.containsPoint(reallyPoint)){
+        return true;
+    }
+    return false;
+}
 
+void Item::checkLongPress(){
+    
+    this->unschedule(schedule_selector(Item::checkLongPress));
+    
+    if (isInTouch&&!isInMove) {
+        
+        CCLog("LONGLONG");
+//        
+//        this->setScale(2);
+//        
+//        this->setOpacity(200);
+        
+        afterLongPress=true;
+        
+    }
+    
+}
+void Item:: singleClickSprite()
+{
+    selectItem(true);
+}
+void Item:: doubleClickSprite()
+{
+    CCLog("double click");
+}
+bool Item::ccTouchBegan(CCTouch *pTouch,CCEvent *pEvent){
+    
+    if (this->isInSprite(pTouch)) {
+        isInTouch=true;
+        
+        if (isDoubleTouch()) {
+            
+            this->doubleClickSprite();
+            
+            this->touchBeginTime=millisecondNow();
+            
+        }else{
+            
+            this->singleClickSprite();
+            
+            this->touchBeginTime=millisecondNow();
+            
+            this->schedule(schedule_selector(Item::checkLongPress), 2);
+            
+        }
+
+        return true;
+        
+    }
+    
+    return false;
+}
+
+void Item::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent) {
+    
+    CCPoint deltaPoint=pTouch->getDelta();
+    
+    CCLog("x=%f,y=%f",deltaPoint.x,deltaPoint.y);
+    
+    if(fabs(deltaPoint.x)>1||fabs(deltaPoint.y)>1){
+        
+        isInMove=true;
+        
+    }
+}
+
+void Item::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {
+    
+    isInTouch=false;
+    
+    isInMove=false;
+    
+    afterLongPress=false;
+    
+    //     恢复 精灵
+    
+//    this->setScale(1);
+//    
+//    this->setPosition(orignalPoint);
+//    
+//    this->setOpacity(255);
+    
+    
+    
+}
+
+void Item::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent){
+    
+    isInTouch=false;
+    
+    isInMove=false;
+    
+    afterLongPress=false;
+    
+//    //     恢复 精灵
+//    
+//    this->setScale(1);
+//    
+//    this->setPosition(orignalPoint);
+//    
+//    m_Sprite->setOpacity(255);
+    
+}

@@ -302,7 +302,6 @@
 		C60A850018220A48001673B8 /* SceneSetting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F218220A48001673B8 /* SceneSetting.cpp */; };
 		C60A850118220A48001673B8 /* SceneStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F418220A48001673B8 /* SceneStart.cpp */; };
 		C60A850218220A48001673B8 /* LayerLevels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F718220A48001673B8 /* LayerLevels.cpp */; };
-		C65F9DBF18488080001EA815 /* 500169.png in Resources */ = {isa = PBXBuildFile; fileRef = C65F9DBA18488080001EA815 /* 500169.png */; };
 		C65F9DC018488080001EA815 /* 500173.png in Resources */ = {isa = PBXBuildFile; fileRef = C65F9DBB18488080001EA815 /* 500173.png */; };
 		C65F9DC118488080001EA815 /* 500174.png in Resources */ = {isa = PBXBuildFile; fileRef = C65F9DBC18488080001EA815 /* 500174.png */; };
 		C65F9DC218488080001EA815 /* 500175.png in Resources */ = {isa = PBXBuildFile; fileRef = C65F9DBD18488080001EA815 /* 500175.png */; };
@@ -310,6 +309,14 @@
 		C6632E43182B93DA00482106 /* actor.lua in Resources */ = {isa = PBXBuildFile; fileRef = C6632E41182B93DA00482106 /* actor.lua */; };
 		C6632E44182B93DA00482106 /* actorData.lua in Resources */ = {isa = PBXBuildFile; fileRef = C6632E42182B93DA00482106 /* actorData.lua */; };
 		C67363D018482AE200D09C2E /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67363CE18482AE200D09C2E /* Item.cpp */; };
+		C6A0231F18508D82008EB2F7 /* Player0Large.png in Resources */ = {isa = PBXBuildFile; fileRef = C6A0231E18508D82008EB2F7 /* Player0Large.png */; };
+		C6A0232618508E04008EB2F7 /* Kuzhi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6A0232018508E04008EB2F7 /* Kuzhi.jpg */; };
+		C6A0232718508E04008EB2F7 /* Maozhi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6A0232118508E04008EB2F7 /* Maozhi.jpg */; };
+		C6A0232818508E04008EB2F7 /* Shoutao.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6A0232218508E04008EB2F7 /* Shoutao.jpg */; };
+		C6A0232918508E04008EB2F7 /* Wuqi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6A0232318508E04008EB2F7 /* Wuqi.jpg */; };
+		C6A0232A18508E04008EB2F7 /* Xiezhi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6A0232418508E04008EB2F7 /* Xiezhi.jpg */; };
+		C6A0232B18508E04008EB2F7 /* Yifu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6A0232518508E04008EB2F7 /* Yifu.jpg */; };
+		C6A0232E18509024008EB2F7 /* ClothesLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6A0232C18509024008EB2F7 /* ClothesLayer.cpp */; };
 		C6B288DF183DC8E000C415F6 /* guanyu.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B288DD183DC8E000C415F6 /* guanyu.png */; };
 		C6B288E0183DC8E000C415F6 /* jiangwei.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B288DE183DC8E000C415F6 /* jiangwei.png */; };
 		C6B288E4183DDF7000C415F6 /* 关羽_dead.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B288E1183DDF7000C415F6 /* 关羽_dead.png */; };
@@ -983,7 +990,6 @@
 		C60A84F518220A48001673B8 /* SceneStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneStart.h; sourceTree = "<group>"; };
 		C60A84F718220A48001673B8 /* LayerLevels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LayerLevels.cpp; sourceTree = "<group>"; };
 		C60A84F818220A48001673B8 /* LayerLevels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerLevels.h; sourceTree = "<group>"; };
-		C65F9DBA18488080001EA815 /* 500169.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500169.png; path = Resources/500169.png; sourceTree = "<group>"; };
 		C65F9DBB18488080001EA815 /* 500173.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500173.png; path = Resources/500173.png; sourceTree = "<group>"; };
 		C65F9DBC18488080001EA815 /* 500174.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500174.png; path = Resources/500174.png; sourceTree = "<group>"; };
 		C65F9DBD18488080001EA815 /* 500175.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500175.png; path = Resources/500175.png; sourceTree = "<group>"; };
@@ -992,6 +998,15 @@
 		C6632E42182B93DA00482106 /* actorData.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = actorData.lua; sourceTree = "<group>"; };
 		C67363CE18482AE200D09C2E /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
 		C67363CF18482AE200D09C2E /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		C6A0231E18508D82008EB2F7 /* Player0Large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Player0Large.png; path = Resources/Player0Large.png; sourceTree = "<group>"; };
+		C6A0232018508E04008EB2F7 /* Kuzhi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Kuzhi.jpg; path = Resources/Kuzhi.jpg; sourceTree = "<group>"; };
+		C6A0232118508E04008EB2F7 /* Maozhi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Maozhi.jpg; path = Resources/Maozhi.jpg; sourceTree = "<group>"; };
+		C6A0232218508E04008EB2F7 /* Shoutao.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Shoutao.jpg; path = Resources/Shoutao.jpg; sourceTree = "<group>"; };
+		C6A0232318508E04008EB2F7 /* Wuqi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Wuqi.jpg; path = Resources/Wuqi.jpg; sourceTree = "<group>"; };
+		C6A0232418508E04008EB2F7 /* Xiezhi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Xiezhi.jpg; path = Resources/Xiezhi.jpg; sourceTree = "<group>"; };
+		C6A0232518508E04008EB2F7 /* Yifu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Yifu.jpg; path = Resources/Yifu.jpg; sourceTree = "<group>"; };
+		C6A0232C18509024008EB2F7 /* ClothesLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClothesLayer.cpp; sourceTree = "<group>"; };
+		C6A0232D18509024008EB2F7 /* ClothesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClothesLayer.h; sourceTree = "<group>"; };
 		C6B288DD183DC8E000C415F6 /* guanyu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guanyu.png; path = Resources/guanyu.png; sourceTree = "<group>"; };
 		C6B288DE183DC8E000C415F6 /* jiangwei.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jiangwei.png; path = Resources/jiangwei.png; sourceTree = "<group>"; };
 		C6B288E1183DDF7000C415F6 /* 关羽_dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "关羽_dead.png"; path = "Resources/行走图/关羽_dead.png"; sourceTree = "<group>"; };
@@ -1138,7 +1153,13 @@
 		C60A8130182208CF001673B8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C65F9DBA18488080001EA815 /* 500169.png */,
+				C6A0232018508E04008EB2F7 /* Kuzhi.jpg */,
+				C6A0232118508E04008EB2F7 /* Maozhi.jpg */,
+				C6A0232218508E04008EB2F7 /* Shoutao.jpg */,
+				C6A0232318508E04008EB2F7 /* Wuqi.jpg */,
+				C6A0232418508E04008EB2F7 /* Xiezhi.jpg */,
+				C6A0232518508E04008EB2F7 /* Yifu.jpg */,
+				C6A0231E18508D82008EB2F7 /* Player0Large.png */,
 				C65F9DBB18488080001EA815 /* 500173.png */,
 				C65F9DBC18488080001EA815 /* 500174.png */,
 				C65F9DBD18488080001EA815 /* 500175.png */,
@@ -2395,6 +2416,8 @@
 				268ECC141849E1C20045122E /* HTabGroupLayerBase.h */,
 				C6CFE72B184C5605000E9261 /* ActorBoardLayer.cpp */,
 				C6CFE72C184C5605000E9261 /* ActorBoardLayer.h */,
+				C6A0232C18509024008EB2F7 /* ClothesLayer.cpp */,
+				C6A0232D18509024008EB2F7 /* ClothesLayer.h */,
 			);
 			name = UI;
 			path = Classes/UI;
@@ -2529,6 +2552,7 @@
 				C60A8118182208CF001673B8 /* Sources */,
 				C60A8119182208CF001673B8 /* Frameworks */,
 				C60A811A182208CF001673B8 /* Resources */,
+				C6D4722A184D88E500391EEB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2569,10 +2593,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6A0232618508E04008EB2F7 /* Kuzhi.jpg in Resources */,
 				C6C214E3182CE02A008693B7 /* health_bar_red.png in Resources */,
 				C6C8721A1827A3C10006F14F /* CCBReaderLoad.lua in Resources */,
 				C60A8142182208CF001673B8 /* Icon.png in Resources */,
 				C65F9DC318488080001EA815 /* 500176.png in Resources */,
+				C6A0232918508E04008EB2F7 /* Wuqi.jpg in Resources */,
 				C6D9DEFF18361C99007AC1C2 /* hud.png in Resources */,
 				C60A84D7182209F3001673B8 /* ActorsPack1.plist in Resources */,
 				C6C214E2182CE02A008693B7 /* health_bar_green.png in Resources */,
@@ -2591,8 +2617,10 @@
 				C60A8138182208CF001673B8 /* HelloWorld.png in Resources */,
 				C60A813C182208CF001673B8 /* Icon-Small-50.png in Resources */,
 				C60A8146182208CF001673B8 /* iTunesArtwork in Resources */,
+				C6A0232B18508E04008EB2F7 /* Yifu.jpg in Resources */,
 				C60A84DC182209F3001673B8 /* GameUI01.plist in Resources */,
 				C65F9DC118488080001EA815 /* 500174.png in Resources */,
+				C6A0232718508E04008EB2F7 /* Maozhi.jpg in Resources */,
 				C6B288E6183DDF7000C415F6 /* 关羽.png in Resources */,
 				C60A84D8182209F3001673B8 /* ActorsPack1.png in Resources */,
 				C60A84DE182209F3001673B8 /* GameUI02.plist in Resources */,
@@ -2600,7 +2628,6 @@
 				C60A8140182208CF001673B8 /* Icon-Small@2x.png in Resources */,
 				C6C86D36182750DB0006F14F /* GameDate.plist in Resources */,
 				C60A84DD182209F3001673B8 /* GameUI01.png in Resources */,
-				C65F9DBF18488080001EA815 /* 500169.png in Resources */,
 				C6C2EB8D183A070700E7BB02 /* tower1.png in Resources */,
 				C60A84D9182209F3001673B8 /* fps_images-hd.png in Resources */,
 				C6C2EB871839DF8600E7BB02 /* select.png in Resources */,
@@ -2608,10 +2635,12 @@
 				C6C2EB92183A0B8A00E7BB02 /* bullet2.png in Resources */,
 				C6B288E4183DDF7000C415F6 /* 关羽_dead.png in Resources */,
 				C60A8136182208CF001673B8 /* Default.png in Resources */,
+				C6A0232818508E04008EB2F7 /* Shoutao.jpg in Resources */,
 				C60A84E1182209F3001673B8 /* Level0.tmx in Resources */,
 				C60A8134182208CF001673B8 /* CloseSelected.png in Resources */,
 				C60A84DA182209F3001673B8 /* fps_images-ipadhd.png in Resources */,
 				C65F9DC218488080001EA815 /* 500175.png in Resources */,
+				C6A0231F18508D82008EB2F7 /* Player0Large.png in Resources */,
 				C60A84E0182209F3001673B8 /* grass_ground.png in Resources */,
 				C60A8144182208CF001673B8 /* Icon@2x.png in Resources */,
 				C60A8359182208D4001673B8 /* project.pbxproj in Resources */,
@@ -2620,10 +2649,27 @@
 				C65F9DC018488080001EA815 /* 500173.png in Resources */,
 				C6C872191827A3C10006F14F /* AudioEngine.lua in Resources */,
 				C6C86A1F184604B700F8C7B4 /* image.png in Resources */,
+				C6A0232A18508E04008EB2F7 /* Xiezhi.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C6D4722A184D88E500391EEB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode2.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\n\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n\n/Applications/Xcode2.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\n\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\n\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C60A8118182208CF001673B8 /* Sources */ = {
@@ -2806,6 +2852,7 @@
 				C60A849B182208D6001673B8 /* cpBBTree.c in Sources */,
 				C60A83D1182208D4001673B8 /* CCControlSlider.cpp in Sources */,
 				C6C8721F1827A3C10006F14F /* tolua_to.c in Sources */,
+				C6A0232E18509024008EB2F7 /* ClothesLayer.cpp in Sources */,
 				C60A823A182208D1001673B8 /* CCParticleExamples.cpp in Sources */,
 				C60A8202182208D0001673B8 /* CCKeypadDelegate.cpp in Sources */,
 				C60A8453182208D5001673B8 /* SlotData.cpp in Sources */,
@@ -2927,7 +2974,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2949,7 +2997,7 @@
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/third_party/ios\"",
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/ios\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2959,7 +3007,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -2978,7 +3027,7 @@
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/third_party/ios\"",
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/ios\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2995,7 +3044,7 @@
 				GCC_PREFIX_HEADER = "三国war/Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "三国war/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/sev/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
@@ -3024,7 +3073,7 @@
 				GCC_PREFIX_HEADER = "三国war/Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "三国war/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/sev/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",

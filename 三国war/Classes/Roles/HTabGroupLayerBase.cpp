@@ -35,25 +35,37 @@ bool HTabGroupLayerBase::init()
     return bRet;
 }
 
-bool HTabGroupLayerBase::creatTabsWithCount(TabDelegate* pDelegate,int var)
+bool HTabGroupLayerBase::creatTabsWithCount(TabDelegate* pDelegate,int var,TabAlignDir dir,CCSize frame)
 
 {
     bool bRet = false;
     if (var>0) {
         m_count = var;
         setDelegate(pDelegate);
+        setAlignDir(dir);
+        setContentSize(frame);
+        
         for (int i = 0; i < m_count; ++i)
         {
             CCMenuItemSprite* menuItem = CCMenuItemSprite::create(CCSprite::createWithSpriteFrameName("btn_level1.png"), CCSprite::createWithSpriteFrameName("btn_level2.png"), this, menu_selector(HTabGroupLayerBase::tabItemClick));
             //menuItem->setAnchorPoint(ccp(0,0));
             CCMenu *menu = CCMenu::createWithItem(menuItem);
             menu->setAnchorPoint(ccp(0,0));
+            CCPoint pos;
+            if (m_AlignDir==AlignLeft) {
+                pos = ccp(50,150);
+            }else if (m_AlignDir==AlignRight)
+                pos = ccp(frame.width-300 ,150);
+            pos.y += 100*i;
+            
+            menu->setPosition(pos);
             menuItem->setTag(i);
             pDelegate->tabViewInitPage(this,menu, i);
             this->addChild(menu);
             
             CCNode* indexView = pDelegate->viewTabIndex(this, i);
-            indexView->setPosition(200, 100);
+        
+            indexView->setPosition(200, 0);
             this->addChild(indexView, i,i);
             
             m_IndexLayersArray->addObject(indexView);

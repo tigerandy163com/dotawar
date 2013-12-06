@@ -115,5 +115,171 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#19977;&#22269;war/Classes/UI/BagLayer.cpp"
+            timestampString = "408019516.039099"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "BagLayer::ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BagLayer::ccTouchBegan(cocos2d::CCTouch*, cocos2d::CCEvent*)"
+                  moduleName = "&#19977;&#22269;war"
+                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
+                  timestampString = "408019516.092171"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "146"
+                  endingLineNumber = "146"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "non-virtual thunk to BagLayer::ccTouchBegan(cocos2d::CCTouch*, cocos2d::CCEvent*)"
+                  moduleName = "&#19977;&#22269;war"
+                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
+                  timestampString = "408019516.092554"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "146"
+                  endingLineNumber = "146"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#19977;&#22269;war/Classes/UI/BagLayer.cpp"
+            timestampString = "408019645.239961"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "BagLayer::ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BagLayer::ccTouchMoved(cocos2d::CCTouch*, cocos2d::CCEvent*)"
+                  moduleName = "&#19977;&#22269;war"
+                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
+                  timestampString = "408019645.245008"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "non-virtual thunk to BagLayer::ccTouchMoved(cocos2d::CCTouch*, cocos2d::CCEvent*)"
+                  moduleName = "&#19977;&#22269;war"
+                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
+                  timestampString = "408019645.245371"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "non-virtual thunk to BagLayer::ccTouchMoved(cocos2d::CCTouch*, cocos2d::CCEvent*)"
+                  moduleName = "&#19977;&#22269;war"
+                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
+                  timestampString = "408019645.245667"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#19977;&#22269;war/Classes/UI/BagLayer.cpp"
+            timestampString = "408019646.37677"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "BagLayer::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BagLayer::ccTouchEnded(cocos2d::CCTouch*, cocos2d::CCEvent*)"
+                  moduleName = "&#19977;&#22269;war"
+                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
+                  timestampString = "408019646.381501"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "non-virtual thunk to BagLayer::ccTouchEnded(cocos2d::CCTouch*, cocos2d::CCEvent*)"
+                  moduleName = "&#19977;&#22269;war"
+                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
+                  timestampString = "408019646.381867"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "non-virtual thunk to BagLayer::ccTouchEnded(cocos2d::CCTouch*, cocos2d::CCEvent*)"
+                  moduleName = "&#19977;&#22269;war"
+                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
+                  timestampString = "408019646.382143"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -104,11 +104,11 @@ bool ActorBoardLayer::init()
         add->setFontSizeObj(35);
         add->setColor(ccRED);
         CCMenu *menu0 = CCMenu::createWithItem(add);
-        menu0->setPosition( winSize.width-200, 40);
+        menu0->setPosition( winSize.width-150, winSize.height-100);
         this->addChild(menu0);
         
         m_Htab = HTabGroupLayerBase::create();
-        m_Htab->creatTabsWithCount(this, 4);
+        m_Htab->creatTabsWithCount(this, 4,AlignLeft,winSize);
         m_Htab->setAnchorPoint(CCPointZero);
         m_Htab->setPosition(0, 0);
         this->addChild(m_Htab);

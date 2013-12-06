@@ -30,8 +30,13 @@ bool CCCGameScrollView::init()
 
 bool CCCGameScrollView::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
 {
-    CCPoint touchPoint = this->convertTouchToNodeSpace(pTouch);
-    if (!this->boundingBox().containsPoint(touchPoint)) {
+    CCPoint touchPoint=pTouch->getLocation();
+    
+    //    将世界坐标转换为当前父View的本地坐标系
+    
+    CCPoint reallyPoint=this->getParent()->convertToNodeSpace(touchPoint);
+    //CCPoint touchPoint = this->convertTouchToNodeSpace(pTouch);
+    if (!this->boundingBox().containsPoint(reallyPoint)) {
         return false;
     }
 	m_BeginOffset = getContentOffset();

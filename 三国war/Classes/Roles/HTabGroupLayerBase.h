@@ -21,7 +21,10 @@ public:
     virtual CCNode* viewTabIndex(CCNode* pTabLayer,int index)=0;
     virtual void tabItemClick(CCNode* pTabLayer,CCNode* object)=0;
 };
-
+typedef enum{
+    AlignLeft=0,
+    AlignRight
+}TabAlignDir ;
 class HTabGroupLayerBase:public CCLayer
 {
 public:
@@ -29,9 +32,9 @@ public:
     ~HTabGroupLayerBase();
 public:
     CREATE_FUNC(HTabGroupLayerBase);
-    
+    CC_SYNTHESIZE(TabAlignDir, m_AlignDir, AlignDir);
     bool init();
-    bool creatTabsWithCount(TabDelegate* pDelegate,int var);
+    bool creatTabsWithCount(TabDelegate* pDelegate,int var,TabAlignDir dir,CCSize frame);
 private:
     CCArray* m_TabsArray;
     CCArray* m_IndexLayersArray;

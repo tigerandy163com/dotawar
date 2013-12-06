@@ -183,7 +183,7 @@ void Tower::fire()
             bullet->setDamage(_damage);
             bullet->setSpeed(200);
             bullet->setEnemy(_enemy);
-            GameRoot::shareGameRoot()->getSceneGame()->addChild(bullet, 2);
+            GameRoot::shareGameRoot()->getSceneGame()->addChild(bullet);
         }
 
     }

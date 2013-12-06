@@ -23,6 +23,8 @@ bool BagLayer::init()
     bool ret =false;
     do {
         CC_BREAK_IF(!CCLayer::init());
+        CCSize winsize = CCDirector::sharedDirector()->getWinSize();
+      
         CCSprite* sprite = CCSprite::createWithSpriteFrameName("BagItemBgNormal");
         itemSize = sprite->boundingBox().size;
          itemSizeWithMargin = CCSizeMake((int)(itemSize.width*9/8), (int)(itemSize.height*9/8));
@@ -43,8 +45,14 @@ bool BagLayer::init()
         //视口的尺寸(一般是屏幕的尺寸)
        // m_ScrollView->setViewSize(CCDirector::sharedDirector()->getVisibleSize());
         this->setContentSize(CCSizeMake(ww,hh));
-        this->addChild(m_ScrollView);
+  //      this->addChild(m_ScrollView);
    //     registerWithTouchDispatcher();
+        m_Htab = HTabGroupLayerBase::create();
+        m_Htab->creatTabsWithCount(this, 4,AlignRight,winsize);
+        m_Htab->setAnchorPoint(CCPointZero);
+        m_Htab->setPosition(0, 0);
+        this->addChild(m_Htab);
+        
         ret = true;
     } while (0 );
     return ret;
@@ -77,7 +85,7 @@ bool BagLayer::scrollViewInitPage(cocos2d::CCNode *pScroll, cocos2d::CCNode *pPa
                 item = Item::Create(-1, tag, 2);
             }else
             {
-            item = Item::Create(500169, tag, 2);
+            item = Item::Create(500173, tag, 2);
             }
             item->retain();
             item->setAnchorPoint(ccp(0, 0));
@@ -150,6 +158,53 @@ void BagLayer::registerWithTouchDispatcher()
     //使用-128和CCMenu优先级相同,并且吞掉事件true//
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, -128, true);
  //   CCLayer::registerWithTouchDispatcher();
+}
+ CCNode* BagLayer::viewTabIndex(CCNode* pTabLayer,int index)
+{
+    CCNode* node = NULL;
+    switch (index) {
+        case 0:
+            node = m_ScrollView;
+            break;
+        case 1:
+            node = CCLabelTTF::create(
+                                      "01 page", "Arial", 22);
+            break;
+        case 2:
+            node = CCLabelTTF::create(
+                                      "02 page", "Arial", 22);
+            break;
+        case 3:
+            node = CCLabelTTF::create(
+                                      "03 page", "Arial", 22);
+            break;
+        default:
+            node = CCLabelTTF::create(
+                                      "no page", "Arial", 22);
+            break;
+    }
+    return node;
+}
+ bool BagLayer::tabViewInitPage( CCNode* pTabLayer,cocos2d::CCNode *pPage, int nPage)
+{
+    char str[64] = {0};
+    sprintf(str, "%d", nPage);
+    CCMenuItem* menuitem = CCMenuItem::create();
+    CCLabelTTF* text = CCLabelTTF::create(
+                                          str, "Arial", 22);
+    text->setAnchorPoint(CCPointZero);
+    text->setColor(ccBLACK);
+    menuitem->addChild(text);
+    pPage->addChild(menuitem);
+//    CCPoint pos = ccp(50,150);
+//    pos.y += 100*nPage;
+//    
+//    pPage->setPosition(pos);
+    return true;
+}
+  void BagLayer::tabItemClick(CCNode* pTabLayer,CCNode* object)
+{
+    
 }
 void BagLayer::nodeDidClick(CCNode* pNode,const CCPoint& clickPos)
 {

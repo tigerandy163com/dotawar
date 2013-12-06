@@ -46,7 +46,7 @@ bool GameHud::init()
         CCMenu* menu1 = CCMenu::createWithItem(btn_attack);
         menu1->setPosition(ccp(winsize.width/2,winsize.height-70));
         this->addChild(menu1);
-        
+        menu1->setTag(31);
         initBottomLayer();
         initHeroBottomLayer();
         timerLab = CCLabelTTF::create("3", "Arial-BoldMT", 50);
@@ -234,6 +234,7 @@ void GameHud::click_attack(CCNode *pSender)
     if (!GameRoot::shareGameRoot()->gethasStart()) {
         GameRoot::shareGameRoot()->startGame();
         GameRoot::shareGameRoot()->sethasStart(true);
+        this->getChildByTag(31)->setVisible(false);
     }
 
     
@@ -330,7 +331,7 @@ void GameHud::click_BackpackBtn(CCNode *pSender)
 //    ActorBoardLayer* layer = ActorBoardLayer::create();
 //    layer->setAnchorPoint(CCPointZero);
 //    layer->setPosition(ccp(0,0));
-//    GameRoot::shareGameRoot()->getSceneGame()->addChild(layer);
+//    GameRoot::shareGameRoot()->getSceneGame()->addChild(layer,2);
 
 }
 void GameHud::click_FriendBtn(CCNode *pSender)

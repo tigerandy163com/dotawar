@@ -12,8 +12,9 @@
 #include <iostream>
 #include "cocos2d.h"
 #include "CCGameScrollView.h"
+#include "HTabGroupLayerBase.h"
 USING_NS_CC;
-class BagLayer:public CCCGameScrollViewDelegate,public CCLayer
+class BagLayer:public CCCGameScrollViewDelegate,public CCLayer,public TabDelegate
 {
 public:
     BagLayer();
@@ -26,9 +27,14 @@ public:
     
     virtual void scrollViewDidScroll(CCScrollView* view);
     virtual void scrollViewDidZoom(CCScrollView* view);
+    
+    virtual CCNode* viewTabIndex(CCNode* pTabLayer,int index);
+    virtual bool tabViewInitPage( CCNode* pTabLayer,cocos2d::CCNode *pPage, int nPage);
+    virtual  void tabItemClick(CCNode* pTabLayer,CCNode* object);
     CREATE_FUNC(BagLayer);
     void ItemDidClick(CCNode* pNode);
 private:
+    HTabGroupLayerBase* m_Htab;
     CCCGameScrollView* m_ScrollView;
     CCSize itemSize;
     CCSize itemSizeWithMargin;
