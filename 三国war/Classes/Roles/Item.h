@@ -12,7 +12,7 @@
 #include <iostream>
 #include "cocos2d.h"
 USING_NS_CC;
-class Item:public CCNode,public cocos2d::CCTouchDelegate
+class Item:public CCNode
 {
 public:
     Item();
@@ -29,14 +29,11 @@ public:
     CC_SYNTHESIZE(int, m_Cost, Cost);
     CC_SYNTHESIZE(int, m_Count, Count);
     void selectItem(bool var);
-    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
-    virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent) ;
-    virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
-    virtual void ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent);
-     virtual void registerWithTouchDispatcher()
-    {
-            CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, -128, true);
-    }
+     bool itemTouchBegan();
+     void itemTouchMoved() ;
+     void itemTouchEnded();
+     void itemTouchCancelled();
+
     void checkLongPress();
     void singleClickSprite();
     void doubleClickSprite();
@@ -49,6 +46,7 @@ protected:
     bool isInTouch;
     bool isInMove;
     bool afterLongPress;
+    bool afterDoublePress;
     long touchBeginTime;
     CCPoint orignalPoint;
 };

@@ -28,16 +28,15 @@ static inline bool isDoubleTouch(){
     static long lastTouchTime=0;
     
     long thisTouchTime=millisecondNow();
-    
-    if(abs(thisTouchTime-lastTouchTime)<250){
+    long ti = abs(thisTouchTime-lastTouchTime);
+
+    if(ti<250){
         
         lastTouchTime=0;
         
         return true;
         
-    }
-    
-    else{
+    }else{
         
         lastTouchTime=millisecondNow();
         
@@ -70,6 +69,7 @@ Item* Item::Create(int id_var, int lev_var, int count_var)
     Item* item = new Item();
     if (item && item->initWithItemID(id_var, lev_var, count_var)) {
         item->autorelease();
+        
         return item;
     }else
     {
@@ -147,6 +147,7 @@ bool Item::initWithItemID(int id_var,int lev_var,int count_var)
 }
 void Item::selectItem(bool var)
 {
+     CCLOG("item single:%d",getTag());
     if (m_ID==-1) {
         return;
     }
@@ -200,7 +201,7 @@ void Item::checkLongPress(){
     
     if (isInTouch&&!isInMove) {
         
-        CCLog("LONGLONG");
+        CCLog("LONGLONG %d",getTag());
 //        
 //        this->setScale(2);
 //        
@@ -213,26 +214,32 @@ void Item::checkLongPress(){
 }
 void Item:: singleClickSprite()
 {
+    if (!afterDoublePress&&!afterLongPress)
+    {
     selectItem(true);
+        afterDoublePress = false;
+        afterLongPress = false;
+    }
 }
 void Item:: doubleClickSprite()
 {
-    CCLog("double click");
-}
-bool Item::ccTouchBegan(CCTouch *pTouch,CCEvent *pEvent){
     
-    if (this->isInSprite(pTouch)) {
+    CCLog("double click %d",getTag());
+}
+bool Item::itemTouchBegan(){
+    // CCLOG("item touch began:%d",getTag());
+    {
         isInTouch=true;
         
         if (isDoubleTouch()) {
-            
+            afterDoublePress = true;
             this->doubleClickSprite();
             
             this->touchBeginTime=millisecondNow();
             
         }else{
             
-            this->singleClickSprite();
+            //this->singleClickSprite();
             
             this->touchBeginTime=millisecondNow();
             
@@ -247,26 +254,30 @@ bool Item::ccTouchBegan(CCTouch *pTouch,CCEvent *pEvent){
     return false;
 }
 
-void Item::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent) {
+void Item::itemTouchMoved() {
     
-    CCPoint deltaPoint=pTouch->getDelta();
-    
-    CCLog("x=%f,y=%f",deltaPoint.x,deltaPoint.y);
-    
-    if(fabs(deltaPoint.x)>1||fabs(deltaPoint.y)>1){
-        
-        isInMove=true;
-        
-    }
+//    CCPoint deltaPoint=pTouch->getDelta();
+//    
+//    CCLog("x=%f,y=%f",deltaPoint.x,deltaPoint.y);
+//    
+//    if(fabs(deltaPoint.x)>1||fabs(deltaPoint.y)>1){
+//        
+//        isInMove=true;
+//        
+//    }
+    isInMove=true;
+    afterLongPress=false;
+    afterDoublePress = false;
 }
 
-void Item::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {
+void Item::itemTouchEnded() {
     
     isInTouch=false;
     
     isInMove=false;
     
     afterLongPress=false;
+   
     
     //     恢复 精灵
     
@@ -280,13 +291,14 @@ void Item::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {
     
 }
 
-void Item::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent){
+void Item::itemTouchCancelled(){
     
     isInTouch=false;
     
     isInMove=false;
     
     afterLongPress=false;
+    
     
 //    //     恢复 精灵
 //    

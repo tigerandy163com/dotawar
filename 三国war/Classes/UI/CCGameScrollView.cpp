@@ -39,14 +39,57 @@ bool CCCGameScrollView::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
     if (!this->boundingBox().containsPoint(reallyPoint)) {
         return false;
     }
+    
 	m_BeginOffset = getContentOffset();
-   
+    CCPoint m_EndOffset = getContentOffset();
+    
+	//点击Page的功能
+//	if (m_BeginOffset.equals(m_EndOffset))
+	{
+		int nPage = -1;
+		if (m_eDirection == kCCScrollViewDirectionHorizontal)
+		{
+			nPage = abs(m_EndOffset.x / (int)m_CellSize.width);
+		}
+		else
+		{
+			nPage = abs(m_EndOffset.y / (int)m_CellSize.height);
+		}
+		CCCGameScrollViewDelegate *pDele = (CCCGameScrollViewDelegate *)m_pDelegate;
+		CCNode *pPgae = m_pContainer->getChildByTag(nPage);
+		CCRect rcContent;
+		rcContent.origin = pPgae->getPosition();
+        
+		rcContent.size = pPgae->getContentSize();
+        //		rcContent.origin.x -= rcContent.size.width / 2;
+        //	rcContent.origin.y -= rcContent.size.height / 2;
+        CCPoint pos1 = this->convertTouchToNodeSpace(pTouch);
+		CCPoint pos =pos1;
+		if (m_eDirection == kCCScrollViewDirectionHorizontal)
+		{
+			pos.x += nPage * m_CellSize.width;
+		}
+		else
+		{
+			pos.y -= nPage * m_CellSize.height;
+		}
+        
+		if (rcContent.containsPoint(pos))
+		{
+            pDele->scrollViewTouchBegan(pPgae,pos1);
+            
+		}
+	
+	}
     return  CCScrollView::ccTouchBegan(pTouch, pEvent);;
 }
 
 void CCCGameScrollView::ccTouchMoved( CCTouch *pTouch, CCEvent *pEvent )
 {
 	CCScrollView::ccTouchMoved(pTouch, pEvent);
+    CCCGameScrollViewDelegate *pDele = (CCCGameScrollViewDelegate *)m_pDelegate;
+    
+    pDele->scrollViewTouchMoved(this, CCPointZero);
 }
 
 void CCCGameScrollView::ccTouchEnded( CCTouch *pTouch, CCEvent *pEvent )
@@ -91,6 +134,8 @@ void CCCGameScrollView::ccTouchEnded( CCTouch *pTouch, CCEvent *pEvent )
 		if (rcContent.containsPoint(pos))
 		{
 			pDele->scrollViewClick(m_EndOffset, touchPoint, pPgae, nPage);
+            pDele->scrollViewTouchEnded(this,touchPoint);
+            
 		}
 		return ;
 	}
@@ -102,7 +147,8 @@ void CCCGameScrollView::ccTouchEnded( CCTouch *pTouch, CCEvent *pEvent )
 void CCCGameScrollView::ccTouchCancelled( CCTouch *pTouch, CCEvent *pEvent )
 {
 	CCScrollView::ccTouchCancelled(pTouch, pEvent);
-
+//    CCCGameScrollViewDelegate *pDele = (CCCGameScrollViewDelegate *)m_pDelegate;
+//    pDele->scrollViewTouchCancelled(this, CCPointZero);
 	CCPoint m_EndOffset = getContentOffset();
 	adjustScrollView(m_BeginOffset, m_EndOffset);
 }

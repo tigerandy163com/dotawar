@@ -52,7 +52,7 @@ bool BagLayer::init()
         m_Htab->setAnchorPoint(CCPointZero);
         m_Htab->setPosition(0, 0);
         this->addChild(m_Htab);
-        
+        selectItem = NULL;
         ret = true;
     } while (0 );
     return ret;
@@ -104,9 +104,9 @@ bool BagLayer::scrollViewInitPage(cocos2d::CCNode *pScroll, cocos2d::CCNode *pPa
 	return true;
 }
 
- void BagLayer::scrollViewClick(const cocos2d::CCPoint &oOffset, const cocos2d::CCPoint &oPoint , cocos2d::CCNode *pPage, int nPage )
+ void BagLayer::scrollViewClick(const cocos2d::CCPoint &oOffset, const cocos2d::CCPoint &oPoint , cocos2d::CCNode *pScroll, int nPage )
 {
-    nodeDidClick(pPage, oPoint);
+    nodeDidClick(pScroll, oPoint);
 //    switch(nPage)
 //	{
 //        case 0:
@@ -138,9 +138,8 @@ bool BagLayer::scrollViewInitPage(cocos2d::CCNode *pScroll, cocos2d::CCNode *pPa
 }
 void BagLayer::ItemDidClick(cocos2d::CCNode *clickNode)
 {
-    CCLog("item:::%d",clickNode->getTag());
     Item* selItem = (Item*)clickNode;
-    selItem->selectItem(true);
+    selItem->singleClickSprite();
 }
 bool BagLayer::ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent){
     return true;
@@ -206,27 +205,69 @@ void BagLayer::registerWithTouchDispatcher()
 {
     
 }
+ void BagLayer::scrollViewTouchBegan(cocos2d::CCNode *pScroll,CCPoint pos)
+{
+
+    selectItem = (Item*)getTouchItem(pScroll, pos);
+    if (selectItem) {
+       
+        selectItem->itemTouchBegan();
+    }
+}
+
+ void BagLayer::scrollViewTouchMoved(cocos2d::CCNode *pScroll,CCPoint pos )
+{
+
+    if (selectItem) {
+        selectItem->itemTouchMoved();
+    }
+}
+
+ void BagLayer::scrollViewTouchEnded(cocos2d::CCNode *pScroll,CCPoint pos)
+{
+
+    if (selectItem) {
+        selectItem->itemTouchEnded();
+    }
+}
+
+ void BagLayer::scrollViewTouchCancelled(cocos2d::CCNode *pScroll, CCPoint pos)
+{
+
+    if (selectItem) {
+        selectItem->itemTouchCancelled();
+    }
+}
 void BagLayer::nodeDidClick(CCNode* pNode,const CCPoint& clickPos)
 {
     if (!this->isVisible()) {
         return;
     }
+    CCNode* node = getTouchItem(pNode, clickPos);
+    if (node) {
+         ItemDidClick(node);
+    }
+}
+CCNode* BagLayer::getTouchItem(CCNode* ParentNode,const CCPoint& clickPos)
+{
+
     CCObject* pObj = NULL;
-    CCArray* pChildren = pNode->getChildren();
-    
+    CCArray* pChildren = ParentNode->getChildren();
+    CCNode* rNode = nil;
     CCARRAY_FOREACH(pChildren, pObj)
     {
-        Item* pChild = (Item*)pObj;
+        CCNode* pChild = (CCNode*)pObj;
         if(pChild)
         {
             CCRect fra = pChild->boundingBox();
             if (fra.containsPoint(clickPos))
             {
-              {
-                    ItemDidClick(pChild);
-              }
-                return;
+                {
+                    rNode = pChild;
+                }
+                break;
             }
         }
     }
+    return rNode;
 }

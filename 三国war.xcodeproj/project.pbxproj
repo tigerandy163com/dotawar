@@ -3047,9 +3047,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/sev/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
-					"/Users/sev/Desktop/dotawar/三国war/libs/libwebsockets/ios/lib",
-					"/Users/sev/Desktop/dotawar/三国war/libs/lua/luajit/ios",
+					"$(SRCROOT)/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
+					"$(SRCROOT)/三国war/libs/libwebsockets/ios/lib",
+					"$(SRCROOT)/三国war/libs/lua/luajit/ios",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -3076,9 +3076,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/sev/Desktop/dotawar/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
-					"/Users/sev/Desktop/dotawar/三国war/libs/libwebsockets/ios/lib",
-					"/Users/sev/Desktop/dotawar/三国war/libs/lua/luajit/ios",
+					"$(SRCROOT)/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
+					"$(SRCROOT)/三国war/libs/libwebsockets/ios/lib",
+					"$(SRCROOT)/三国war/libs/lua/luajit/ios",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",

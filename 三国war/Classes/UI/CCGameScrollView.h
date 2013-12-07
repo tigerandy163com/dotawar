@@ -18,6 +18,15 @@ public:
 	virtual bool scrollViewInitPage(cocos2d::CCNode *pScroll, cocos2d::CCNode *pPage, int nPage) = 0;
 	virtual void scrollViewClick(const cocos2d::CCPoint &oOffset, const cocos2d::CCPoint &oPoint , cocos2d::CCNode *pPage, int nPage ) = 0;
 	virtual void scrollViewScrollEnd(cocos2d::CCNode *pPage, int nPage) = 0;
+    
+    virtual void scrollViewTouchBegan(cocos2d::CCNode *pScroll,CCPoint pos )=0;
+    
+	virtual void scrollViewTouchMoved( cocos2d::CCNode *pScroll,CCPoint pos)=0;
+    
+	virtual void scrollViewTouchEnded( cocos2d::CCNode *pScroll,CCPoint pos)=0;
+    
+	virtual void scrollViewTouchCancelled(cocos2d::CCNode *pScroll,CCPoint pos)=0;
+    
 };
 
 class CCCGameScrollView
