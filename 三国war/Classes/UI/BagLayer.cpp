@@ -42,6 +42,7 @@ bool BagLayer::init()
         //一般是原点
         m_ScrollView->setPosition(ccp(0, 0));
         m_ScrollView->setAnchorPoint(CCPointZero);
+        m_ScrollView->retain();
         //视口的尺寸(一般是屏幕的尺寸)
        // m_ScrollView->setViewSize(CCDirector::sharedDirector()->getVisibleSize());
         this->setContentSize(CCSizeMake(ww,hh));
@@ -51,6 +52,7 @@ bool BagLayer::init()
         m_Htab->creatTabsWithCount(this, 4,AlignRight,winsize);
         m_Htab->setAnchorPoint(CCPointZero);
         m_Htab->setPosition(0, 0);
+        m_Htab->retain();
         this->addChild(m_Htab);
         selectItem = NULL;
         ret = true;
@@ -245,7 +247,7 @@ void BagLayer::nodeDidClick(CCNode* pNode,const CCPoint& clickPos)
     }
     CCNode* node = getTouchItem(pNode, clickPos);
     if (node) {
-         ItemDidClick(node);
+   //      ItemDidClick(node);
     }
 }
 CCNode* BagLayer::getTouchItem(CCNode* ParentNode,const CCPoint& clickPos)

@@ -14,7 +14,10 @@ bool ClothesLayer::init()
     bool bRet = false;
     do {
         CC_BREAK_IF(!CCLayer::init());
-         
+        CCSprite* bgsprite = CCSprite::create("Player0Large.png");
+        bgsprite->setPosition(CCPointZero);
+        addChild(bgsprite);
+        
         
         bRet = true;
     } while (0);

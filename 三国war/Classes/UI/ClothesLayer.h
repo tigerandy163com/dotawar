@@ -14,6 +14,7 @@
 #include "cocos-ext.h"
 USING_NS_CC;
 USING_NS_CC_EXT;
+class Item;
 typedef enum
 {
     MaoZi =0,
@@ -28,11 +29,11 @@ class ClothesLayer:public CCLayer
 public:
     virtual bool init();
     CREATE_FUNC(ClothesLayer);
-    CCMenu* m_MaoZiBtn;
-    CCControlButton* m_YiFuBtn;
-    CCControlButton* m_XieZiBtn;
-    CCControlButton* m_ShouTaoBtn;
-    CCControlButton* m_KuZiBtn;
-    CCControlButton* m_YaoDaiBtn;
+    Item* m_MaoZiBtn;
+    Item* m_YiFuBtn;
+    Item* m_XieZiBtn;
+    Item* m_ShouTaoBtn;
+    Item* m_KuZiBtn;
+    Item* m_YaoDaiBtn;
 };
 #endif /* defined(____war__ClothesLayer__) */

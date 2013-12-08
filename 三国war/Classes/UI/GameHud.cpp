@@ -328,10 +328,10 @@ void GameHud::click_BackpackBtn(CCNode *pSender)
     CCMenu* menu = (CCMenu*)heroBottomLayer->getChildByTag(10);
     SelectMenuItem(menu, (CCMenuItem*)pSender);
     
-//    ActorBoardLayer* layer = ActorBoardLayer::create();
-//    layer->setAnchorPoint(CCPointZero);
-//    layer->setPosition(ccp(0,0));
-//    GameRoot::shareGameRoot()->getSceneGame()->addChild(layer,2);
+    ActorBoardLayer* layer = ActorBoardLayer::create();
+    layer->setAnchorPoint(CCPointZero);
+    layer->setPosition(ccp(0,0));
+    GameRoot::shareGameRoot()->getSceneGame()->addChild(layer,2);
 
 }
 void GameHud::click_FriendBtn(CCNode *pSender)

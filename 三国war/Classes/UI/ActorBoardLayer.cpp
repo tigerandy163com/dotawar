@@ -63,6 +63,7 @@ CCNode* ActorBoardLayer::viewTabIndex(CCNode* pTabLayer,int index)
                                       "no page", "Arial", 22);
             break;
     }
+    node->retain();
     return node;
 }
 bool ActorBoardLayer::tabViewInitPage( CCNode* pTabLayer,cocos2d::CCNode *pPage, int nPage)

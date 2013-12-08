@@ -37,6 +37,7 @@ public:
     void checkLongPress();
     void singleClickSprite();
     void doubleClickSprite();
+    bool  isDoubleTouch();
 protected:
     bool isSelect;
     CCSprite* NBackGroundSprite;
@@ -46,7 +47,7 @@ protected:
     bool isInTouch;
     bool isInMove;
     bool afterLongPress;
-    bool afterDoublePress;
+    bool m_bClicked;
     long touchBeginTime;
     CCPoint orignalPoint;
 };

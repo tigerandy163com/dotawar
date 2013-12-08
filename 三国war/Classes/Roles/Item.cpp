@@ -23,22 +23,22 @@ static inline long millisecondNow()
 
 // 判断是不是 双击
 
-static inline bool isDoubleTouch(){
+ bool  Item:: isDoubleTouch(){
     
-    static long lastTouchTime=0;
+
     
     long thisTouchTime=millisecondNow();
-    long ti = abs(thisTouchTime-lastTouchTime);
-
-    if(ti<250){
+    long ti = abs(thisTouchTime-this->touchBeginTime);
+    
+    if(ti<500){
         
-        lastTouchTime=0;
+
         
         return true;
         
     }else{
         
-        lastTouchTime=millisecondNow();
+     //   lastTouchTime=millisecondNow();
         
         return false;
         
@@ -87,7 +87,7 @@ bool Item::initWithItemID(int id_var,int lev_var,int count_var)
         m_Level = lev_var;
         m_Count = count_var;
         
-
+   
         
         NBackGroundSprite = CCSprite::createWithSpriteFrameName("BagItemBgNormal");
         NBackGroundSprite->setAnchorPoint(CCPointZero);
@@ -140,6 +140,7 @@ bool Item::initWithItemID(int id_var,int lev_var,int count_var)
         }
         setContentSize(NBackGroundSprite->boundingBox().size);
         isSelect = false;
+        m_bClicked = false;
         Ret =true;
     } while (0);
 
@@ -195,63 +196,41 @@ bool Item::isInSprite(cocos2d::CCTouch *theTouch)
     return false;
 }
 
-void Item::checkLongPress(){
-    
-    this->unschedule(schedule_selector(Item::checkLongPress));
-    
-    if (isInTouch&&!isInMove) {
-        
+void Item::checkLongPress()
+{
         CCLog("LONGLONG %d",getTag());
-//        
-//        this->setScale(2);
-//        
-//        this->setOpacity(200);
-        
+
         afterLongPress=true;
-        
-    }
-    
 }
 void Item:: singleClickSprite()
 {
-    if (!afterDoublePress&&!afterLongPress)
-    {
-    selectItem(true);
-        afterDoublePress = false;
-        afterLongPress = false;
+//    if (!afterDoublePress&&!afterLongPress)
+//    {
+//    selectItem(true);
+//        afterDoublePress = false;
+//        afterLongPress = false;
+//    }
+    if( m_bClicked ){
+
+        m_bClicked = false;
+        selectItem(true);
     }
+ 
 }
 void Item:: doubleClickSprite()
 {
-    
+   
     CCLog("double click %d",getTag());
 }
 bool Item::itemTouchBegan(){
     // CCLOG("item touch began:%d",getTag());
-    {
-        isInTouch=true;
-        
-        if (isDoubleTouch()) {
-            afterDoublePress = true;
-            this->doubleClickSprite();
-            
-            this->touchBeginTime=millisecondNow();
-            
-        }else{
-            
-            //this->singleClickSprite();
-            
-            this->touchBeginTime=millisecondNow();
-            
-            this->schedule(schedule_selector(Item::checkLongPress), 2);
-            
-        }
-
-        return true;
-        
-    }
     
-    return false;
+        isInTouch=true;
+       afterLongPress=false;
+      this->touchBeginTime=millisecondNow();
+      this->unschedule(schedule_selector(Item::checkLongPress));
+      this->scheduleOnce(schedule_selector(Item::checkLongPress), 2);
+
 }
 
 void Item::itemTouchMoved() {
@@ -267,28 +246,37 @@ void Item::itemTouchMoved() {
 //    }
     isInMove=true;
     afterLongPress=false;
-    afterDoublePress = false;
+    m_bClicked = false;
+    this->unschedule(schedule_selector(Item::checkLongPress));
 }
 
 void Item::itemTouchEnded() {
-    
+
     isInTouch=false;
     
     isInMove=false;
     
-    afterLongPress=false;
-   
     
+    if ( !afterLongPress &&(millisecondNow()-touchBeginTime)<200) {
+        this->unschedule(schedule_selector(Item::checkLongPress));
+        if ( m_bClicked ) {
+             m_bClicked = false;
+              this->doubleClickSprite();
+        }
+        else
+        {
+            scheduleOnce(schedule_selector(Item::singleClickSprite), 0.2f);
+            m_bClicked = true;
+            return;
+        }
+    }
     //     恢复 精灵
-    
+
 //    this->setScale(1);
-//    
+//
 //    this->setPosition(orignalPoint);
 //    
 //    this->setOpacity(255);
-    
-    
-    
 }
 
 void Item::itemTouchCancelled(){
@@ -298,7 +286,7 @@ void Item::itemTouchCancelled(){
     isInMove=false;
     
     afterLongPress=false;
-    
+    m_bClicked = false;
     
 //    //     恢复 精灵
 //    
