@@ -43,19 +43,20 @@ bool HTabGroupLayerBase::creatTabsWithCount(TabDelegate* pDelegate,int var,TabAl
         m_count = var;
         setDelegate(pDelegate);
         setAlignDir(dir);
-        setContentSize(frame);
+
         
         for (int i = 0; i < m_count; ++i)
         {
             CCMenuItemSprite* menuItem = CCMenuItemSprite::create(CCSprite::createWithSpriteFrameName("btn_level1.png"), CCSprite::createWithSpriteFrameName("btn_level2.png"), this, menu_selector(HTabGroupLayerBase::tabItemClick));
-            //menuItem->setAnchorPoint(ccp(0,0));
+            menuItem->setAnchorPoint(ccp(0,0));
+            menuItem->setPosition(0, 0);
             CCMenu *menu = CCMenu::createWithItem(menuItem);
-            menu->setAnchorPoint(ccp(0,0));
-            CCPoint pos;
+                      CCPoint pos;
+            
             if (m_AlignDir==AlignLeft) {
-                pos = ccp(50,150);
+                pos = ccp(0,150);
             }else if (m_AlignDir==AlignRight)
-                pos = ccp(frame.width-300 ,150);
+                pos = ccp(frame.width-130 ,150);
             pos.y += 100*i;
             
             menu->setPosition(pos);
@@ -64,14 +65,18 @@ bool HTabGroupLayerBase::creatTabsWithCount(TabDelegate* pDelegate,int var,TabAl
             this->addChild(menu);
             
             CCNode* indexView = pDelegate->viewTabIndex(this, i);
-        
-            indexView->setPosition(200, 0);
+           
+            if (m_AlignDir==AlignLeft)
+            indexView->setPositionX(150);
+            else if(m_AlignDir==AlignRight)
+                indexView->setPositionX(0);
             this->addChild(indexView, i,i);
             
             m_IndexLayersArray->addObject(indexView);
             m_TabsArray->addObject(menu);
         }
-        
+        frame.width -=200;
+        setContentSize(frame);
         bRet = true;
     }
     selectItemIndex(0);

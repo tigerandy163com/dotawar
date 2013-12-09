@@ -21,19 +21,34 @@ typedef enum
     YiFu,
     XieZi,
     ShouTao,
-    KuZi,
-    YaoDai
-}CLOSETYPE ;
-class ClothesLayer:public CCLayer
+    WuQi,
+    KuZi
+}CLOThESTYPE ;
+class ClothesLayer:public CCLayerColor
 {
 public:
     virtual bool init();
+
     CREATE_FUNC(ClothesLayer);
-    Item* m_MaoZiBtn;
-    Item* m_YiFuBtn;
-    Item* m_XieZiBtn;
-    Item* m_ShouTaoBtn;
-    Item* m_KuZiBtn;
-    Item* m_YaoDaiBtn;
+    Item* getClothesItem(CLOThESTYPE typeName);
+   void setClothesItem(Item* var,CLOThESTYPE type);
+    virtual void onEnter();
+    virtual void onExit();
+    ~ClothesLayer();
+    ClothesLayer();
+    CCArray* itemsArr;
+private:
+    Item* selectItem;
+    Item* m_MaoZi;
+    Item* m_YiFu;
+    Item* m_XieZi;
+    Item* m_ShouTao;
+    Item* m_WuQi;
+    Item* m_KuZi;
+    
+    virtual bool ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent);
+    virtual void ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent);
+    virtual void ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent);
+    virtual void registerWithTouchDispatcher();
 };
 #endif /* defined(____war__ClothesLayer__) */

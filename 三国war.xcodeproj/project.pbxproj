@@ -302,6 +302,7 @@
 		C60A850018220A48001673B8 /* SceneSetting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F218220A48001673B8 /* SceneSetting.cpp */; };
 		C60A850118220A48001673B8 /* SceneStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F418220A48001673B8 /* SceneStart.cpp */; };
 		C60A850218220A48001673B8 /* LayerLevels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60A84F718220A48001673B8 /* LayerLevels.cpp */; };
+		C60E0C821855C95A00DC866A /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C60E0C801855C95A00DC866A /* Helper.cpp */; };
 		C65F9DC018488080001EA815 /* 500173.png in Resources */ = {isa = PBXBuildFile; fileRef = C65F9DBB18488080001EA815 /* 500173.png */; };
 		C65F9DC118488080001EA815 /* 500174.png in Resources */ = {isa = PBXBuildFile; fileRef = C65F9DBC18488080001EA815 /* 500174.png */; };
 		C65F9DC218488080001EA815 /* 500175.png in Resources */ = {isa = PBXBuildFile; fileRef = C65F9DBD18488080001EA815 /* 500175.png */; };
@@ -990,6 +991,8 @@
 		C60A84F518220A48001673B8 /* SceneStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneStart.h; sourceTree = "<group>"; };
 		C60A84F718220A48001673B8 /* LayerLevels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LayerLevels.cpp; sourceTree = "<group>"; };
 		C60A84F818220A48001673B8 /* LayerLevels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerLevels.h; sourceTree = "<group>"; };
+		C60E0C801855C95A00DC866A /* Helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Helper.cpp; path = Classes/Help/Helper.cpp; sourceTree = "<group>"; };
+		C60E0C811855C95A00DC866A /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Helper.h; path = Classes/Help/Helper.h; sourceTree = "<group>"; };
 		C65F9DBB18488080001EA815 /* 500173.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500173.png; path = Resources/500173.png; sourceTree = "<group>"; };
 		C65F9DBC18488080001EA815 /* 500174.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500174.png; path = Resources/500174.png; sourceTree = "<group>"; };
 		C65F9DBD18488080001EA815 /* 500175.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500175.png; path = Resources/500175.png; sourceTree = "<group>"; };
@@ -2430,6 +2433,8 @@
 				C6CE5C681846F31500AC5121 /* MyXMLParser.h */,
 				C6CE5C691846F31500AC5121 /* tileMapHelp.cpp */,
 				C6CE5C6A1846F31500AC5121 /* tileMapHelp.h */,
+				C60E0C801855C95A00DC866A /* Helper.cpp */,
+				C60E0C811855C95A00DC866A /* Helper.h */,
 			);
 			name = Help;
 			sourceTree = "<group>";
@@ -2943,6 +2948,7 @@
 				C60A815B182208CF001673B8 /* CCActionCatmullRom.cpp in Sources */,
 				C60A83F7182208D5001673B8 /* CCScrollView.cpp in Sources */,
 				C60A82D8182208D3001673B8 /* CCPointExtension.cpp in Sources */,
+				C60E0C821855C95A00DC866A /* Helper.cpp in Sources */,
 				C60A83A4182208D4001673B8 /* CCScale9SpriteLoader.cpp in Sources */,
 				C60A82E1182208D3001673B8 /* ccUtils.cpp in Sources */,
 				C60A83E4182208D5001673B8 /* CCEditBox.cpp in Sources */,

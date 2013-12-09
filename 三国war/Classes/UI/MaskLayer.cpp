@@ -33,5 +33,5 @@ void MaskLayer::registerWithTouchDispatcher()
 {
     //使用-128和CCMenu优先级相同,并且吞掉事件true//
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, -128, true);
-    CCLayer::registerWithTouchDispatcher();
+ //   CCLayer::registerWithTouchDispatcher();
 }

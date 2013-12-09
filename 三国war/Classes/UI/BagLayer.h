@@ -15,7 +15,7 @@
 #include "HTabGroupLayerBase.h"
 USING_NS_CC;
 class Item;
-class BagLayer:public CCCGameScrollViewDelegate,public CCLayer,public TabDelegate
+class BagLayer:public CCCGameScrollViewDelegate,public CCLayerColor,public TabDelegate
 {
 public:
     BagLayer();
@@ -55,11 +55,11 @@ private:
     CCSize itemSizeWithMargin;
     CC_SYNTHESIZE(int, m_ItemCount, ItemCount);
     void nodeDidClick(CCNode* pNode,const CCPoint& clickPos);
-    CCNode* getTouchItem(CCNode* ParentNode,const CCPoint& clickPos);
+
 private:
-    virtual bool ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent);
-    virtual void ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent);
-    virtual void ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent);
-     virtual void registerWithTouchDispatcher();
+//    virtual bool ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent);
+//    virtual void ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent);
+//    virtual void ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent);
+//     virtual void registerWithTouchDispatcher();
 };
 #endif /* defined(____war__BagLayer__) */

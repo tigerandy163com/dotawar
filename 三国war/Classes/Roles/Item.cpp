@@ -64,10 +64,10 @@ bool Item::init()
     } while (0);
     return Ret;
 }
-Item* Item::Create(int id_var, int lev_var, int count_var)
+Item* Item::Create(int id_var, int lev_var, int count_var,CCSprite* _sprite,CCSprite* NBackGroundSprite,CCSprite* SBackGroundSprite)
 {
     Item* item = new Item();
-    if (item && item->initWithItemID(id_var, lev_var, count_var)) {
+    if (item && item->initWithItemID(id_var, lev_var, count_var,_sprite,NBackGroundSprite,SBackGroundSprite)) {
         item->autorelease();
         
         return item;
@@ -78,7 +78,7 @@ Item* Item::Create(int id_var, int lev_var, int count_var)
         return NULL;
     }
 }
-bool Item::initWithItemID(int id_var,int lev_var,int count_var)
+bool Item::initWithItemID(int id_var,int lev_var,int count_var,CCSprite* _sprite,CCSprite* _NBackGroundSprite,CCSprite* _SBackGroundSprite)
 {
       bool Ret = false;
     do {
@@ -88,57 +88,61 @@ bool Item::initWithItemID(int id_var,int lev_var,int count_var)
         m_Count = count_var;
         
    
-        
+        if (NBackGroundSprite==NULL) {
         NBackGroundSprite = CCSprite::createWithSpriteFrameName("BagItemBgNormal");
+        }
+        NBackGroundSprite = _NBackGroundSprite;
         NBackGroundSprite->setAnchorPoint(CCPointZero);
         NBackGroundSprite->setPosition(CCPointZero);
-        NBackGroundSprite->retain();
+         NBackGroundSprite->retain();
         this->addChild(NBackGroundSprite, 0);
-
+         if (SBackGroundSprite==NULL) {
         SBackGroundSprite = CCSprite::createWithSpriteFrameName("BagItemBgDown");
+         }
+        SBackGroundSprite = _SBackGroundSprite;
         SBackGroundSprite->setAnchorPoint(CCPointZero);
         SBackGroundSprite->setPosition(CCPointZero);
+
         SBackGroundSprite->retain();
         this->addChild(SBackGroundSprite,0);
         SBackGroundSprite->setVisible(false);
         
-        
+        setContentSize(SBackGroundSprite->boundingBox().size);
         if (m_ID==-1) {
             return true;
         }
+        if (_sprite) {
+             m_Sprite = _sprite;
+        }else
+            m_Sprite = CCSprite::create();
         
-        char imageN[64] = {0};
-        sprintf(imageN,"%d.png",id_var);
-        m_Sprite = CCSprite::create(imageN);
-        if (m_Sprite==NULL) {
-            Ret= false;
-            break;
-        }
         m_Sprite->retain();
         addChild(m_Sprite,1);
         m_Sprite->setAnchorPoint(CCPointZero);
         m_Sprite->setPosition(ccp(8, 8));
         
-        CCRect msize = m_Sprite->boundingBox();
+        CCRect msize = this->boundingBox();
         float h = msize.size.height;
         float w = msize.size.width;
         if (lev_var>0) {
             char levstr[10]={0};
             sprintf(levstr, "%d",lev_var);
             CCLabelTTF* levLab = CCLabelTTF::create(levstr, "Arial-BoldMT",20);
-            levLab->setColor(ccBLACK);
+            levLab->setColor(ccWHITE);
             addChild(levLab,2);
-            levLab->setPosition(ccp(w-5,h));
+            levLab->setAnchorPoint(CCPointZero);
+            levLab->setPosition(ccp(w-25,h-25));
         }
         if (count_var>1) {
             char countstr[10]={0};
             sprintf(countstr, "%d",count_var);
             CCLabelTTF* conutLab = CCLabelTTF::create(countstr, "Arial-BoldMT",20);
             conutLab->setColor(ccBLUE);
+            conutLab->setAnchorPoint(CCPointZero);
             addChild(conutLab,2);
-            conutLab->setPosition(ccp(w-5,20));
+            conutLab->setPosition(ccp(w-25,0));
         }
-        setContentSize(NBackGroundSprite->boundingBox().size);
+    
         isSelect = false;
         m_bClicked = false;
         Ret =true;

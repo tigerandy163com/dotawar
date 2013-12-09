@@ -31,10 +31,10 @@ public:
     void closeMe();
 private:
     HTabGroupLayerBase* m_Htab;
-    virtual bool ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent);
-    virtual void ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent);
-    virtual void ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent);
-    virtual void registerWithTouchDispatcher();
+//    virtual bool ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent);
+//    virtual void ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent);
+//    virtual void ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent);
+  //  virtual void registerWithTouchDispatcher();
     
 };
 #endif /* defined(____war__ActorBoardLayer__) */

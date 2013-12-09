@@ -8,6 +8,7 @@
 
 #include "ActorBoardLayer.h"
 #include "GameHud.h"
+#include "ClothesLayer.h"
 ActorBoardLayer::ActorBoardLayer()
 {
     
@@ -16,23 +17,23 @@ ActorBoardLayer::~ActorBoardLayer()
 {
     
 }
-bool ActorBoardLayer::ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent){
-    return true;
-}
-void ActorBoardLayer::ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent)
-{
-    
-}
-void ActorBoardLayer::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)
-{
-    
-}
-void ActorBoardLayer::registerWithTouchDispatcher()
-{
-    //使用-128和CCMenu优先级相同,并且吞掉事件true//
-    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, -127, true);
-   // CCLayer::registerWithTouchDispatcher();
-}
+//bool ActorBoardLayer::ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent){
+//    return true;
+//}
+//void ActorBoardLayer::ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent)
+//{
+//    
+//}
+//void ActorBoardLayer::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)
+//{
+//    
+//}
+//void ActorBoardLayer::registerWithTouchDispatcher()
+//{
+//    //使用-128和CCMenu优先级相同,并且吞掉事件true//
+//    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, -127, true);
+//   // CCLayer::registerWithTouchDispatcher();
+//}
 void ActorBoardLayer::tabItemClick(cocos2d::CCNode *pTabLayer, cocos2d::CCNode *object)
 {
     
@@ -44,7 +45,22 @@ CCNode* ActorBoardLayer::viewTabIndex(CCNode* pTabLayer,int index)
     CCNode* node = NULL;
     switch (index) {
         case 0:
-            node = BagLayer::create();
+        {
+          //  node = BagLayer::create();
+            CCSize winsize = CCDirector::sharedDirector()->getWinSize();
+            ClothesLayer* layer1 = ClothesLayer::create();
+            BagLayer* layer2 = BagLayer::create();
+            node = CCNode::create();
+          
+            node->addChild(layer1);
+            layer1->setAnchorPoint(ccp(0,0));
+            layer1->setPosition(ccp(50, winsize.height/3));
+            node->addChild(layer2);
+            
+            layer2->setPosition(layer1->boundingBox().size.width+150,0);
+ 
+            
+        }
             break;
         case 1:
             node = CCLabelTTF::create(
@@ -77,10 +93,6 @@ bool ActorBoardLayer::tabViewInitPage( CCNode* pTabLayer,cocos2d::CCNode *pPage,
     text->setColor(ccBLACK);
     menuitem->addChild(text);
     pPage->addChild(menuitem);
-    CCPoint pos = ccp(50,150);
-    pos.y += 100*nPage;
-    
-    pPage->setPosition(pos);
     return true;
 }
 
@@ -89,6 +101,7 @@ bool ActorBoardLayer::init()
     bool bRet =false;
     do {
         CC_BREAK_IF(!CCLayer::init());
+         setTouchEnabled(true);
         CCSize winSize = CCDirector::sharedDirector()->getWinSize();
         CCSprite* background = CCSprite::createWithSpriteFrameName("bg_over.png");
         background->setAnchorPoint(ccp(0, 0));
@@ -113,7 +126,7 @@ bool ActorBoardLayer::init()
         m_Htab->setAnchorPoint(CCPointZero);
         m_Htab->setPosition(0, 0);
         this->addChild(m_Htab);
-     //     registerWithTouchDispatcher();
+        
         bRet = true;
     } while (0);
     return bRet;

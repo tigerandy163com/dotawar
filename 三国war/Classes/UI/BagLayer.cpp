@@ -8,6 +8,7 @@
 
 #include "BagLayer.h"
 #include "Item.h"
+#include "Helper.h"
 #define BAGROW 4
 #define BAGCOL 3
 BagLayer:: BagLayer()
@@ -22,7 +23,8 @@ bool BagLayer::init()
 {
     bool ret =false;
     do {
-        CC_BREAK_IF(!CCLayer::init());
+        CC_BREAK_IF(!CCLayerColor::initWithColor(ccc4(250, 100, 250, 200)));
+        
         CCSize winsize = CCDirector::sharedDirector()->getWinSize();
       
         CCSprite* sprite = CCSprite::createWithSpriteFrameName("BagItemBgNormal");
@@ -37,19 +39,19 @@ bool BagLayer::init()
         }
             float ww =itemSizeWithMargin.width*(BAGCOL);
             float hh =itemSizeWithMargin.height*(BAGROW);
-
+        m_ScrollView->setViewSize(CCSizeMake(ww,hh));
         m_ScrollView->createContainer(this, pageCount, CCSizeMake(ww,hh));
         //一般是原点
-        m_ScrollView->setPosition(ccp(0, 0));
+       
         m_ScrollView->setAnchorPoint(CCPointZero);
         m_ScrollView->retain();
         //视口的尺寸(一般是屏幕的尺寸)
-       // m_ScrollView->setViewSize(CCDirector::sharedDirector()->getVisibleSize());
-        this->setContentSize(CCSizeMake(ww,hh));
+        setContentSize(CCSizeMake(ww+150, winsize.height));
+  //      this->setContentSize(CCSizeMake(ww,hh));
   //      this->addChild(m_ScrollView);
    //     registerWithTouchDispatcher();
         m_Htab = HTabGroupLayerBase::create();
-        m_Htab->creatTabsWithCount(this, 4,AlignRight,winsize);
+        m_Htab->creatTabsWithCount(this, 4,AlignRight,this->getContentSize());
         m_Htab->setAnchorPoint(CCPointZero);
         m_Htab->setPosition(0, 0);
         m_Htab->retain();
@@ -84,10 +86,10 @@ bool BagLayer::scrollViewInitPage(cocos2d::CCNode *pScroll, cocos2d::CCNode *pPa
             tag = i*column +j+1;
             tag += nPage*BAGROW*BAGCOL;
             if (tag>m_ItemCount) {
-                item = Item::Create(-1, tag, 2);
+                item = Item::Create(-1, tag, 2, NULL,CCSprite::createWithSpriteFrameName("BagItemBgNormal"),CCSprite::createWithSpriteFrameName("BagItemBgDown"));
             }else
             {
-            item = Item::Create(500173, tag, 2);
+            item = Item::Create(500173, tag, 2, CCSprite::create("500173.png"),CCSprite::createWithSpriteFrameName("BagItemBgNormal"),CCSprite::createWithSpriteFrameName("BagItemBgDown"));
             }
             item->retain();
             item->setAnchorPoint(ccp(0, 0));
@@ -143,29 +145,39 @@ void BagLayer::ItemDidClick(cocos2d::CCNode *clickNode)
     Item* selItem = (Item*)clickNode;
     selItem->singleClickSprite();
 }
-bool BagLayer::ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent){
-    return true;
-}
-void BagLayer::ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent)
-{
-    
-}
-void BagLayer::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)
-{
-    
-}
-void BagLayer::registerWithTouchDispatcher()
-{
-    //使用-128和CCMenu优先级相同,并且吞掉事件true//
-    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, -128, true);
- //   CCLayer::registerWithTouchDispatcher();
-}
+//bool BagLayer::ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent){
+//    return true;
+//}
+//void BagLayer::ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent)
+//{
+//    
+//}
+//void BagLayer::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)
+//{
+//    
+//}
+//void BagLayer::registerWithTouchDispatcher()
+//{
+//    //使用-128和CCMenu优先级相同,并且吞掉事件true//
+//    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, -128, true);
+// //   CCLayer::registerWithTouchDispatcher();
+//}
  CCNode* BagLayer::viewTabIndex(CCNode* pTabLayer,int index)
 {
+    CCSize winsize = CCDirector::sharedDirector()->getWinSize();
     CCNode* node = NULL;
     switch (index) {
         case 0:
+        {
+//            node = CCNode::create();
+//            node->addChild(m_ScrollView);
+//            node->setAnchorPoint(CCPointZero);
+//            node->setContentSize(m_ScrollView->boundingBox().size);
+            m_ScrollView->setPosition(0, 0);
             node = m_ScrollView;
+        }
+            
+            
             break;
         case 1:
             node = CCLabelTTF::create(
@@ -184,6 +196,8 @@ void BagLayer::registerWithTouchDispatcher()
                                       "no page", "Arial", 22);
             break;
     }
+    CCRect size = node->boundingBox();
+    node->setPosition(ccp(200, (winsize.height - size.size.height)/2+20));
     return node;
 }
  bool BagLayer::tabViewInitPage( CCNode* pTabLayer,cocos2d::CCNode *pPage, int nPage)
@@ -197,10 +211,6 @@ void BagLayer::registerWithTouchDispatcher()
     text->setColor(ccBLACK);
     menuitem->addChild(text);
     pPage->addChild(menuitem);
-//    CCPoint pos = ccp(50,150);
-//    pos.y += 100*nPage;
-//    
-//    pPage->setPosition(pos);
     return true;
 }
   void BagLayer::tabItemClick(CCNode* pTabLayer,CCNode* object)
@@ -209,8 +219,10 @@ void BagLayer::registerWithTouchDispatcher()
 }
  void BagLayer::scrollViewTouchBegan(cocos2d::CCNode *pScroll,CCPoint pos)
 {
-
-    selectItem = (Item*)getTouchItem(pScroll, pos);
+    if (!m_ScrollView->isVisible()) {
+        return;
+    }
+    selectItem = (Item*)Helper::getTouchItem(pScroll, pos);
     if (selectItem) {
        
         selectItem->itemTouchBegan();
@@ -219,7 +231,9 @@ void BagLayer::registerWithTouchDispatcher()
 
  void BagLayer::scrollViewTouchMoved(cocos2d::CCNode *pScroll,CCPoint pos )
 {
-
+    if (!m_ScrollView->isVisible()) {
+        return;
+    }
     if (selectItem) {
         selectItem->itemTouchMoved();
     }
@@ -227,7 +241,9 @@ void BagLayer::registerWithTouchDispatcher()
 
  void BagLayer::scrollViewTouchEnded(cocos2d::CCNode *pScroll,CCPoint pos)
 {
-
+    if (!m_ScrollView->isVisible()) {
+        return;
+    }
     if (selectItem) {
         selectItem->itemTouchEnded();
     }
@@ -235,7 +251,9 @@ void BagLayer::registerWithTouchDispatcher()
 
  void BagLayer::scrollViewTouchCancelled(cocos2d::CCNode *pScroll, CCPoint pos)
 {
-
+    if (!m_ScrollView->isVisible()) {
+        return;
+    }
     if (selectItem) {
         selectItem->itemTouchCancelled();
     }
@@ -245,31 +263,9 @@ void BagLayer::nodeDidClick(CCNode* pNode,const CCPoint& clickPos)
     if (!this->isVisible()) {
         return;
     }
-    CCNode* node = getTouchItem(pNode, clickPos);
+    CCNode* node =Helper::getTouchItem(pNode, clickPos);
     if (node) {
    //      ItemDidClick(node);
     }
 }
-CCNode* BagLayer::getTouchItem(CCNode* ParentNode,const CCPoint& clickPos)
-{
 
-    CCObject* pObj = NULL;
-    CCArray* pChildren = ParentNode->getChildren();
-    CCNode* rNode = nil;
-    CCARRAY_FOREACH(pChildren, pObj)
-    {
-        CCNode* pChild = (CCNode*)pObj;
-        if(pChild)
-        {
-            CCRect fra = pChild->boundingBox();
-            if (fra.containsPoint(clickPos))
-            {
-                {
-                    rNode = pChild;
-                }
-                break;
-            }
-        }
-    }
-    return rNode;
-}

@@ -118,142 +118,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#19977;&#22269;war/Classes/UI/BagLayer.cpp"
-            timestampString = "408168474.472761"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "BagLayer::ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#19977;&#22269;war/Classes/UI/BagLayer.cpp"
-            timestampString = "408168474.472761"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "BagLayer::ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BagLayer::ccTouchMoved(cocos2d::CCTouch*, cocos2d::CCEvent*)"
-                  moduleName = "&#19977;&#22269;war"
-                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
-                  timestampString = "408175273.372322"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "non-virtual thunk to BagLayer::ccTouchMoved(cocos2d::CCTouch*, cocos2d::CCEvent*)"
-                  moduleName = "&#19977;&#22269;war"
-                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
-                  timestampString = "408175273.372596"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "non-virtual thunk to BagLayer::ccTouchMoved(cocos2d::CCTouch*, cocos2d::CCEvent*)"
-                  moduleName = "&#19977;&#22269;war"
-                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
-                  timestampString = "408175273.372867"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#19977;&#22269;war/Classes/UI/BagLayer.cpp"
-            timestampString = "408168474.472761"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "BagLayer::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BagLayer::ccTouchEnded(cocos2d::CCTouch*, cocos2d::CCEvent*)"
-                  moduleName = "&#19977;&#22269;war"
-                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
-                  timestampString = "408175273.373165"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "non-virtual thunk to BagLayer::ccTouchEnded(cocos2d::CCTouch*, cocos2d::CCEvent*)"
-                  moduleName = "&#19977;&#22269;war"
-                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
-                  timestampString = "408175273.373438"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "non-virtual thunk to BagLayer::ccTouchEnded(cocos2d::CCTouch*, cocos2d::CCEvent*)"
-                  moduleName = "&#19977;&#22269;war"
-                  urlString = "file:///Users/sev/Desktop/dotawar/%E4%B8%89%E5%9B%BDwar/Classes/UI/BagLayer.cpp"
-                  timestampString = "408175273.373712"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -264,6 +128,38 @@
             startingLineNumber = "149"
             endingLineNumber = "149"
             landmarkName = "CCTextureAtlas::initWithTexture(CCTexture2D *texture, unsigned int capacity)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#19977;&#22269;war/Classes/UI/MaskLayer.cpp"
+            timestampString = "408268076.337558"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "MaskLayer::registerWithTouchDispatcher()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#19977;&#22269;war/libs/cocos2dx/layers_scenes_transitions_nodes/CCLayer.cpp"
+            timestampString = "408268402.527638"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "CCLayer::onEnter()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
