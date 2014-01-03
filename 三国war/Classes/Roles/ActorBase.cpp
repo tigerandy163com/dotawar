@@ -676,7 +676,7 @@ void ActorBase:: update(float dt){
                 this->unscheduleUpdate();
                 this->StateToStand();
                 //遭遇敌人，在攻击范围内，开始攻击
-                schedule( schedule_selector(ActorBase::fire), 2.0f);
+                schedule( schedule_selector(ActorBase::fire), 1.0f);
         }
     }else
     {
@@ -694,9 +694,9 @@ void ActorBase:: update(float dt){
         double deltay = targetPos.y - myPos.y;
         if( deltax == 0 )
         {
-            if( targetPos.y >= myPos.y )             // 子弹需要下移
+            if( targetPos.y >= myPos.y )             // 需要下移
                 deltax = 0.0000001;
-            else                                 // 子弹需要上移
+            else                                 // 需要上移
                 deltax = -0.0000001;
         }
         
@@ -704,9 +704,9 @@ void ActorBase:: update(float dt){
         
         if( deltay == 0 )
         {
-            if( targetPos.x >= myPos.x )             // 子弹需要右移
+            if( targetPos.x >= myPos.x )             // 需要右移
                 deltay = 0.0000001;
-            else                                 // 子弹需要左移
+            else                                 // 需要左移
                 deltay = -0.0000001;
         }
         

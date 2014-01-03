@@ -42,19 +42,25 @@ static AppDelegate s_sharedApplication;
     viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
     viewController.wantsFullScreenLayout = YES;
     viewController.view = __glView;
-
+    dragbut =  [[dragButton alloc]initWithFrame:CGRectMake(25, 25, 50, 50)];
+    dragbut.delegate = self;
+    [dragbut setTitle:@"点喔" forState:UIControlStateNormal];
+    [dragbut setBackgroundColor:[UIColor greenColor]];
+ 
     // Set RootViewController to window
     if ( [[UIDevice currentDevice].systemVersion floatValue] < 6.0)
     {
         // warning: addSubView doesn't work on iOS6
         [window addSubview: viewController.view];
+        
     }
     else
     {
         // use this method on ios6
         [window setRootViewController:viewController];
     }
-    
+    [viewController.view addSubview:dragbut];
+    [dragbut release];
     [window makeKeyAndVisible];
 
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
@@ -117,6 +123,16 @@ static AppDelegate s_sharedApplication;
     [super dealloc];
 }
 
-
+-(void)BtnClicked:(id)sender
+{
+//    if (!modelVC) {
+//        modelVC = [[topModelViewController alloc]initWithNibName:@"topModelViewController" bundle:nil];
+//    }
+//    dragbut.hidden = YES;
+//    UINavigationController* naviVc = [[UINavigationController alloc]initWithRootViewController:modelVC];
+//    naviVc.navigationBarHidden = YES;
+//    [window addSubview:naviVc.view];
+//    [naviVc release];
+}
 @end
 

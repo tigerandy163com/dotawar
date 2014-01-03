@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		268ECC151849E1C20045122E /* HTabGroupLayerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 268ECC131849E1C20045122E /* HTabGroupLayerBase.cpp */; };
+		52B697DD1869846C0071120B /* dragButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B697DC1869846C0071120B /* dragButton.m */; };
+		52B697E618698CCA0071120B /* topModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B697E418698CCA0071120B /* topModelViewController.m */; };
+		52B697E718698CCA0071120B /* topModelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52B697E518698CCA0071120B /* topModelViewController.xib */; };
 		C60A8120182208CF001673B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60A811F182208CF001673B8 /* QuartzCore.framework */; };
 		C60A8122182208CF001673B8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60A8121182208CF001673B8 /* OpenGLES.framework */; };
 		C60A8124182208CF001673B8 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60A8123182208CF001673B8 /* OpenAL.framework */; };
@@ -370,6 +373,11 @@
 /* Begin PBXFileReference section */
 		268ECC131849E1C20045122E /* HTabGroupLayerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HTabGroupLayerBase.cpp; path = "三国war/Classes/Roles/HTabGroupLayerBase.cpp"; sourceTree = SOURCE_ROOT; };
 		268ECC141849E1C20045122E /* HTabGroupLayerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTabGroupLayerBase.h; path = "三国war/Classes/Roles/HTabGroupLayerBase.h"; sourceTree = SOURCE_ROOT; };
+		52B697DB1869846C0071120B /* dragButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dragButton.h; path = ios/dragButton.h; sourceTree = "<group>"; };
+		52B697DC1869846C0071120B /* dragButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dragButton.m; path = ios/dragButton.m; sourceTree = "<group>"; };
+		52B697E318698CCA0071120B /* topModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = topModelViewController.h; path = ios/topModelViewController.h; sourceTree = "<group>"; };
+		52B697E418698CCA0071120B /* topModelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = topModelViewController.m; path = ios/topModelViewController.m; sourceTree = "<group>"; };
+		52B697E518698CCA0071120B /* topModelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = topModelViewController.xib; path = ios/topModelViewController.xib; sourceTree = "<group>"; };
 		C60A811C182208CF001673B8 /* 三国war.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "三国war.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C60A811F182208CF001673B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C60A8121182208CF001673B8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1222,6 +1230,11 @@
 				C60A814C182208CF001673B8 /* RootViewController.h */,
 				C60A814D182208CF001673B8 /* RootViewController.mm */,
 				C60A814F182208CF001673B8 /* main.m */,
+				52B697DB1869846C0071120B /* dragButton.h */,
+				52B697DC1869846C0071120B /* dragButton.m */,
+				52B697E318698CCA0071120B /* topModelViewController.h */,
+				52B697E418698CCA0071120B /* topModelViewController.m */,
+				52B697E518698CCA0071120B /* topModelViewController.xib */,
 			);
 			name = ios;
 			sourceTree = "<group>";
@@ -2557,7 +2570,6 @@
 				C60A8118182208CF001673B8 /* Sources */,
 				C60A8119182208CF001673B8 /* Frameworks */,
 				C60A811A182208CF001673B8 /* Resources */,
-				C6D4722A184D88E500391EEB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2620,6 +2632,7 @@
 				C60A813E182208CF001673B8 /* Icon-Small.png in Resources */,
 				C60A813A182208CF001673B8 /* Icon-72.png in Resources */,
 				C60A8138182208CF001673B8 /* HelloWorld.png in Resources */,
+				52B697E718698CCA0071120B /* topModelViewController.xib in Resources */,
 				C60A813C182208CF001673B8 /* Icon-Small-50.png in Resources */,
 				C60A8146182208CF001673B8 /* iTunesArtwork in Resources */,
 				C6A0232B18508E04008EB2F7 /* Yifu.jpg in Resources */,
@@ -2659,22 +2672,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		C6D4722A184D88E500391EEB /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode2.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\n\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n\n/Applications/Xcode2.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\n\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\n\nfi";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C60A8118182208CF001673B8 /* Sources */ = {
@@ -2720,6 +2717,7 @@
 				C60A8223182208D0001673B8 /* CCMenu.cpp in Sources */,
 				C60A8450182208D5001673B8 /* Slot.cpp in Sources */,
 				C60A8355182208D4001673B8 /* SimpleAudioEngine_objc.m in Sources */,
+				52B697DD1869846C0071120B /* dragButton.m in Sources */,
 				C60A8429182208D5001673B8 /* Attachment.cpp in Sources */,
 				C60A8339182208D4001673B8 /* CCTouch.cpp in Sources */,
 				C60A81BE182208D0001673B8 /* CCDrawNode.cpp in Sources */,
@@ -2792,6 +2790,7 @@
 				C60A837B182208D4001673B8 /* CCControlLoader.cpp in Sources */,
 				C60A81AF182208D0001673B8 /* CCSet.cpp in Sources */,
 				C60A8426182208D5001673B8 /* AtlasAttachmentLoader.cpp in Sources */,
+				52B697E618698CCA0071120B /* topModelViewController.m in Sources */,
 				C60A829E182208D2001673B8 /* CCScriptSupport.cpp in Sources */,
 				C60A839A182208D4001673B8 /* CCNodeLoader.cpp in Sources */,
 				C60A8438182208D5001673B8 /* CCSkeletonAnimation.cpp in Sources */,
@@ -3044,13 +3043,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: YIng Ren (U852D5784E)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "三国war/Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "三国war/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/三国war/libs/cocos2dx/platform/third_party/ios/libraries",
@@ -3074,12 +3074,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: YIng Ren (U852D5784E)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "三国war/Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "三国war/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/三国war/libs/cocos2dx/platform/third_party/ios/libraries",

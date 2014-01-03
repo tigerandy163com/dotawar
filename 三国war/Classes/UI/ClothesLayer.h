@@ -45,7 +45,7 @@ private:
     Item* m_ShouTao;
     Item* m_WuQi;
     Item* m_KuZi;
-    
+   
     virtual bool ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent);
     virtual void ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent);
     virtual void ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent);

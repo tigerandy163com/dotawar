@@ -88,7 +88,7 @@ bool ClothesLayer::init()
         
         itemsArr = CCArray::create(m_MaoZi,m_WuQi,m_YiFu,m_ShouTao,m_KuZi,m_XieZi,NULL);
         itemsArr->retain();
-        registerWithTouchDispatcher();
+      //  registerWithTouchDispatcher();
         bRet = true;
     } while (0);
     return bRet;
