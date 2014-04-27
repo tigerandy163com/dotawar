@@ -171,7 +171,7 @@ bool SceneGame:: ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent
         return false;
     }
 
-    GameHud::shareGameHud()->unShowBottomMenu();
+   // GameHud::shareGameHud()->unShowBottomMenu();
        
     
     CCPoint touchLocation = this->convertTouchToNodeSpace(pTouch);

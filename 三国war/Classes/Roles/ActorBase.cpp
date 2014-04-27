@@ -280,6 +280,7 @@ void ActorBase::StateToStand()
 	else
 		RunAnimateAction_RepeatForever(_action_stand_flip);
     mState = Stand;
+    //setAutoFight(true);
 }
 
 void ActorBase::currentAnimateActionStop()

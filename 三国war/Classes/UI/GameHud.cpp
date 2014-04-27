@@ -317,7 +317,7 @@ void GameHud::addRightHead(const char *name)
 void GameHud::selMyHead()
 {
     _heroSel =true;
-    unShowBottomMenu();
+//    unShowBottomMenu();
 }
 void GameHud::selEnemyHead()
 {
